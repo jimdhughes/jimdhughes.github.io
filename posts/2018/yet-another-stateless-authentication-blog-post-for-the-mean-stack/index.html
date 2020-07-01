@@ -1,0 +1,431 @@
+<!doctype html><html lang=en><meta charset=utf-8><meta name=generator content="Hugo 0.64.0"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name=color-scheme content="light dark"><meta name=supported-color-schemes content="light dark"><title>Yet Another Stateless Authentication Blog Post for the MEAN stack.&nbsp;&ndash;&nbsp;James Hughes</title><link rel=stylesheet href=/css/core.min.99d761621eb15531f47d6f109c742c4d2f97f9c10fed380e3da27af7676a27a1fb5968bfbd3207717f11d40ad1d68b92.css integrity=sha384-mddhYh6xVTH0fW8QnHQsTS+X+cEP7TgOPaJ692dqJ6H7WWi/vTIHcX8R1ArR1ouS><meta name=twitter:card content="summary"><meta name=twitter:title content="Yet Another Stateless Authentication Blog Post for the MEAN stack."><body><section id=header><div class="header wrap"><span class="header left-side"><a class="site home" href=/><span class="site name">James Hughes</span></a></span>
+<span class="header right-side"><div class="nav wrap"><nav class=nav><a class="nav item" href=/categories/>Categories</a><a class="nav item" href=/tags/>Tags</a><a class="nav item" href></a><a class="nav item" href></a></nav></div></span></div></section><section id=content><div class=article-container><section class="article header"><h1 class="article title">Yet Another Stateless Authentication Blog Post for the MEAN stack.</h1><p class="article date">Saturday, May 5, 2018</p></section><article class="article markdown-body"><p>#inb4: this ain&rsquo;t new.</p><p>I&rsquo;m writing this for everyone that wants a <em>slightly</em> more organized approach to express middleware and authentication. I&rsquo;m writing this because once again I was inspired by how much I <strong>adore</strong> Node, Express, and all the delights that come from being able to implement my API&rsquo;s and leverage middlewares. Also, I&rsquo;m using async / await, which is pretty neat.</p><p>I&rsquo;m going to use MongoDB as a datastore it just jives so well with Node.</p><p>So - let&rsquo;s bootstrap if you don&rsquo;t have express-generator installed, do it. <code>npm i -g express-generator</code></p><pre><code class=language-console data-lang=console>$ express express-jwt-tutorial
+$ cd express-jwt-tutorial
+$ npm i jsonwebtoken mongoose bcryptjs --save
+</code></pre><p>I like to add my folders immediately after I make a new project so&mldr;</p><pre><code class=language-console data-lang=console>$ mkdir models
+$ mkdir middleware
+$ mkdir config
+</code></pre><p>First things first - our user model:</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>//models/user.model.js
+</span><span class=c1></span><span class=kr>const</span> <span class=nx>mongoose</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;mongoose&#39;</span><span class=p>)</span><span class=p>;</span>
+<span class=kr>const</span> <span class=nx>bcrypt</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;bcryptjs&#39;</span><span class=p>)</span><span class=p>;</span>
+
+<span class=kr>const</span> <span class=nx>userSchema</span> <span class=o>=</span> <span class=nx>mongoose</span><span class=p>.</span><span class=nx>Schema</span><span class=p>(</span><span class=p>{</span>
+    <span class=nx>email</span><span class=o>:</span><span class=p>{</span><span class=nx>type</span><span class=o>:</span><span class=nb>String</span><span class=p>,</span> <span class=nx>required</span><span class=o>:</span><span class=kc>true</span><span class=p>,</span> <span class=nx>unique</span><span class=o>:</span><span class=kc>true</span><span class=p>}</span><span class=p>,</span>
+    <span class=nx>password</span><span class=o>:</span><span class=p>{</span><span class=nx>type</span><span class=o>:</span><span class=nb>String</span><span class=p>,</span> <span class=nx>required</span><span class=o>:</span><span class=kc>true</span><span class=p>}</span>
+<span class=p>}</span><span class=p>)</span><span class=p>;</span>
+
+<span class=c1>//encrpyt a password
+</span><span class=c1></span><span class=nx>userSchema</span><span class=p>.</span><span class=nx>methods</span><span class=p>.</span><span class=nx>generateHash</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(</span><span class=nx>password</span><span class=p>)</span> <span class=p>{</span>
+  <span class=k>return</span> <span class=nx>bcrypt</span><span class=p>.</span><span class=nx>hashSync</span><span class=p>(</span><span class=nx>password</span><span class=p>,</span> <span class=mi>10</span><span class=p>,</span> <span class=kc>null</span><span class=p>)</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=c1>//Check to see if password is a valid hash
+</span><span class=c1></span><span class=nx>userSchema</span><span class=p>.</span><span class=nx>methods</span><span class=p>.</span><span class=nx>validPassword</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(</span><span class=nx>password</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=nx>bcrypt</span><span class=p>.</span><span class=nx>compareSync</span><span class=p>(</span><span class=nx>password</span><span class=p>,</span> <span class=k>this</span><span class=p>.</span><span class=nx>password</span><span class=p>)</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=c1>//Hash password if it&#39;s been changed
+</span><span class=c1></span><span class=nx>userSchema</span><span class=p>.</span><span class=nx>pre</span><span class=p>(</span><span class=s1>&#39;save&#39;</span><span class=p>,</span> <span class=kd>function</span><span class=p>(</span><span class=nx>next</span><span class=p>)</span><span class=p>{</span>
+  <span class=k>if</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>isModified</span><span class=p>(</span><span class=s1>&#39;password&#39;</span><span class=p>)</span><span class=p>)</span><span class=p>{</span>
+    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;password changed&#39;</span><span class=p>)</span><span class=p>;</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>password</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>generateHash</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>password</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=nx>next</span><span class=p>(</span><span class=p>)</span><span class=p>;</span>
+<span class=p>}</span><span class=p>)</span><span class=p>;</span>
+
+<span class=c1>//export the model
+</span><span class=c1></span><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=nx>mongoose</span><span class=p>.</span><span class=nx>model</span><span class=p>(</span><span class=s1>&#39;User&#39;</span><span class=p>,</span> <span class=nx>userSchema</span><span class=p>)</span><span class=p>;</span>
+
+</code></pre></div><p>I added in some methods to create and validate hashes for passwords. Never store those passwords in plain text!</p><p>Below is an example mongodb configuration file that I&rsquo;ll put in the <code>config</code> folder</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// config/db.js
+</span><span class=c1></span><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=p>{</span>
+    <span class=nx>development</span><span class=o>:</span><span class=s1>&#39;mongodb://localhost/someapp&#39;</span>
+<span class=p>}</span>
+</code></pre></div><p>I like to keep my mongodb initializations in one file. Set up the connections, load up the models, etc. This makes it easy to get the app up and running with a single line of code later. Below is an example of how I do this.</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// models/index.js
+</span><span class=c1></span><span class=kr>const</span> <span class=nx>mongoose</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;mongoose&#39;</span><span class=p>)</span><span class=p>;</span>
+<span class=kr>const</span> <span class=nx>env</span> <span class=o>=</span> <span class=nx>process</span><span class=p>.</span><span class=nx>env</span><span class=p>.</span><span class=nx>NODE_ENV</span> <span class=o>||</span> <span class=s1>&#39;development&#39;</span><span class=p>;</span>
+<span class=kr>const</span> <span class=nx>db</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;../config/db&#39;</span><span class=p>)</span><span class=p>[</span><span class=nx>env</span><span class=p>]</span><span class=p>;</span>
+
+<span class=nx>mongoose</span><span class=p>.</span><span class=nx>connect</span><span class=p>(</span><span class=nx>db</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>require</span><span class=p>(</span><span class=s1>&#39;./user.model&#39;</span><span class=p>)</span><span class=p>;</span>
+</code></pre></div><p>Onto bootstrapping&mldr;</p><p>In <code>app.js</code> I usually do the following immediately:</p><ol><li>Delete the predefined <code>index</code> and <code>user</code> routes</li><li>Delete the predefined route mappings denoted by <code>app.use('/', indexRouter)</code> and <code>app.use('/users/', usersRouter)</code></li></ol><p>Next: initialize mongo by adding a require line. I typically put this just below the app initialization:</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>//app.js
+</span><span class=c1></span><span class=p>...</span>
+<span class=kd>var</span> <span class=nx>app</span> <span class=o>=</span> <span class=nx>express</span><span class=p>(</span><span class=p>)</span><span class=p>;</span>
+
+<span class=c1>//Load Mongoose Models
+</span><span class=c1></span><span class=nx>require</span><span class=p>(</span><span class=s1>&#39;./models&#39;</span><span class=p>)</span><span class=p>;</span>
+
+<span class=c1>// view engine setup
+</span><span class=c1></span><span class=p>...</span>
+</code></pre></div><h1 id=run-it>Run it!</h1><p>You can use npm start, or whatever mechanism you like to use to get your app up and running. I like to use nodemon for livereload, but it&rsquo;s totally up to you.</p><h1 id=define-some-routes>Define some Routes</h1><p>Time to define some endpoints!
+Again - I have a flavour of setup that I like to use - so that&rsquo;s what I&rsquo;m going to show!
+Under the <code>routes</code> folder, open up <code>index</code>, wipe it out, and add the following:</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript> <span class=c1>// routes/index.js
+</span><span class=c1></span> <span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=p>{</span>
+   <span class=nx>users</span><span class=o>:</span><span class=nx>require</span><span class=p>(</span><span class=s1>&#39;./users&#39;</span><span class=p>)</span>
+ <span class=p>}</span>
+</code></pre></div><p>Open up <code>users</code> and replace it with the following:</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>//routes/users.js
+</span><span class=c1></span><span class=kr>const</span> <span class=nx>router</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;express&#39;</span><span class=p>)</span><span class=p>.</span><span class=nx>Router</span><span class=p>(</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>router</span><span class=p>.</span><span class=nx>route</span><span class=p>(</span><span class=s1>&#39;/&#39;</span><span class=p>)</span>
+    <span class=p>.</span><span class=nx>get</span><span class=p>(</span><span class=nx>getUsers</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>router</span><span class=p>.</span><span class=nx>route</span><span class=p>(</span><span class=s1>&#39;/:id&#39;</span><span class=p>)</span>
+    <span class=p>.</span><span class=nx>get</span><span class=p>(</span><span class=nx>getUser</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=nx>router</span><span class=p>;</span>
+
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>getUsers</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span><span class=p>{</span>
+  <span class=nx>next</span><span class=p>(</span><span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;Not Yet Implemented&#39;</span><span class=p>)</span><span class=p>)</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>getUser</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>next</span><span class=p>(</span><span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;Not Yet Implemented&#39;</span><span class=p>)</span><span class=p>)</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p>Now it&rsquo;s pretty easy to set up our endpoints. Return to app.js and add the following code. You will need to import it after you load your mongoose models.</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>//app.js
+</span><span class=c1></span>
+<span class=c1>//Load Mongoose Models
+</span><span class=c1></span><span class=nx>require</span><span class=p>(</span><span class=s1>&#39;./models&#39;</span><span class=p>)</span><span class=p>;</span>
+<span class=kd>var</span> <span class=nx>routes</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;./routes&#39;</span><span class=p>)</span><span class=p>;</span>
+<span class=p>...</span>
+<span class=c1>// Middleware
+</span><span class=c1></span><span class=p>...</span>
+<span class=nx>app</span><span class=p>.</span><span class=nx>use</span><span class=p>(</span><span class=s1>&#39;/api/v1/users&#39;</span><span class=p>,</span> <span class=nx>routes</span><span class=p>.</span><span class=nx>users</span><span class=p>)</span><span class=p>;</span>
+</code></pre></div><p>We&rsquo;ve written all this code &ndash; but haven&rsquo;t actually done anything yet.</p><p>Let&rsquo;s build in some funcitonality! We&rsquo;ll start with registration and authentication. Some people will suggest you use something like passport.js - which I have used previously. However since I am going to go stateless, I find it completely unnecessary to do this when it really just takes a few lines of code!</p><p>Go ahead and create your authentication router.</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// routes/authentication.js
+</span><span class=c1></span><span class=kr>const</span> <span class=nx>router</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;express&#39;</span><span class=p>)</span><span class=p>.</span><span class=nx>Router</span><span class=p>(</span><span class=p>)</span><span class=p>;</span>
+<span class=kr>const</span> <span class=nx>User</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;mongoose&#39;</span><span class=p>)</span><span class=p>.</span><span class=nx>model</span><span class=p>(</span><span class=s1>&#39;User&#39;</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>router</span><span class=p>.</span><span class=nx>route</span><span class=p>(</span><span class=s1>&#39;/login&#39;</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>post</span><span class=p>(</span><span class=nx>doLogin</span><span class=p>)</span>
+
+<span class=nx>router</span><span class=p>.</span><span class=nx>route</span><span class=p>(</span><span class=s1>&#39;/register&#39;</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>post</span><span class=p>(</span><span class=nx>doRegister</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=nx>router</span><span class=p>;</span>
+
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>doLogin</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+ <span class=nx>next</span><span class=p>(</span><span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;Not Yet Implemented&#39;</span><span class=p>)</span><span class=p>)</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>doRegister</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>next</span><span class=p>(</span><span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;Not Yet Implemented&#39;</span><span class=p>)</span><span class=p>)</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p>To handle a registration, life is pretty easy. We can just create a new user. Our Mongoose Model definition will handle the encrypting of passwords and the like for us so we don&rsquo;t really need to worry too much about this. We could maybe add some validations, but they&rsquo;re not totally necessary.</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=p>...</span>
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>doRegister</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kd>let</span> <span class=nx>user</span> <span class=o>=</span> <span class=nx>req</span><span class=p>.</span><span class=nx>body</span><span class=p>;</span>
+
+  <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>user</span><span class=p>.</span><span class=nx>email</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=nx>res</span><span class=p>.</span><span class=nx>status</span><span class=p>(</span><span class=mi>400</span><span class=p>)</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=p>{</span> <span class=nx>message</span><span class=o>:</span> <span class=s1>&#39;Require Email For User&#39;</span> <span class=p>}</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>user</span><span class=p>.</span><span class=nx>password</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=nx>res</span><span class=p>.</span><span class=nx>status</span><span class=p>(</span><span class=mi>400</span><span class=p>)</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=p>{</span> <span class=nx>message</span><span class=o>:</span> <span class=s1>&#39;Require Password For User&#39;</span> <span class=p>}</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=k>try</span> <span class=p>{</span>
+    <span class=kd>let</span> <span class=nx>result</span> <span class=o>=</span> <span class=nx>await</span> <span class=nx>User</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=nx>user</span><span class=p>)</span><span class=p>;</span>
+    <span class=nx>res</span><span class=p>.</span><span class=nx>status</span><span class=p>(</span><span class=mi>201</span><span class=p>)</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=p>{</span><span class=nx>message</span><span class=o>:</span><span class=s1>&#39;Successfully Registered! Please Login&#39;</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span> <span class=k>catch</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span> <span class=p>{</span>
+    <span class=c1>//You can handle this better.  I&#39;m not going to though
+</span><span class=c1></span>    <span class=nx>next</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>I&rsquo;m not going to give you a tutorial on how to issue HTTP requests. I use Postman on windows and CURL or Postman on Linux. It&rsquo;s up to you, but you can now POST to api/v1/auth/register and send a body with an email and password and we can now register! It&rsquo;s that easy! After you post a user to api/v1/auth/register, you should get a return value with our little json message: &lsquo;Successfully Registered! Please Login&rsquo;. Which I would LOVE to do&mldr; If I had a login method!</p><p>So to create a login controller:</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=p>...</span>
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>doLogin</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kd>let</span> <span class=nx>credentials</span> <span class=o>=</span> <span class=nx>req</span><span class=p>.</span><span class=nx>body</span><span class=p>;</span>
+  <span class=k>if</span><span class=p>(</span><span class=o>!</span><span class=nx>credentials</span><span class=p>.</span><span class=nx>email</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=nx>res</span><span class=p>.</span><span class=nx>status</span><span class=p>(</span><span class=mi>400</span><span class=p>)</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=p>{</span><span class=nx>message</span><span class=o>:</span><span class=s1>&#39;Require Email&#39;</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=k>if</span><span class=p>(</span><span class=o>!</span><span class=nx>credentials</span><span class=p>.</span><span class=nx>password</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=nx>res</span><span class=p>.</span><span class=nx>status</span><span class=p>(</span><span class=mi>400</span><span class=p>)</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=p>{</span><span class=nx>message</span><span class=o>:</span><span class=s1>&#39; Require Password&#39;</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=k>try</span> <span class=p>{</span>
+    <span class=kd>let</span> <span class=nx>u</span> <span class=o>=</span> <span class=nx>await</span> <span class=nx>User</span><span class=p>.</span><span class=nx>findOne</span><span class=p>(</span><span class=p>{</span><span class=nx>email</span><span class=o>:</span><span class=nx>credentials</span><span class=p>.</span><span class=nx>email</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+    <span class=k>if</span><span class=p>(</span><span class=o>!</span><span class=nx>u</span><span class=p>)</span> <span class=p>{</span>
+      <span class=k>return</span> <span class=nx>res</span><span class=p>.</span><span class=nx>status</span><span class=p>(</span><span class=mi>404</span><span class=p>)</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=p>{</span><span class=nx>message</span><span class=o>:</span><span class=s1>&#39;User Not Found!&#39;</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+    <span class=p>}</span>
+    <span class=kd>let</span> <span class=nx>validPassword</span> <span class=o>=</span> <span class=nx>u</span><span class=p>.</span><span class=nx>validPassword</span><span class=p>(</span><span class=nx>credentials</span><span class=p>.</span><span class=nx>password</span><span class=p>)</span><span class=p>;</span>
+    <span class=k>if</span><span class=p>(</span><span class=o>!</span><span class=nx>validPassword</span><span class=p>)</span> <span class=p>{</span>
+      <span class=k>return</span> <span class=nx>res</span><span class=p>.</span><span class=nx>status</span><span class=p>(</span><span class=mi>401</span><span class=p>)</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=p>{</span><span class=nx>message</span><span class=o>:</span><span class=s1>&#39;Invalid Username / Password combination&#39;</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+    <span class=p>}</span>
+    <span class=k>return</span> <span class=nx>res</span><span class=p>.</span><span class=nx>status</span><span class=p>(</span><span class=mi>200</span><span class=p>)</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=p>{</span><span class=nx>message</span><span class=o>:</span><span class=s1>&#39;Welcome!&#39;</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span> <span class=k>catch</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>next</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+<span class=p>...</span>
+</code></pre></div><p>Go ahead and POST your email / password to the <code>api/v1/auth/login</code> endpoint and you will get our nice Welcome message.</p><p>But wait &ndash;
+This doesn&rsquo;t really DO anything. Sure your challenge is correct, and if you wanted to send an email and password on every request you COULD do it this way.. OR you could sign a json web token!
+That&rsquo;s what we&rsquo;re going to do.
+First - We need to set up a secret for our app. This will need to be shared across all servers that could handle your authentication so it can get a bit tricky. You could use a super secure key or a RSA cert or the like. We&rsquo;re going to just use a big string.</p><p>So - let&rsquo;s make an app config file at <code>config/properties.js</code></p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// config/properties.js
+</span><span class=c1></span><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=p>{</span>
+  <span class=nx>secret</span><span class=o>:</span><span class=s1>&#39;thisisasecretthatisnotinsecureatall&#39;</span>
+<span class=p>}</span>
+</code></pre></div><p>Go back to <code>routes/authentication.js</code> and import the jsonwebtoken library.</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// routes/authentication.js
+</span><span class=c1></span><span class=p>...</span>
+<span class=kr>const</span> <span class=nx>jwt</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;jsonwebtoken&#39;</span><span class=p>)</span><span class=p>;</span>
+<span class=kr>const</span> <span class=nx>config</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;../config/properties&#39;</span><span class=p>)</span><span class=p>;</span>
+<span class=p>...</span>
+</code></pre></div><p>Now we can update our doLogin function to create a token and send it back to the client! We&rsquo;re going to add code JUST before we return the success message.</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=nx>async</span> <span class=kd>function</span> <span class=nx>doLogin</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+<span class=p>...</span>
+    <span class=kd>let</span> <span class=nx>token</span>  <span class=o>=</span> <span class=nx>jwt</span><span class=p>.</span><span class=nx>sign</span><span class=p>(</span><span class=p>{</span><span class=nx>id</span><span class=o>:</span><span class=nx>u</span><span class=p>.</span><span class=nx>_id</span><span class=p>}</span><span class=p>,</span> <span class=nx>config</span><span class=p>.</span><span class=nx>secret</span><span class=p>)</span><span class=p>;</span>
+    <span class=k>return</span> <span class=nx>res</span><span class=p>.</span><span class=nx>status</span><span class=p>(</span><span class=mi>200</span><span class=p>)</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=p>{</span><span class=nx>message</span><span class=o>:</span><span class=s1>&#39;Welcome!&#39;</span><span class=p>,</span> <span class=nx>token</span><span class=o>:</span> <span class=nx>token</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+<span class=p>...</span>
+<span class=p>}</span>
+</code></pre></div><p>If you POST a login again, you will get the welcome message AND a token! Make sure you keep it safe ;) (Truth be told, plain old json sending a token is probably not the best idea. Using a cookie or something might be a little more secure, regardless. There&rsquo;s some potential security issues)</p><p>Now, what do you do next? We have this token, and logging in, but what is the POINT of it all?
+Well, we need to secure some endpoints. Let&rsquo;s set it up so that a user can access their profile with a new router: <code>routes/me.js</code></p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// routes/me.js
+</span><span class=c1></span><span class=kr>const</span> <span class=nx>router</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;express&#39;</span><span class=p>)</span><span class=p>.</span><span class=nx>Router</span><span class=p>(</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>router</span><span class=p>.</span><span class=nx>route</span><span class=p>(</span><span class=s1>&#39;/&#39;</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>get</span><span class=p>(</span><span class=nx>getMe</span><span class=p>)</span><span class=p>;</span>
+  
+<span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=nx>router</span><span class=p>;</span>
+
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>getMe</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>next</span><span class=p>(</span><span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;Not Yet Implemented&#39;</span><span class=p>)</span><span class=p>)</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p>This would be neat, but if you&rsquo;re thinking even remotely logically - you will know why this is pointless. Nothing exists to determine who it is that&rsquo;s making the request! That&rsquo;s where the joyous middleware comes into play.</p><p>Let&rsquo;s make a new middleware file at: <code>middleware/checkToken.js</code></p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// middleware/checkToken.js
+</span><span class=c1></span><span class=kr>const</span> <span class=nx>jwt</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;jsonwebtoken&#39;</span><span class=p>)</span><span class=p>;</span>
+<span class=kr>const</span> <span class=nx>config</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;../config/properties&#39;</span><span class=p>)</span><span class=p>;</span>
+<span class=kr>const</span> <span class=nx>User</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;mongoose&#39;</span><span class=p>)</span><span class=p>.</span><span class=nx>model</span><span class=p>(</span><span class=s1>&#39;User&#39;</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=nx>async</span> <span class=kd>function</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kd>let</span> <span class=nx>token</span> <span class=o>=</span> <span class=nx>req</span><span class=p>.</span><span class=nx>headers</span><span class=p>[</span><span class=s1>&#39;x-auth-token&#39;</span><span class=p>]</span><span class=p>;</span>
+  <span class=k>if</span><span class=p>(</span><span class=o>!</span><span class=nx>token</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=nx>res</span><span class=p>.</span><span class=nx>status</span><span class=p>(</span><span class=mi>403</span><span class=p>)</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=p>{</span><span class=nx>message</span><span class=o>:</span><span class=s1>&#39;No Token Provided&#39;</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=k>try</span><span class=p>{</span>
+    <span class=kd>let</span> <span class=nx>payload</span> <span class=o>=</span> <span class=nx>await</span> <span class=nx>jwt</span><span class=p>.</span><span class=nx>verify</span><span class=p>(</span><span class=nx>token</span><span class=p>,</span> <span class=nx>config</span><span class=p>.</span><span class=nx>secret</span><span class=p>)</span><span class=p>;</span>
+    <span class=kd>let</span> <span class=nx>u</span> <span class=o>=</span> <span class=nx>await</span> <span class=nx>User</span><span class=p>.</span><span class=nx>findOne</span><span class=p>(</span><span class=p>{</span><span class=nx>id</span><span class=o>:</span><span class=nx>payload</span><span class=p>.</span><span class=nx>_id</span><span class=p>}</span><span class=p>,</span> <span class=p>{</span><span class=nx>password</span><span class=o>:</span><span class=kc>false</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+    <span class=nx>req</span><span class=p>.</span><span class=nx>user</span> <span class=o>=</span> <span class=nx>u</span><span class=p>;</span>
+    <span class=nx>next</span><span class=p>(</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span> <span class=k>catch</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>res</span><span class=p>.</span><span class=nx>status</span><span class=p>(</span><span class=mi>403</span><span class=p>)</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=p>{</span><span class=nx>message</span><span class=o>:</span><span class=s1>&#39;Invalid Token&#39;</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>Then it&rsquo;s super easy to use! Add this middleware before each call in your <code>routes/me.js</code> or any route you want to be secured by at minimum an authentication!</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// routes/me.js
+</span><span class=c1></span><span class=kr>const</span> <span class=nx>router</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;express&#39;</span><span class=p>)</span><span class=p>.</span><span class=nx>Router</span><span class=p>(</span><span class=p>)</span><span class=p>;</span>
+<span class=kr>const</span> <span class=nx>checkToken</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;../middleware/checkToken&#39;</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>router</span><span class=p>.</span><span class=nx>route</span><span class=p>(</span><span class=s1>&#39;/&#39;</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>get</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>getMe</span><span class=p>)</span><span class=p>;</span>
+  
+<span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=nx>router</span><span class=p>;</span>
+
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>getMe</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>res</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=nx>req</span><span class=p>.</span><span class=nx>user</span><span class=p>)</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p>Add <code>me.js</code> to your <code>routes/index.js</code> in the same manner as the other imports:</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// routes/index.js
+</span><span class=c1></span><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=p>{</span>
+  <span class=nx>users</span><span class=o>:</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;./users&#39;</span><span class=p>)</span><span class=p>,</span>
+  <span class=nx>authentication</span><span class=o>:</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;./authentication&#39;</span><span class=p>)</span><span class=p>,</span>
+  <span class=nx>me</span><span class=o>:</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;./me&#39;</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>Then add an endpoint in <code>app.js</code>
+app.use('/api/v1/me&rsquo;, routes.me);</p><p>Add the <code>x-auth-token</code> header to your <code>api/v1/me</code> request with the token that was generated from your login and boom! You&rsquo;ve got authorization!
+Try again without sending a token and you will get our &lsquo;No Token Provided&rsquo; message.
+Pretty cool, yeah?</p><p>This is pretty simple example, but what I really wanted to discuss is next. The middleware for even more functionality!</p><p>Adding in some permission-level authentication in this is super easy now that we have this architecture. First things first, let&rsquo;s adjust our user model to have a &lsquo;role&rsquo; property that can be any of &lsquo;user&rsquo;, &lsquo;admin&rsquo;, or &lsquo;manager&rsquo;. It&rsquo;ll look something like this:</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// models/user.model.js
+</span><span class=c1></span><span class=p>...</span>
+<span class=kr>const</span> <span class=nx>userSchema</span> <span class=o>=</span> <span class=nx>mongoose</span><span class=p>.</span><span class=nx>Schema</span><span class=p>(</span><span class=p>{</span>
+    <span class=nx>email</span><span class=o>:</span><span class=p>{</span><span class=nx>type</span><span class=o>:</span><span class=nb>String</span><span class=p>,</span> <span class=nx>required</span><span class=o>:</span><span class=kc>true</span><span class=p>,</span> <span class=nx>unique</span><span class=o>:</span><span class=kc>true</span><span class=p>}</span><span class=p>,</span>
+    <span class=nx>password</span><span class=o>:</span><span class=p>{</span><span class=nx>type</span><span class=o>:</span><span class=nb>String</span><span class=p>,</span> <span class=nx>required</span><span class=o>:</span><span class=kc>true</span><span class=p>}</span><span class=p>,</span>
+    <span class=nx>role</span><span class=o>:</span><span class=p>{</span><span class=nx>type</span><span class=o>:</span><span class=nb>String</span><span class=p>,</span> <span class=kr>enum</span><span class=o>:</span><span class=p>[</span><span class=s1>&#39;user&#39;</span><span class=p>,</span> <span class=s1>&#39;admin&#39;</span><span class=p>,</span> <span class=s1>&#39;manager&#39;</span><span class=p>]</span><span class=p>,</span> <span class=nx>required</span><span class=o>:</span><span class=kc>true</span><span class=p>,</span> <span class=k>default</span><span class=o>:</span><span class=s1>&#39;user&#39;</span><span class=p>}</span>
+<span class=p>}</span><span class=p>)</span><span class=p>;</span>
+<span class=p>...</span>
+</code></pre></div><p>For entertainment purposes, we&rsquo;re going to add a new resource and simply call it asset. We will need a mongoose model for it to begin:</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// models/asset.model.js
+</span><span class=c1></span><span class=kr>const</span> <span class=nx>mongoose</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;mongoose&#39;</span><span class=p>)</span><span class=p>;</span>
+
+<span class=kr>const</span> <span class=nx>assetSchema</span> <span class=o>=</span> <span class=nx>mongoose</span><span class=p>.</span><span class=nx>Schema</span><span class=p>(</span><span class=p>{</span>
+  <span class=nx>title</span><span class=o>:</span><span class=p>{</span><span class=nx>type</span><span class=o>:</span><span class=nb>String</span><span class=p>,</span> <span class=nx>required</span><span class=o>:</span><span class=kc>true</span><span class=p>}</span><span class=p>,</span>
+  <span class=nx>properties</span><span class=o>:</span><span class=p>{</span><span class=nx>type</span><span class=o>:</span><span class=nb>Object</span><span class=p>}</span><span class=p>,</span>
+  <span class=nx>assignedTo</span><span class=o>:</span><span class=p>{</span><span class=nx>type</span><span class=o>:</span><span class=nx>mongoose</span><span class=p>.</span><span class=nx>Schema</span><span class=p>.</span><span class=nx>Types</span><span class=p>.</span><span class=nx>ObjectId</span><span class=p>,</span> <span class=nx>required</span><span class=o>:</span><span class=kc>false</span><span class=p>}</span><span class=p>,</span>
+  <span class=nx>assignedAt</span><span class=o>:</span><span class=p>{</span><span class=nx>type</span><span class=o>:</span> <span class=nb>Date</span><span class=p>,</span> <span class=k>default</span><span class=o>:</span> <span class=kd>function</span><span class=p>(</span><span class=p>)</span> <span class=p>{</span> <span class=k>return</span> <span class=k>new</span> <span class=nb>Date</span><span class=p>(</span><span class=p>)</span><span class=p>}</span><span class=p>}</span>
+<span class=p>}</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=nx>mongoose</span><span class=p>.</span><span class=nx>model</span><span class=p>(</span><span class=s1>&#39;Asset&#39;</span><span class=p>,</span> <span class=nx>assetSchema</span><span class=p>)</span><span class=p>;</span>
+</code></pre></div><p>Require it in our <code>models/index.js</code> file as we did previously:</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// models/index.js
+</span><span class=c1></span><span class=p>...</span>
+<span class=nx>require</span><span class=p>(</span><span class=s1>&#39;./asset.model&#39;</span><span class=p>)</span><span class=p>;</span>
+<span class=p>...</span>
+</code></pre></div><p>Next we&rsquo;ll make a basic CRUD router for the asset:</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// routes/assets.js
+</span><span class=c1></span><span class=kr>const</span> <span class=nx>router</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;express&#39;</span><span class=p>)</span><span class=p>.</span><span class=nx>Router</span><span class=p>(</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>router</span><span class=p>.</span><span class=nx>route</span><span class=p>(</span><span class=s1>&#39;/&#39;</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>get</span><span class=p>(</span><span class=nx>getAssets</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>post</span><span class=p>(</span><span class=nx>createAsset</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>router</span><span class=p>.</span><span class=nx>route</span><span class=p>(</span><span class=s1>&#39;/:id&#39;</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>get</span><span class=p>(</span><span class=nx>getAsset</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>put</span><span class=p>(</span><span class=nx>updateAsset</span><span class=p>)</span>
+  <span class=p>.</span><span class=k>delete</span><span class=p>(</span><span class=nx>deleteAsset</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=nx>router</span><span class=p>;</span>
+
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>getAssets</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>next</span><span class=p>(</span><span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;Not Yet Implemented&#39;</span><span class=p>)</span><span class=p>)</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>createAsset</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>next</span><span class=p>(</span><span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;Not Yet Implemented&#39;</span><span class=p>)</span><span class=p>)</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>getAsset</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>next</span><span class=p>(</span><span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;Not Yet Implemented&#39;</span><span class=p>)</span><span class=p>)</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>updateAsset</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>next</span><span class=p>(</span><span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;Not Yet Implemented&#39;</span><span class=p>)</span><span class=p>)</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>deleteAsset</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>next</span><span class=p>(</span><span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;Not Yet Implemented&#39;</span><span class=p>)</span><span class=p>)</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p>Then add it to our index and app.js as we did previously.</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// SEE ABOVE. It&#39;s the exact same as before
+</span><span class=c1></span><span class=c1>// routes/index.js
+</span><span class=c1></span><span class=p>...</span>
+<span class=nx>assets</span><span class=o>:</span><span class=nx>require</span><span class=p>(</span><span class=s1>&#39;./assets&#39;</span><span class=p>)</span>
+<span class=p>...</span>
+
+<span class=c1>//app.js
+</span><span class=c1></span><span class=nx>app</span><span class=p>.</span><span class=nx>use</span><span class=p>(</span><span class=s1>&#39;/api/v1/assets&#39;</span><span class=p>,</span> <span class=nx>routes</span><span class=p>.</span><span class=nx>assets</span><span class=p>)</span><span class=p>;</span>
+</code></pre></div><p>The use case for this asset is as follows:</p><ol><li>Assets can be assigned to any user</li><li>Administrators can assign assets to any individual</li><li>Users can only view the assets that are assigned to them</li><li>Manager can view all assets but can&rsquo;t edit or create them.</li></ol><p>The first and foremost requirement of all of these scenarios is that a user must be authenticated to view. So to do this, we add the <code>checkToken</code> middleware to all those routes.</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// routes/asset.js
+</span><span class=c1></span><span class=kr>const</span> <span class=nx>router</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;express&#39;</span><span class=p>)</span><span class=p>.</span><span class=nx>Router</span><span class=p>(</span><span class=p>)</span><span class=p>;</span>
+<span class=kr>const</span> <span class=nx>checkToken</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;../middleware/checkToken&#39;</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>router</span><span class=p>.</span><span class=nx>route</span><span class=p>(</span><span class=s1>&#39;/&#39;</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>get</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>getAssets</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>post</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>createAsset</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>router</span><span class=p>.</span><span class=nx>route</span><span class=p>(</span><span class=s1>&#39;/:id&#39;</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>get</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>getAsset</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>put</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>updateAsset</span><span class=p>)</span>
+  <span class=p>.</span><span class=k>delete</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>deleteAsset</span><span class=p>)</span><span class=p>;</span>
+<span class=p>...</span>
+</code></pre></div><p>This is all fine and dandy, but what about those role requirements?
+More middleware?
+More middleware!</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// middleware/authorize.js
+</span><span class=c1></span><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=p>{</span>
+  <span class=nx>hasRole</span><span class=o>:</span> <span class=kd>function</span><span class=p>(</span><span class=nx>role</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=kd>function</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+      <span class=k>if</span><span class=p>(</span><span class=nx>role</span> <span class=o>===</span> <span class=nx>req</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>role</span><span class=p>)</span> <span class=p>{</span>
+        <span class=nx>next</span><span class=p>(</span><span class=p>)</span><span class=p>;</span>
+      <span class=p>}</span>
+      <span class=k>else</span><span class=p>{</span>
+        <span class=k>return</span> <span class=nx>res</span><span class=p>.</span><span class=nx>status</span><span class=p>(</span><span class=mi>403</span><span class=p>)</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=p>{</span><span class=nx>message</span><span class=o>:</span><span class=s1>&#39;Unauthorized&#39;</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+      <span class=p>}</span>
+    <span class=p>}</span>
+  <span class=p>}</span><span class=p>,</span>
+  <span class=nx>hasAnyRole</span><span class=o>:</span> <span class=kd>function</span><span class=p>(</span><span class=nx>roles</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=kd>function</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+      <span class=kd>let</span> <span class=nx>authorized</span> <span class=o>=</span> <span class=kc>false</span><span class=p>;</span>
+      <span class=k>if</span><span class=p>(</span><span class=o>!</span><span class=p>(</span><span class=nx>roles</span> <span class=k>instanceof</span> <span class=nb>Array</span><span class=p>)</span><span class=p>)</span> <span class=p>{</span>
+        <span class=nx>roles</span> <span class=o>=</span> <span class=p>[</span><span class=nx>roles</span><span class=p>]</span><span class=p>;</span>
+      <span class=p>}</span>
+      <span class=nx>roles</span><span class=p>.</span><span class=nx>forEach</span><span class=p>(</span><span class=nx>r</span> <span class=p>=&gt;</span> <span class=p>{</span>
+        <span class=k>if</span><span class=p>(</span><span class=nx>r</span> <span class=o>===</span> <span class=nx>req</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>role</span><span class=p>)</span> <span class=p>{</span>
+          <span class=nx>authorized</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
+        <span class=p>}</span>
+      <span class=p>}</span><span class=p>)</span><span class=p>;</span>
+      <span class=k>if</span><span class=p>(</span><span class=nx>authorized</span><span class=p>)</span><span class=p>{</span>
+        <span class=nx>next</span><span class=p>(</span><span class=p>)</span><span class=p>;</span>
+      <span class=p>}</span>
+      <span class=k>else</span><span class=p>{</span>
+        <span class=k>return</span> <span class=nx>res</span><span class=p>.</span><span class=nx>status</span><span class=p>(</span><span class=mi>403</span><span class=p>)</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=p>{</span><span class=nx>message</span><span class=o>:</span><span class=s1>&#39;Unauthorized&#39;</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+      <span class=p>}</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>This will allow us to implement all sorts of combinations of permission checking! I implemented the two that I need right now, but if you had an app with some more complicated permissions structure you could do something like <code>hasAllRoles</code> or <code>doesNotHaveRole</code> or <code>hasNoRoles</code> for some reason.</p><p>Next we can just chain these into our endpoints in our <code>asset</code> router.</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>//routes/asset.js
+</span><span class=c1></span><span class=kr>const</span> <span class=nx>router</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;express&#39;</span><span class=p>)</span><span class=p>.</span><span class=nx>Router</span><span class=p>(</span><span class=p>)</span><span class=p>;</span>
+<span class=kr>const</span> <span class=nx>Asset</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;mongoose&#39;</span><span class=p>)</span><span class=p>.</span><span class=nx>model</span><span class=p>(</span><span class=s1>&#39;Asset&#39;</span><span class=p>)</span><span class=p>;</span>
+
+<span class=kr>const</span> <span class=nx>checkToken</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;../middleware/checkToken&#39;</span><span class=p>)</span><span class=p>;</span>
+<span class=kr>const</span> <span class=nx>authorize</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;../middleware/authorize&#39;</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>router</span><span class=p>.</span><span class=nx>route</span><span class=p>(</span><span class=s1>&#39;/&#39;</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>get</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>authorize</span><span class=p>.</span><span class=nx>hasAnyRole</span><span class=p>(</span><span class=p>[</span><span class=s1>&#39;admin&#39;</span><span class=p>,</span> <span class=s1>&#39;manager&#39;</span><span class=p>]</span><span class=p>)</span><span class=p>,</span> <span class=nx>getAssets</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>post</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>authorize</span><span class=p>.</span><span class=nx>hasRole</span><span class=p>(</span><span class=s1>&#39;admin&#39;</span><span class=p>)</span><span class=p>,</span> <span class=nx>createAsset</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>router</span><span class=p>.</span><span class=nx>route</span><span class=p>(</span><span class=s1>&#39;/:id&#39;</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>get</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>authorize</span><span class=p>.</span><span class=nx>hasAnyRole</span><span class=p>(</span><span class=p>[</span><span class=s1>&#39;admin&#39;</span><span class=p>,</span> <span class=s1>&#39;manager&#39;</span><span class=p>]</span><span class=p>)</span><span class=p>,</span> <span class=nx>getAsset</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>put</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>authorize</span><span class=p>.</span><span class=nx>hasRole</span><span class=p>(</span><span class=s1>&#39;admin&#39;</span><span class=p>)</span><span class=p>,</span> <span class=nx>updateAsset</span><span class=p>)</span>
+  <span class=p>.</span><span class=k>delete</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>authorize</span><span class=p>.</span><span class=nx>hasRole</span><span class=p>(</span><span class=s1>&#39;admin&#39;</span><span class=p>)</span><span class=p>,</span> <span class=nx>deleteAsset</span><span class=p>)</span><span class=p>;</span>
+</code></pre></div><p>Note that I put the checkToken middleware first. This is because it allows us to check for a token first (and if there isn&rsquo;t one, end the request) and insert the user represented by the token into the request data. It is then accessible by the next piece of middleware.</p><p>Once we implement the rest of our functions, the asset class will look something like this:</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=kr>const</span> <span class=nx>router</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;express&#39;</span><span class=p>)</span><span class=p>.</span><span class=nx>Router</span><span class=p>(</span><span class=p>)</span><span class=p>;</span>
+<span class=kr>const</span> <span class=nx>Asset</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;mongoose&#39;</span><span class=p>)</span><span class=p>.</span><span class=nx>model</span><span class=p>(</span><span class=s1>&#39;Asset&#39;</span><span class=p>)</span><span class=p>;</span>
+
+<span class=kr>const</span> <span class=nx>checkToken</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;../middleware/checkToken&#39;</span><span class=p>)</span><span class=p>;</span>
+<span class=kr>const</span> <span class=nx>authorize</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;../middleware/authorize&#39;</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>router</span><span class=p>.</span><span class=nx>route</span><span class=p>(</span><span class=s1>&#39;/&#39;</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>get</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>authorize</span><span class=p>.</span><span class=nx>hasAnyRole</span><span class=p>(</span><span class=p>[</span><span class=s1>&#39;admin&#39;</span><span class=p>,</span> <span class=s1>&#39;manager&#39;</span><span class=p>]</span><span class=p>)</span><span class=p>,</span> <span class=nx>getAssets</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>post</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>authorize</span><span class=p>.</span><span class=nx>hasRole</span><span class=p>(</span><span class=s1>&#39;admin&#39;</span><span class=p>)</span><span class=p>,</span> <span class=nx>createAsset</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>router</span><span class=p>.</span><span class=nx>route</span><span class=p>(</span><span class=s1>&#39;/:id&#39;</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>get</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>authorize</span><span class=p>.</span><span class=nx>hasAnyRole</span><span class=p>(</span><span class=p>[</span><span class=s1>&#39;admin&#39;</span><span class=p>,</span> <span class=s1>&#39;manager&#39;</span><span class=p>]</span><span class=p>)</span><span class=p>,</span> <span class=nx>getAsset</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>put</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>authorize</span><span class=p>.</span><span class=nx>hasRole</span><span class=p>(</span><span class=s1>&#39;admin&#39;</span><span class=p>)</span><span class=p>,</span> <span class=nx>updateAsset</span><span class=p>)</span>
+  <span class=p>.</span><span class=k>delete</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>authorize</span><span class=p>.</span><span class=nx>hasRole</span><span class=p>(</span><span class=s1>&#39;admin&#39;</span><span class=p>)</span><span class=p>,</span> <span class=nx>deleteAsset</span><span class=p>)</span><span class=p>;</span>
+
+<span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=nx>router</span><span class=p>;</span>
+
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>getAssets</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=k>try</span> <span class=p>{</span>
+    <span class=kd>let</span> <span class=nx>assets</span> <span class=o>=</span> <span class=nx>await</span> <span class=nx>Asset</span><span class=p>.</span><span class=nx>find</span><span class=p>(</span><span class=p>)</span><span class=p>;</span>
+    <span class=nx>res</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=nx>assets</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span> <span class=k>catch</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>next</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>createAsset</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kd>let</span> <span class=nx>asset</span> <span class=o>=</span> <span class=nx>req</span><span class=p>.</span><span class=nx>body</span><span class=p>;</span>
+  <span class=k>try</span> <span class=p>{</span>
+    <span class=kd>let</span> <span class=nx>a</span> <span class=o>=</span> <span class=nx>await</span> <span class=nx>Asset</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=nx>asset</span><span class=p>)</span><span class=p>;</span>
+    <span class=nx>res</span><span class=p>.</span><span class=nx>status</span><span class=p>(</span><span class=mi>201</span><span class=p>)</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=nx>a</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span> <span class=k>catch</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>next</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>getAsset</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kd>let</span> <span class=nx>id</span> <span class=o>=</span> <span class=nx>req</span><span class=p>.</span><span class=nx>params</span><span class=p>.</span><span class=nx>id</span><span class=p>;</span>
+  <span class=k>try</span> <span class=p>{</span>
+    <span class=kd>let</span> <span class=nx>asset</span> <span class=o>=</span> <span class=nx>await</span> <span class=nx>Asset</span><span class=p>.</span><span class=nx>findById</span><span class=p>(</span><span class=nx>id</span><span class=p>)</span><span class=p>;</span>
+    <span class=nx>res</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=nx>asset</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span> <span class=k>catch</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>next</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>updateAsset</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kd>let</span> <span class=nx>id</span> <span class=o>=</span> <span class=nx>req</span><span class=p>.</span><span class=nx>params</span><span class=p>.</span><span class=nx>id</span><span class=p>;</span>
+  <span class=kd>let</span> <span class=nx>asset</span> <span class=o>=</span> <span class=nx>req</span><span class=p>.</span><span class=nx>body</span><span class=p>;</span>
+  <span class=k>try</span> <span class=p>{</span>
+    <span class=kd>let</span> <span class=nx>result</span> <span class=o>=</span> <span class=nx>await</span> <span class=nx>Asset</span><span class=p>.</span><span class=nx>update</span><span class=p>(</span><span class=p>{</span><span class=nx>_id</span><span class=o>:</span><span class=nx>id</span><span class=p>}</span><span class=p>,</span> <span class=nx>asset</span><span class=p>,</span> <span class=p>{</span><span class=k>new</span><span class=o>:</span><span class=kc>true</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+    <span class=nx>res</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=nx>result</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span> <span class=k>catch</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>next</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>deleteAsset</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kd>let</span> <span class=nx>id</span> <span class=o>=</span> <span class=nx>req</span><span class=p>.</span><span class=nx>params</span><span class=p>.</span><span class=nx>id</span><span class=p>;</span>
+  <span class=k>try</span> <span class=p>{</span>
+    <span class=kd>let</span> <span class=nx>done</span> <span class=o>=</span> <span class=nx>await</span> <span class=nx>Asset</span><span class=p>.</span><span class=nx>deleteOne</span><span class=p>(</span><span class=p>{</span><span class=nx>_id</span><span class=o>:</span><span class=nx>id</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+    <span class=k>if</span><span class=p>(</span><span class=nx>done</span><span class=p>)</span> <span class=p>{</span>
+      <span class=k>return</span> <span class=nx>res</span><span class=p>.</span><span class=nx>status</span><span class=p>(</span><span class=mi>200</span><span class=p>)</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=p>{</span><span class=nx>message</span><span class=o>:</span><span class=s1>&#39;Deleted&#39;</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+    <span class=p>}</span>
+  <span class=p>}</span> <span class=k>catch</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>next</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>I&rsquo;m not going to prove it, but if you want to test the use cases, go ahead and make a couple of users and try to access each endpoint as each of them :D.</p><p>For most API&rsquo;s I&rsquo;ve grown quite fond of implementing features for individuals with the <code>/me</code> endpoint. To complete our previous list of user requirements, I&rsquo;m going to simply implement the feature for getting assets but by using the <code>/me</code> endpoint as the only requirement is not permissions based, but identity based.</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// routes/me.js
+</span><span class=c1></span><span class=p>...</span>
+<span class=nx>router</span><span class=p>.</span><span class=nx>route</span><span class=p>(</span><span class=s1>&#39;/assets&#39;</span><span class=p>)</span>
+  <span class=p>.</span><span class=nx>get</span><span class=p>(</span><span class=nx>checkToken</span><span class=p>,</span> <span class=nx>getMyAssets</span><span class=p>)</span><span class=p>;</span>
+<span class=p>...</span>
+<span class=nx>async</span> <span class=kd>function</span> <span class=nx>getMyAssets</span><span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>,</span> <span class=nx>next</span><span class=p>)</span> <span class=p>{</span>
+  <span class=k>try</span> <span class=p>{</span>
+    <span class=kd>let</span> <span class=nx>assets</span> <span class=o>=</span> <span class=nx>await</span> <span class=nx>Asset</span><span class=p>.</span><span class=nx>find</span><span class=p>(</span><span class=p>{</span> <span class=nx>assignedTo</span><span class=o>:</span> <span class=nx>req</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>_id</span> <span class=p>}</span><span class=p>)</span><span class=p>;</span>
+    <span class=nx>res</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=nx>assets</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>err</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>next</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>and Voila. We can get all the assets that&rsquo;s assigned to the currently authenticated user.</p><p>Isn&rsquo;t that fun?</p><p><del>I&rsquo;m going to post the source code on my github - I&rsquo;ll update the post when I do!</del></p><p>The source is up at <a href=https://github.com/jimdhughes/jdhc-express-stateless-template>https://github.com/jimdhughes/jdhc-express-stateless-template</a></p><p>Cheers!</p></article><section class="article labels"><a class=category href=/categories/nodejs/>nodejs</a><a class=category href=/categories/rest/>REST</a><a class=category href=/categories/jwt/>JWT</a><a class=category href=/categories/expressjs/>ExpressJS</a><a class=category href=/categories/middleware/>Middleware</a><a class=category href=/categories/development/>development</a><a class=category href=/categories/javascript/>JavaScript</a><a class=category href=/categories/mongodb/>MongoDB</a><a class=category href=/categories/async/>async</a><a class=tag href=/tags/nodejs/>nodejs</a><a class=tag href=/tags/rest/>REST</a><a class=tag href=/tags/jwt/>JWT</a><a class=tag href=/tags/expressjs/>ExpressJS</a><a class=tag href=/tags/middleware/>Middleware</a><a class=tag href=/tags/development/>development</a><a class=tag href=/tags/javascript/>JavaScript</a><a class=tag href=/tags/mongodb/>MongoDB</a><a class=tag href=/tags/async/>async</a></section></div><div class="article bottom"><section class="article navigation"><p><a class=link href=/posts/2018/my-concept2-model-d-lets-get-after-it/><span class="iconfont icon-article"></span>My Concept2 Model D - Let's get after it!</a></p><p><a class=link href=/posts/2018/why-your-it-friends-are-always-grumpy/><span class="iconfont icon-article"></span>Why your IT friends are always grumpy</a></p></section></div></section><section id=footer><div class=footer-wrap><p class=copyright>©2020 James Hughes.</p><p class=powerby><span>Powered by </span><a href=https://gohugo.io target=_blank>Hugo</a><span> and the </span><a href=https://themes.gohugo.io/hugo-notepadium/ target=_blank>Notepadium</a></p></div></section></body></html>
