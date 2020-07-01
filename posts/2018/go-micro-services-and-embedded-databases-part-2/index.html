@@ -1,0 +1,339 @@
+<!doctype html><html lang=en><meta charset=utf-8><meta name=generator content="Hugo 0.64.0"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name=color-scheme content="light dark"><meta name=supported-color-schemes content="light dark"><title>Go - Micro-services and Embedded Databases [Part 2]&nbsp;&ndash;&nbsp;James Hughes</title><link rel=stylesheet href=/css/core.min.99d761621eb15531f47d6f109c742c4d2f97f9c10fed380e3da27af7676a27a1fb5968bfbd3207717f11d40ad1d68b92.css integrity=sha384-mddhYh6xVTH0fW8QnHQsTS+X+cEP7TgOPaJ692dqJ6H7WWi/vTIHcX8R1ArR1ouS><meta name=twitter:card content="summary"><meta name=twitter:title content="Go - Micro-services and Embedded Databases [Part 2]"><body><section id=header><div class="header wrap"><span class="header left-side"><a class="site home" href=/><span class="site name">James Hughes</span></a></span>
+<span class="header right-side"><div class="nav wrap"><nav class=nav><a class="nav item" href=/categories/>Categories</a><a class="nav item" href=/tags/>Tags</a><a class="nav item" href></a><a class="nav item" href></a></nav></div></span></div></section><section id=content><div class=article-container><section class="article header"><h1 class="article title">Go - Micro-services and Embedded Databases [Part 2]</h1><p class="article date">Monday, September 24, 2018</p></section><article class="article markdown-body"><p>If you haven&rsquo;t already, check out <a href=https://blog.jimdhughes.com/go-micro-services-and-embedded-databases/ target=_blank>Part 1</a>[!]</p><p>First things first - let&rsquo;s make these responses something machine readable instead of just some plain text! That&rsquo;s a nice and easy way to dive back into the code!</p><p>We are going to create 2 new structs in the <code>router.go</code> file to declare how the app is going to return Errors and Standard responses.</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>main</span>
+
+<span class=c1>// ...
+</span><span class=c1></span>
+<span class=kd>type</span> <span class=nx>ApiErrorResponse</span> <span class=kd>struct</span> <span class=p>{</span>
+	<span class=nx>Error</span> <span class=kt>string</span> <span class=s>`</span><span class=s>json:&#34;error&#34;</span><span class=s>`</span>
+<span class=p>}</span>
+
+<span class=kd>type</span> <span class=nx>ApiStandardResponse</span> <span class=kd>struct</span> <span class=p>{</span>
+	<span class=nx>Payload</span> <span class=kd>interface</span><span class=p>{</span><span class=p>}</span> <span class=s>`</span><span class=s>json:&#34;payload&#34;</span><span class=s>`</span>
+<span class=p>}</span>
+
+</code></pre></div><p>This is menial, but it helps our responses have a bit more structure. The first simply returns an error message as a string value. We will assume that our handlers will set the http response status accordingly. The <code>ApiStandardResponse</code> is pretty well the same except we have an <code>interface{}</code> type on the payload. This is so that we can return any type of data. The response will be dependent on what is being returned by the handler. Next let&rsquo;s update our <code>WriteError</code> function to use this new struct</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>WriteError</span><span class=p>(</span><span class=nx>w</span> <span class=nx>http</span><span class=p>.</span><span class=nx>ResponseWriter</span><span class=p>,</span> <span class=nx>statusCode</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>w</span><span class=p>.</span><span class=nf>Header</span><span class=p>(</span><span class=p>)</span><span class=p>.</span><span class=nf>Set</span><span class=p>(</span><span class=s>&#34;Content-Type&#34;</span><span class=p>,</span> <span class=s>&#34;application/json; charset=UTF-8&#34;</span><span class=p>)</span>
+    <span class=nx>w</span><span class=p>.</span><span class=nf>WriteHeader</span><span class=p>(</span><span class=nx>statusCode</span><span class=p>)</span>
+	<span class=nx>response</span> <span class=o>:=</span> <span class=nx>ApiErrorResponse</span><span class=p>{</span><span class=nx>Error</span><span class=p>:</span> <span class=nx>err</span><span class=p>.</span><span class=nf>Error</span><span class=p>(</span><span class=p>)</span><span class=p>}</span>
+	<span class=nx>json</span><span class=p>.</span><span class=nf>NewEncoder</span><span class=p>(</span><span class=nx>w</span><span class=p>)</span><span class=p>.</span><span class=nf>Encode</span><span class=p>(</span><span class=nx>response</span><span class=p>)</span>
+<span class=p>}</span>
+
+</code></pre></div><p>Here we take the error, make a new response object and then encode it as a json format and send it back to the requester. Easy as pie!</p><p>Taking a leaf out of our <code>WriteError</code> book, let&rsquo;s implement a <code>WriteResponse</code> function to handle all the good responses! It&rsquo;s going to look a lot the same as the <code>WriteError</code> function.</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>WriteResponse</span><span class=p>(</span><span class=nx>w</span> <span class=nx>http</span><span class=p>.</span><span class=nx>ResponseWriter</span><span class=p>,</span> <span class=nx>statusCode</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>payload</span> <span class=kd>interface</span><span class=p>{</span><span class=p>}</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>w</span><span class=p>.</span><span class=nf>Header</span><span class=p>(</span><span class=p>)</span><span class=p>.</span><span class=nf>Set</span><span class=p>(</span><span class=s>&#34;Content-Type&#34;</span><span class=p>,</span> <span class=s>&#34;application/json; charset=UTF-8&#34;</span><span class=p>)</span>
+    <span class=nx>w</span><span class=p>.</span><span class=nf>WriteHeader</span><span class=p>(</span><span class=nx>statusCode</span><span class=p>)</span>
+	<span class=nx>response</span> <span class=o>:=</span> <span class=nx>ApiStandardResponse</span><span class=p>{</span><span class=nx>Payload</span><span class=p>:</span> <span class=nx>payload</span><span class=p>}</span>
+	<span class=nx>json</span><span class=p>.</span><span class=nf>NewEncoder</span><span class=p>(</span><span class=nx>w</span><span class=p>)</span><span class=p>.</span><span class=nf>Encode</span><span class=p>(</span><span class=nx>response</span><span class=p>)</span>
+<span class=p>}</span>
+
+</code></pre></div><p>Again, pretty straight forward. You should update all of your response lines that were previously just fmt.Fprintf(w, &mldr;) with the WriteResponse function. Hint - they are in the <code>HandleRegistration</code> and <code>HandleLogin</code> functions!</p><p>Now on to some real functionality. Tokens!</p><p>We&rsquo;re going to return a token from our <code>Login</code> function. This is going to contain some user information such as their Email and ID. In a real app you could return some permission grants for your apps or user roles, but we&rsquo;re not going to be that sophisticated here. Make a new file called <code>tokenHandler.go</code></p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>main</span>
+
+<span class=kd>const</span> <span class=p>(</span>
+	<span class=nx>secretKey</span> <span class=p>=</span> <span class=s>&#34;asupersecretekeythatshouldntbehardcodedhere&#34;</span>
+<span class=p>)</span>
+
+<span class=kd>type</span> <span class=nx>ITokenService</span> <span class=kd>interface</span> <span class=p>{</span>
+	<span class=nf>CreateToken</span><span class=p>(</span><span class=nx>user</span> <span class=nx>User</span><span class=p>)</span> <span class=p>(</span><span class=kt>string</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span>
+	<span class=nf>ValidateToken</span><span class=p>(</span><span class=nx>token</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=kd>interface</span><span class=p>{</span><span class=p>}</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>type</span> <span class=nx>TokenService</span> <span class=kd>struct</span><span class=p>{</span><span class=p>}</span>
+
+<span class=kd>var</span> <span class=nx>TS</span> <span class=nx>ITokenService</span>
+
+<span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>TokenService</span><span class=p>)</span> <span class=nf>CreateToken</span><span class=p>(</span><span class=nx>user</span> <span class=nx>User</span><span class=p>)</span> <span class=p>(</span><span class=kt>string</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+	<span class=k>return</span> <span class=s>&#34;&#34;</span><span class=p>,</span> <span class=kc>nil</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>TokenService</span><span class=p>)</span> <span class=nf>ValidateToken</span><span class=p>(</span><span class=nx>token</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=kd>interface</span><span class=p>{</span><span class=p>}</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+	<span class=k>return</span> <span class=nx>User</span><span class=p>{</span><span class=p>}</span><span class=p>,</span> <span class=kc>nil</span>
+<span class=p>}</span>
+
+</code></pre></div><p>This should be all we need as a scaffold. We create an interface as the contract for the service and then implement a struct that will essentially implement the ITokenService interface. We have method stubs to handle the creation of a token from a user and the validation of a token.</p><p>In contrast to my last post, we&rsquo;re going to do our development TDD style this time around.</p><p>Firstly we need to initialize our TokenService in our TestMain function (found in db.go)</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>TestMain</span><span class=p>(</span><span class=nx>m</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>M</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>DB</span> <span class=p>=</span> <span class=o>&amp;</span><span class=nx>DBClient</span><span class=p>{</span><span class=p>}</span>
+	<span class=nx>TS</span> <span class=p>=</span> <span class=o>&amp;</span><span class=nx>TokenService</span><span class=p>{</span><span class=p>}</span>
+	<span class=nx>DB</span><span class=p>.</span><span class=nf>Initialize</span><span class=p>(</span><span class=s>&#34;./bolt-test.db&#34;</span><span class=p>)</span>
+	<span class=nx>retCode</span> <span class=o>:=</span> <span class=nx>m</span><span class=p>.</span><span class=nf>Run</span><span class=p>(</span><span class=p>)</span>
+	<span class=nx>os</span><span class=p>.</span><span class=nf>Remove</span><span class=p>(</span><span class=s>&#34;./bolt-test.db&#34;</span><span class=p>)</span>
+	<span class=nx>os</span><span class=p>.</span><span class=nf>Exit</span><span class=p>(</span><span class=nx>retCode</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>Next comes the test file for the Token Service <code>tokenService_test.go</code></p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>main</span>
+
+<span class=kn>import</span> <span class=p>(</span>
+	<span class=s>&#34;testing&#34;</span>
+<span class=p>)</span>
+
+<span class=kd>func</span> <span class=nf>TestCreateTokenFromNotValidUser</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>user</span> <span class=o>:=</span> <span class=nx>User</span><span class=p>{</span><span class=p>}</span>
+	<span class=nx>token</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>TS</span><span class=p>.</span><span class=nf>CreateToken</span><span class=p>(</span><span class=nx>user</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Token should not be created for an empty user&#34;</span><span class=p>)</span>
+		<span class=k>return</span>
+	<span class=p>}</span>
+	<span class=k>if</span> <span class=nx>token</span> <span class=o>!=</span> <span class=s>&#34;&#34;</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Error should have been thrown as token cannot be created&#34;</span><span class=p>)</span>
+		<span class=k>return</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>TestCreateTokenFromValidUser</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>user</span> <span class=o>:=</span> <span class=nx>User</span><span class=p>{</span><span class=nx>Email</span><span class=p>:</span> <span class=s>&#34;tokentester@domain.com&#34;</span><span class=p>,</span> <span class=nx>Password</span><span class=p>:</span> <span class=s>&#34;password&#34;</span><span class=p>}</span>
+	<span class=nx>DB</span><span class=p>.</span><span class=nf>CreateUser</span><span class=p>(</span><span class=nx>user</span><span class=p>)</span> <span class=c1>// we test this elsewhere so assume it works. see db_test.go
+</span><span class=c1></span>    <span class=c1>// ... I&#39;m Stuck!
+</span><span class=c1></span>
+<span class=p>}</span>
+
+</code></pre></div><p>Yep. I&rsquo;m stuck!</p><p>This is why TDD is good. It forces you to develop some better code. The original flow that I had planned was that the Login function would just return a string value (the token) which isn&rsquo;t necessarily wrong, however for logical testing it makes life a bit harder than it has to be!</p><p>We have code to get a user by email twice in this application already. Once in the <code>Login</code> function and once in the <code>CheckUserExists</code> function. So let&rsquo;s refactor this repeated code into a new function called <code>GetUserByEmail</code> in the <code>db.go</code> file.</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>main</span>
+
+<span class=kd>type</span> <span class=nx>IDBClient</span> <span class=kd>interface</span> <span class=p>{</span>
+	<span class=nf>Initialize</span><span class=p>(</span><span class=nx>filepath</span> <span class=kt>string</span><span class=p>)</span>
+	<span class=nf>Open</span><span class=p>(</span><span class=p>)</span>
+	<span class=nf>Close</span><span class=p>(</span><span class=p>)</span>
+	<span class=nf>CreateUser</span><span class=p>(</span><span class=nx>u</span> <span class=nx>User</span><span class=p>)</span> <span class=p>(</span><span class=kt>bool</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span>
+	<span class=nf>Login</span><span class=p>(</span><span class=nx>email</span><span class=p>,</span> <span class=nx>password</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=kt>string</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span>
+	<span class=nf>CheckUserIsNew</span><span class=p>(</span><span class=nx>email</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=kt>bool</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span>
+    <span class=c1>// Add to the interface
+</span><span class=c1></span>	<span class=nf>GetUserByEmail</span><span class=p>(</span><span class=nx>email</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=nx>User</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=c1>// ...
+</span><span class=c1></span>
+<span class=kd>func</span> <span class=p>(</span><span class=nx>db</span> <span class=o>*</span><span class=nx>DBClient</span><span class=p>)</span> <span class=nf>GetUserByEmail</span><span class=p>(</span><span class=nx>email</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=nx>User</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>db</span><span class=p>.</span><span class=nf>Open</span><span class=p>(</span><span class=p>)</span>
+	<span class=k>defer</span> <span class=nx>db</span><span class=p>.</span><span class=nf>Close</span><span class=p>(</span><span class=p>)</span>
+	<span class=nx>user</span> <span class=o>:=</span> <span class=nx>User</span><span class=p>{</span><span class=p>}</span>
+	<span class=nx>err</span> <span class=o>:=</span> <span class=nx>db</span><span class=p>.</span><span class=nx>client</span><span class=p>.</span><span class=nf>View</span><span class=p>(</span><span class=kd>func</span><span class=p>(</span><span class=nx>tx</span> <span class=o>*</span><span class=nx>bolt</span><span class=p>.</span><span class=nx>Tx</span><span class=p>)</span> <span class=kt>error</span> <span class=p>{</span>
+		<span class=nx>b</span> <span class=o>:=</span> <span class=nx>tx</span><span class=p>.</span><span class=nf>Bucket</span><span class=p>(</span><span class=p>[</span><span class=p>]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>usersBucketName</span><span class=p>)</span><span class=p>)</span>
+		<span class=nx>userBytes</span> <span class=o>:=</span> <span class=nx>b</span><span class=p>.</span><span class=nf>Get</span><span class=p>(</span><span class=p>[</span><span class=p>]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>email</span><span class=p>)</span><span class=p>)</span>
+		<span class=k>if</span> <span class=nx>userBytes</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>
+			<span class=k>return</span> <span class=kc>nil</span>
+		<span class=p>}</span>
+		<span class=nx>err</span> <span class=o>:=</span> <span class=nx>json</span><span class=p>.</span><span class=nf>Unmarshal</span><span class=p>(</span><span class=nx>userBytes</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>user</span><span class=p>)</span>
+		<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+			<span class=k>return</span> <span class=nx>err</span>
+		<span class=p>}</span>
+		<span class=k>return</span> <span class=kc>nil</span>
+	<span class=p>}</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=k>return</span> <span class=nx>User</span><span class=p>{</span><span class=p>}</span><span class=p>,</span> <span class=nx>err</span>
+	<span class=p>}</span>
+	<span class=k>return</span> <span class=nx>user</span><span class=p>,</span> <span class=kc>nil</span>
+<span class=p>}</span>
+
+</code></pre></div><p>And now that we have our helper function we can rebuild our <code>CheckUserExists</code> and <code>Login</code> functions!</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=p>(</span><span class=nx>db</span> <span class=o>*</span><span class=nx>DBClient</span><span class=p>)</span> <span class=nf>CheckUserIsNew</span><span class=p>(</span><span class=nx>email</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=kt>bool</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>user</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>db</span><span class=p>.</span><span class=nf>GetUserByEmail</span><span class=p>(</span><span class=nx>email</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=nx>log</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%s&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+		<span class=k>return</span> <span class=kc>false</span><span class=p>,</span> <span class=nx>err</span>
+	<span class=p>}</span>
+	<span class=k>if</span> <span class=nx>user</span><span class=p>.</span><span class=nx>ID</span> <span class=o>!=</span> <span class=s>&#34;&#34;</span> <span class=p>{</span>
+		<span class=k>return</span> <span class=kc>false</span><span class=p>,</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;User Exists with email %s&#34;</span><span class=p>,</span> <span class=nx>email</span><span class=p>)</span>
+	<span class=p>}</span>
+	<span class=k>return</span> <span class=kc>true</span><span class=p>,</span> <span class=kc>nil</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=p>(</span><span class=nx>db</span> <span class=o>*</span><span class=nx>DBClient</span><span class=p>)</span> <span class=nf>Login</span><span class=p>(</span><span class=nx>email</span><span class=p>,</span> <span class=nx>password</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=kt>string</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>user</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>db</span><span class=p>.</span><span class=nf>GetUserByEmail</span><span class=p>(</span><span class=nx>email</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=k>return</span> <span class=s>&#34;Nope&#34;</span><span class=p>,</span> <span class=nx>err</span>
+	<span class=p>}</span>
+	<span class=nx>err</span> <span class=p>=</span> <span class=nx>user</span><span class=p>.</span><span class=nf>CheckPassword</span><span class=p>(</span><span class=nx>password</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=k>return</span> <span class=s>&#34;nope&#34;</span><span class=p>,</span> <span class=nx>err</span>
+	<span class=p>}</span>
+	<span class=k>return</span> <span class=s>&#34;yep&#34;</span><span class=p>,</span> <span class=kc>nil</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=p>(</span><span class=nx>db</span> <span class=o>*</span><span class=nx>DBClient</span><span class=p>)</span> <span class=nf>CreateUser</span><span class=p>(</span><span class=nx>u</span> <span class=nx>User</span><span class=p>)</span> <span class=p>(</span><span class=kt>bool</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>isNew</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>db</span><span class=p>.</span><span class=nf>CheckUserIsNew</span><span class=p>(</span><span class=nx>u</span><span class=p>.</span><span class=nx>Email</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=o>||</span> <span class=nx>isNew</span> <span class=o>==</span> <span class=kc>false</span> <span class=p>{</span>
+		<span class=k>return</span> <span class=kc>false</span><span class=p>,</span> <span class=nx>err</span>
+	<span class=p>}</span>
+	<span class=nx>db</span><span class=p>.</span><span class=nf>Open</span><span class=p>(</span><span class=p>)</span>
+	<span class=k>defer</span> <span class=nx>db</span><span class=p>.</span><span class=nf>Close</span><span class=p>(</span><span class=p>)</span>
+	<span class=nx>err</span> <span class=p>=</span> <span class=nx>db</span><span class=p>.</span><span class=nx>client</span><span class=p>.</span><span class=nf>Update</span><span class=p>(</span><span class=kd>func</span><span class=p>(</span><span class=nx>txn</span> <span class=o>*</span><span class=nx>bolt</span><span class=p>.</span><span class=nx>Tx</span><span class=p>)</span> <span class=kt>error</span> <span class=p>{</span>
+        <span class=c1>// ...
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></div><p>With this new functionality, we have to make some changes to our original code. We don&rsquo;t need to open the database in the <code>Login</code> function or the <code>CheckUserExists</code> function. This also means though that when we get to our <code>CreateUser</code> we need to move the <code>db.Open()</code> and <code>defer db.Close()</code> calls to after the <code>CheckUserIsNew</code> function as we end up opening a database connection again.</p><p>We should test the new <code>GetUserByEmail</code> function so add a new test in <code>db_test.go</code></p><div class=highlight><pre class=chroma><code class=language-go data-lang=go>
+<span class=c1>// ...
+</span><span class=c1></span>
+<span class=kd>func</span> <span class=nf>TestGetUserByEmailInvalidEmail</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>user</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>DB</span><span class=p>.</span><span class=nf>GetUserByEmail</span><span class=p>(</span><span class=s>&#34;invalidemail@somedomain.com&#34;</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=nx>err</span><span class=p>.</span><span class=nf>Error</span><span class=p>(</span><span class=p>)</span><span class=p>)</span>
+	<span class=p>}</span>
+	<span class=k>if</span> <span class=nx>user</span><span class=p>.</span><span class=nx>ID</span> <span class=o>!=</span> <span class=s>&#34;&#34;</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;No user should have been returned&#34;</span><span class=p>)</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>TestGetUserByEmailValidEmail</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>user</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>DB</span><span class=p>.</span><span class=nf>GetUserByEmail</span><span class=p>(</span><span class=s>&#34;test@domain.com&#34;</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Error</span><span class=p>(</span><span class=nx>err</span><span class=p>.</span><span class=nf>Error</span><span class=p>(</span><span class=p>)</span><span class=p>)</span>
+	<span class=p>}</span>
+	<span class=k>if</span> <span class=nx>user</span><span class=p>.</span><span class=nx>Email</span> <span class=o>==</span> <span class=s>&#34;&#34;</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Error</span><span class=p>(</span><span class=s>&#34;Expected to get user but got an empty user&#34;</span><span class=p>)</span>
+	<span class=p>}</span>
+	<span class=k>if</span> <span class=nx>user</span><span class=p>.</span><span class=nx>Email</span> <span class=o>!=</span> <span class=s>&#34;test@domain.com&#34;</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Returned a user other than expected&#34;</span><span class=p>)</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>That&rsquo;s much better! Run our tests again to make sure we haven&rsquo;t broken any functionality using <code>go test</code>. The only test that should be failing is the one we were previously stuck on! This means that we haven&rsquo;t broken the system! Woot!! We don&rsquo;t have to stay late tonight!</p><p><strong>Full Disclosure: My tests were failing when I first wrote the changes. I got to fix them before publishing. Tests are good.</strong></p><p>Now that we&rsquo;ve made those changes, we can implement that test and continue on writing some more!</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=c1>// ...
+</span><span class=c1></span><span class=kd>func</span> <span class=nf>TestCreateTokenFromValidUser</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>user</span> <span class=o>:=</span> <span class=nx>User</span><span class=p>{</span><span class=nx>Email</span><span class=p>:</span> <span class=s>&#34;tokentester@domain.com&#34;</span><span class=p>,</span> <span class=nx>Password</span><span class=p>:</span> <span class=s>&#34;password&#34;</span><span class=p>}</span>
+	<span class=nx>DB</span><span class=p>.</span><span class=nf>CreateUser</span><span class=p>(</span><span class=nx>user</span><span class=p>)</span>                     <span class=c1>// we test this elsewhere so assume it works. see db_test.go
+</span><span class=c1></span>	<span class=nx>user</span><span class=p>,</span> <span class=nx>_</span> <span class=p>=</span> <span class=nx>DB</span><span class=p>.</span><span class=nf>GetUserByEmail</span><span class=p>(</span><span class=nx>user</span><span class=p>.</span><span class=nx>Email</span><span class=p>)</span> <span class=c1>//we can ignore the error as we test this elsewhere
+</span><span class=c1></span>	<span class=nx>token</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>TS</span><span class=p>.</span><span class=nf>CreateToken</span><span class=p>(</span><span class=nx>user</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Token could not be created for user: %s&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+	<span class=p>}</span>
+	<span class=k>if</span> <span class=nx>token</span> <span class=o>==</span> <span class=s>&#34;&#34;</span> <span class=p>{</span>
+		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Empty token was returned. Expected a token as a string&#34;</span><span class=p>)</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+
+</code></pre></div><p>Let&rsquo;s run our tests!</p><p>They better all fail. If they don&rsquo;t then my logic might be worse than I originally anticipated.</p><p><strong>Disclosure again: I got to run these before posting so I look smart :) Testing saves the day again!</strong></p><p>Now onto implementing our <code>CreateToken</code> function. I&rsquo;m using the package <code>"github.com/dgrijalva/jwt-go"</code> because it&rsquo;s the first that pops up when you type &lsquo;golang&rsquo; and &lsquo;jwt&rsquo; into google (and the Auth0 blog wrote a post on it as well, so you know it&rsquo;s good)</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=c1>// Creates a new Token for a User
+</span><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>TokenService</span><span class=p>)</span> <span class=nf>CreateToken</span><span class=p>(</span><span class=nx>user</span> <span class=nx>User</span><span class=p>)</span> <span class=p>(</span><span class=kt>string</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>safeUser</span> <span class=o>:=</span> <span class=nx>UserSafe</span><span class=p>{</span><span class=p>}</span>
+	<span class=nx>safeUser</span><span class=p>.</span><span class=nx>ID</span> <span class=p>=</span> <span class=nx>user</span><span class=p>.</span><span class=nx>ID</span>
+	<span class=nx>safeUser</span><span class=p>.</span><span class=nx>Email</span> <span class=p>=</span> <span class=nx>user</span><span class=p>.</span><span class=nx>Email</span>
+	<span class=nx>token</span> <span class=o>:=</span> <span class=nx>jwt</span><span class=p>.</span><span class=nf>NewWithClaims</span><span class=p>(</span><span class=nx>jwt</span><span class=p>.</span><span class=nx>SigningMethodHS256</span><span class=p>,</span> <span class=nx>jwt</span><span class=p>.</span><span class=nx>MapClaims</span><span class=p>{</span>
+		<span class=s>&#34;sub&#34;</span><span class=p>:</span> <span class=nx>user</span><span class=p>,</span>
+		<span class=s>&#34;exp&#34;</span><span class=p>:</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>(</span><span class=p>)</span><span class=p>.</span><span class=nf>Add</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nx>Hour</span><span class=p>)</span><span class=p>.</span><span class=nf>Unix</span><span class=p>(</span><span class=p>)</span><span class=p>,</span>
+	<span class=p>}</span><span class=p>)</span>
+
+	<span class=c1>// TODO: Remove hardcoded signed string
+</span><span class=c1></span>	<span class=nx>tokenString</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>token</span><span class=p>.</span><span class=nf>SignedString</span><span class=p>(</span><span class=p>[</span><span class=p>]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>secretKey</span><span class=p>)</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Error signing token: &#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+		<span class=k>return</span> <span class=s>&#34;&#34;</span><span class=p>,</span> <span class=nx>err</span>
+	<span class=p>}</span>
+	<span class=k>return</span> <span class=nx>tokenString</span><span class=p>,</span> <span class=kc>nil</span>
+<span class=p>}</span>
+
+</code></pre></div><p>In <code>model.go</code> I guess we should make the SafeUser struct. This is just a helper struct to make sure we don&rsquo;t hand the passwords back to anyone that shouldn&rsquo;t have access to them.</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=c1>// ...
+</span><span class=c1></span><span class=kd>type</span> <span class=nx>UserSafe</span> <span class=kd>struct</span> <span class=p>{</span>
+	<span class=nx>ID</span>    <span class=kt>string</span> <span class=s>`</span><span class=s>json:&#34;id&#34;</span><span class=s>`</span>
+	<span class=nx>Email</span> <span class=kt>string</span> <span class=s>`</span><span class=s>json:&#34;email&#34;</span><span class=s>`</span>
+<span class=p>}</span>
+</code></pre></div><p>Here we are parsing the interesting fields of our User into a SafeUser struct. I&rsquo;ve read some blogs saying that you can pass around the password through your microservice architecture but I don&rsquo;t prescribe to that school of thought. The less often your passwords are exposed on the wire the less chance you have of accidentally leaking it. If you&rsquo;re making this service the trusted source of user authentication and authorization for your app, no other component needs to know what their password is.</p><p>Next we create a token by signing it using the HS256 method with the claims <code>sub</code> as the safeUser data and <code>exp</code> as the expiration date. In a full implementation you may also issue a refresh token here but I&rsquo;m not interested in handling that for this post.</p><p>We then take the token and stringify it then return it to the calling function! run <code>go test</code> to make sure we have two less failing test now! Wait! We are still not handling the scenario where we create a token for a user struct thats empty! That&rsquo;s illogical! Let&rsquo;s fix that really quickly.</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>TokenService</span><span class=p>)</span> <span class=nf>CreateToken</span><span class=p>(</span><span class=nx>user</span> <span class=nx>User</span><span class=p>)</span> <span class=p>(</span><span class=kt>string</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+	<span class=k>if</span> <span class=p>(</span><span class=nx>User</span><span class=p>{</span><span class=p>}</span><span class=p>)</span> <span class=o>==</span> <span class=nx>user</span> <span class=p>{</span>
+		<span class=nx>log</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%s&#34;</span><span class=p>,</span> <span class=nx>user</span><span class=p>.</span><span class=nx>Email</span><span class=p>)</span>
+		<span class=k>return</span> <span class=s>&#34;&#34;</span><span class=p>,</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Cannot create token for empty user&#34;</span><span class=p>)</span>
+	<span class=p>}</span>
+    <span class=c1>// ...
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></div><p>In keeping with our TDD approach, let&rsquo;s whip up some scenarios to test our <code>ValidateToken</code> function. We should at least try to validate an invalid token, and then validate a valid token. Back to <code>tokenService_test.go</code></p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>TestValidateTokenFromInvalidToken</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>token</span> <span class=o>:=</span> <span class=s>&#34;thisisNOTatoken&#34;</span>
+	<span class=nx>payload</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>TS</span><span class=p>.</span><span class=nf>ValidateToken</span><span class=p>(</span><span class=nx>token</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Expected an error to be thrown as token is not valid&#34;</span><span class=p>)</span>
+	<span class=p>}</span>
+	<span class=k>if</span> <span class=nx>payload</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Expected no user to be returned&#34;</span><span class=p>)</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>TestValidateTokenFromValidToken</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>user</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>DB</span><span class=p>.</span><span class=nf>GetUserByEmail</span><span class=p>(</span><span class=s>&#34;tokentester@domain.com&#34;</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Error</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+	<span class=p>}</span>
+	<span class=k>if</span> <span class=nx>user</span><span class=p>.</span><span class=nx>ID</span> <span class=o>==</span> <span class=s>&#34;&#34;</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Expected to get a user. Got none&#34;</span><span class=p>)</span>
+	<span class=p>}</span>
+	<span class=nx>token</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>TS</span><span class=p>.</span><span class=nf>CreateToken</span><span class=p>(</span><span class=nx>user</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Error</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+	<span class=p>}</span>
+	<span class=k>if</span> <span class=nx>token</span> <span class=o>==</span> <span class=s>&#34;&#34;</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Error</span><span class=p>(</span><span class=s>&#34;Got an empty token when expecting a real token&#34;</span><span class=p>)</span>
+	<span class=p>}</span>
+	<span class=nx>payload</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>TS</span><span class=p>.</span><span class=nf>ValidateToken</span><span class=p>(</span><span class=nx>token</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Error</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+	<span class=p>}</span>
+	<span class=k>if</span> <span class=nx>payload</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Error</span><span class=p>(</span><span class=s>&#34;Expected to get a payload, got none&#34;</span><span class=p>)</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>Now that we have our extensive tests planned out, we can implement the feature!</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>TokenService</span><span class=p>)</span> <span class=nf>ValidateToken</span><span class=p>(</span><span class=nx>tokenString</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=kd>interface</span><span class=p>{</span><span class=p>}</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>claims</span> <span class=o>:=</span> <span class=nx>jwt</span><span class=p>.</span><span class=nx>MapClaims</span><span class=p>{</span><span class=p>}</span>
+	<span class=nx>token</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>jwt</span><span class=p>.</span><span class=nf>ParseWithClaims</span><span class=p>(</span><span class=nx>tokenString</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>claims</span><span class=p>,</span> <span class=kd>func</span><span class=p>(</span><span class=nx>token</span> <span class=o>*</span><span class=nx>jwt</span><span class=p>.</span><span class=nx>Token</span><span class=p>)</span> <span class=p>(</span><span class=kd>interface</span><span class=p>{</span><span class=p>}</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+		<span class=k>return</span> <span class=p>[</span><span class=p>]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>secretKey</span><span class=p>)</span><span class=p>,</span> <span class=kc>nil</span>
+	<span class=p>}</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=k>return</span> <span class=kc>nil</span><span class=p>,</span> <span class=nx>err</span>
+	<span class=p>}</span>
+	<span class=k>if</span> <span class=nx>token</span><span class=p>.</span><span class=nx>Valid</span> <span class=p>{</span>
+		<span class=k>return</span> <span class=nx>claims</span><span class=p>[</span><span class=s>&#34;sub&#34;</span><span class=p>]</span><span class=p>,</span> <span class=kc>nil</span>
+	<span class=p>}</span> <span class=k>else</span> <span class=k>if</span> <span class=nx>ve</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>err</span><span class=p>.</span><span class=p>(</span><span class=o>*</span><span class=nx>jwt</span><span class=p>.</span><span class=nx>ValidationError</span><span class=p>)</span><span class=p>;</span> <span class=nx>ok</span> <span class=p>{</span>
+		<span class=k>if</span> <span class=nx>ve</span><span class=p>.</span><span class=nx>Errors</span><span class=o>&amp;</span><span class=nx>jwt</span><span class=p>.</span><span class=nx>ValidationErrorMalformed</span> <span class=o>!=</span> <span class=mi>0</span> <span class=p>{</span>
+			<span class=k>return</span> <span class=kc>false</span><span class=p>,</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Malformed Token&#34;</span><span class=p>)</span>
+		<span class=p>}</span> <span class=k>else</span> <span class=k>if</span> <span class=nx>ve</span><span class=p>.</span><span class=nx>Errors</span><span class=o>&amp;</span><span class=p>(</span><span class=nx>jwt</span><span class=p>.</span><span class=nx>ValidationErrorExpired</span><span class=p>|</span><span class=nx>jwt</span><span class=p>.</span><span class=nx>ValidationErrorNotValidYet</span><span class=p>)</span> <span class=o>!=</span> <span class=mi>0</span> <span class=p>{</span>
+			<span class=c1>// Token is either expired or not active yet
+</span><span class=c1></span>			<span class=k>return</span> <span class=kc>false</span><span class=p>,</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Token is Expired&#34;</span><span class=p>)</span>
+		<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+			<span class=k>return</span> <span class=kc>false</span><span class=p>,</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Couldn&#39;t handle the token&#34;</span><span class=p>)</span>
+		<span class=p>}</span>
+	<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+		<span class=k>return</span> <span class=kc>false</span><span class=p>,</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Error handling token: %v&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>There we go! We try to parse the token and if it succeeds, we return the subject of the token. If it&rsquo;s expired, or malformed, or the like then we return some errors! We could make this more bulletproof probably by returning a UserSafe object as opposed to an interface, but this post is getting long again and I&rsquo;m getting lazy :)</p><p>Run our tests and everything should look good!</p><p>Finally! We&rsquo;re going to implement the <code>HandleValidateToken</code> endpoint! It&rsquo;s been a long fought battle but here we go! We&rsquo;re going to be more strict with our token payload so first we declare a struct for it, and then implement the function.</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=c1>// ...
+</span><span class=c1></span><span class=kd>type</span> <span class=nx>TokenPayload</span> <span class=kd>struct</span> <span class=p>{</span>
+    <span class=nx>Token</span>  <span class=kt>string</span> <span class=s>`</span><span class=s>json:&#34;token&#34;</span><span class=s>`</span>
+<span class=p>}</span>
+<span class=c1>// ...
+</span><span class=c1></span><span class=kd>func</span> <span class=nf>HandleValidateToken</span><span class=p>(</span><span class=nx>w</span> <span class=nx>http</span><span class=p>.</span><span class=nx>ResponseWriter</span><span class=p>,</span> <span class=nx>r</span> <span class=o>*</span><span class=nx>http</span><span class=p>.</span><span class=nx>Request</span><span class=p>)</span> <span class=p>{</span>
+	<span class=kd>var</span> <span class=nx>Token</span> <span class=nx>TokenPayload</span>
+	<span class=nx>err</span> <span class=o>:=</span> <span class=nx>json</span><span class=p>.</span><span class=nf>NewDecoder</span><span class=p>(</span><span class=nx>r</span><span class=p>.</span><span class=nx>Body</span><span class=p>)</span><span class=p>.</span><span class=nf>Decode</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>Token</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Fprintf</span><span class=p>(</span><span class=nx>w</span><span class=p>,</span> <span class=s>&#34;Error Decoding Body: %v&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>.</span><span class=nf>Error</span><span class=p>(</span><span class=p>)</span><span class=p>)</span>
+		<span class=k>return</span>
+	<span class=p>}</span>
+	<span class=nx>payload</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>TS</span><span class=p>.</span><span class=nf>ValidateToken</span><span class=p>(</span><span class=nx>Token</span><span class=p>.</span><span class=nx>Token</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Fprintf</span><span class=p>(</span><span class=nx>w</span><span class=p>,</span> <span class=s>&#34;Error Decoding Token: %v&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>.</span><span class=nf>Error</span><span class=p>(</span><span class=p>)</span><span class=p>)</span>
+		<span class=k>return</span>
+	<span class=p>}</span>
+	<span class=nf>WriteResponse</span><span class=p>(</span><span class=nx>w</span><span class=p>,</span> <span class=nx>http</span><span class=p>.</span><span class=nx>StatusOK</span><span class=p>,</span> <span class=nx>payload</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>You&rsquo;ve got some errors though. We didn&rsquo;t initialize TS in our app. Go into main.go and add a <code>InitializeTokenService</code> function and call it from main:</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=c1>// ...
+</span><span class=c1></span><span class=kd>func</span> <span class=nf>main</span><span class=p>(</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Hello, World!&#34;</span><span class=p>)</span>
+	<span class=nf>InitializeDatabase</span><span class=p>(</span><span class=p>)</span>
+	<span class=nf>InitializeTokenService</span><span class=p>(</span><span class=p>)</span>
+	<span class=nf>InitializeHttpServer</span><span class=p>(</span><span class=p>)</span>
+<span class=p>}</span>
+<span class=c1>// ...
+</span><span class=c1></span><span class=kd>func</span> <span class=nf>InitializeTokenService</span><span class=p>(</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>TS</span> <span class=p>=</span> <span class=o>&amp;</span><span class=nx>TokenService</span><span class=p>{</span><span class=p>}</span>
+<span class=p>}</span>
+
+</code></pre></div><p>Finally, to bring it all together, we need to update our <code>Login</code> function to return something meaningful (a token) so update the function like so:</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=p>(</span><span class=nx>db</span> <span class=o>*</span><span class=nx>DBClient</span><span class=p>)</span> <span class=nf>Login</span><span class=p>(</span><span class=nx>email</span><span class=p>,</span> <span class=nx>password</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=kt>string</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>db</span><span class=p>.</span><span class=nf>Open</span><span class=p>(</span><span class=p>)</span>
+	<span class=k>defer</span> <span class=nx>db</span><span class=p>.</span><span class=nf>Close</span><span class=p>(</span><span class=p>)</span>
+	<span class=kd>var</span> <span class=nx>user</span> <span class=nx>User</span>
+	<span class=nx>err</span> <span class=o>:=</span> <span class=nx>db</span><span class=p>.</span><span class=nx>client</span><span class=p>.</span><span class=nf>View</span><span class=p>(</span><span class=kd>func</span><span class=p>(</span><span class=nx>tx</span> <span class=o>*</span><span class=nx>bolt</span><span class=p>.</span><span class=nx>Tx</span><span class=p>)</span> <span class=kt>error</span> <span class=p>{</span>
+		<span class=nx>b</span> <span class=o>:=</span> <span class=nx>tx</span><span class=p>.</span><span class=nf>Bucket</span><span class=p>(</span><span class=p>[</span><span class=p>]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>usersBucketName</span><span class=p>)</span><span class=p>)</span>
+		<span class=nx>userBytes</span> <span class=o>:=</span> <span class=nx>b</span><span class=p>.</span><span class=nf>Get</span><span class=p>(</span><span class=p>[</span><span class=p>]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>email</span><span class=p>)</span><span class=p>)</span>
+		<span class=nx>json</span><span class=p>.</span><span class=nf>Unmarshal</span><span class=p>(</span><span class=nx>userBytes</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>user</span><span class=p>)</span>
+		<span class=nx>err</span> <span class=o>:=</span> <span class=nx>user</span><span class=p>.</span><span class=nf>CheckPassword</span><span class=p>(</span><span class=nx>password</span><span class=p>)</span>
+		<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+			<span class=nx>log</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;ERROR: %s&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+			<span class=nx>log</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Invalid Login Attempt for User: %s&#34;</span><span class=p>,</span> <span class=nx>email</span><span class=p>)</span>
+			<span class=k>return</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Invalid Email/Password Combnation&#34;</span><span class=p>)</span>
+		<span class=p>}</span>
+		<span class=k>return</span> <span class=kc>nil</span>
+	<span class=p>}</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=k>return</span> <span class=s>&#34;&#34;</span><span class=p>,</span> <span class=nx>err</span>
+	<span class=p>}</span>
+	<span class=nx>token</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>TS</span><span class=p>.</span><span class=nf>CreateToken</span><span class=p>(</span><span class=nx>user</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=k>return</span> <span class=s>&#34;&#34;</span><span class=p>,</span> <span class=nx>err</span>
+	<span class=p>}</span>
+	<span class=k>return</span> <span class=nx>token</span><span class=p>,</span> <span class=kc>nil</span>
+<span class=p>}</span>
+</code></pre></div><p>Great Success! We&rsquo;ve all learned something here (hopefully). I&rsquo;ve learned how to make something actually useful with Go. You&rsquo;ve hopefully learned it as well. We&rsquo;ve put together a service that is built using go, with an embedded database, and has just one small job to perform. It&rsquo;s got some tests so you can update code and feel more confident about it, and you could call it from other apps on your network.</p><p>There&rsquo;s a bunch of security things you should do before using this in a production environment such as:</p><ul><li>Limiting hosts and ports that can make requests to the server (CORS)</li><li>Setting up SSL certificates to host</li><li>Disabling non-SSL/TLS connections</li><li>Automatic backups of your database file</li><li>Refactoring your secrets into a config file or to CLI variables</li><li>Implementing functionality to revoke token access for a specific user</li><li>Add in some permissions to the user to have some granularity for controls within your suite of apps</li></ul><p>Hopefully these posts have been as insightful for you to read as me to write! I&rsquo;ll have the code up on my github in the near future.</p></article><section class="article labels"><a class=category href=/categories/golang/>golang</a><a class=tag href=/tags/golang/>golang</a></section></div><div class="article bottom"><section class="article navigation"><p><a class=link href=/posts/2018/brainteasers-theyre-important/><span class="iconfont icon-article"></span>Brainteasers - they're important!</a></p><p><a class=link href=/posts/2018/go-micro-services-and-embedded-databases/><span class="iconfont icon-article"></span>Go - Micro-services and Embedded Databases [Part 1]</a></p></section></div></section><section id=footer><div class=footer-wrap><p class=copyright>©2020 James Hughes.</p><p class=powerby><span>Powered by </span><a href=https://gohugo.io target=_blank>Hugo</a><span> and the </span><a href=https://themes.gohugo.io/hugo-notepadium/ target=_blank>Notepadium</a></p></div></section></body></html>

@@ -1,0 +1,159 @@
+<!doctype html><html lang=en><meta charset=utf-8><meta name=generator content="Hugo 0.64.0"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name=color-scheme content="light dark"><meta name=supported-color-schemes content="light dark"><title>Learning React with create-react-app&nbsp;&ndash;&nbsp;James Hughes</title><link rel=stylesheet href=/css/core.min.99d761621eb15531f47d6f109c742c4d2f97f9c10fed380e3da27af7676a27a1fb5968bfbd3207717f11d40ad1d68b92.css integrity=sha384-mddhYh6xVTH0fW8QnHQsTS+X+cEP7TgOPaJ692dqJ6H7WWi/vTIHcX8R1ArR1ouS><meta name=twitter:card content="summary"><meta name=twitter:title content="Learning React with create-react-app"><body><section id=header><div class="header wrap"><span class="header left-side"><a class="site home" href=/><span class="site name">James Hughes</span></a></span>
+<span class="header right-side"><div class="nav wrap"><nav class=nav><a class="nav item" href=/categories/>Categories</a><a class="nav item" href=/tags/>Tags</a><a class="nav item" href></a><a class="nav item" href></a></nav></div></span></div></section><section id=content><div class=article-container><section class="article header"><h1 class="article title">Learning React with create-react-app</h1><p class="article date">Friday, August 17, 2018</p></section><article class="article markdown-body"><p>I&rsquo;m an Angular kind of guy.</p><p>I&rsquo;ve built several front end applications using Angular 1.x and 2+. I&rsquo;ve built hybrid mobile apps using the Ionic Framework. In this time, I seem to have just completely ignored the phenomenon that is React js. There are so many frameworks that I&rsquo;ve not even touched but if any of the job postings I&rsquo;m seeing are an indication, the appetite for React and React Native developers is increasing rapidly.</p><p>So I&rsquo;m going to go through my experience building the quintessential &ldquo;todo&rdquo; app to help me learn some things. Feel free to follow along!</p><p>First, from the docs, I&rsquo;m going to bootstrap my app with the &lsquo;create-react-app&rsquo; installation from npm. You can install this by opening a terminal and typing</p><pre><code class=language-terminal data-lang=terminal>npm i -g create-react-app
+</code></pre><p>Once that&rsquo;s started. You literally do just that. Create a react app called my-todos or something of the like by entering a command such as</p><pre><code class=language-terminal data-lang=terminal>create-react-app my-todos
+</code></pre><p>Pretty straight forward so far? Good.</p><p>Once everything is installed, go into your app folder and host it. You&rsquo;ll see a pretty minimalized application.</p><pre><code class=language-terminal data-lang=terminal>cd my-todos
+npm start
+</code></pre><p>Congrats. You&rsquo;ve gone through the docs without reading the docs. Some super entertaining content so far, no?</p><p>Now the first thing I&rsquo;m going to do is essentially nuke out EVERYTHING in the <code>src/App.js</code> file as I don&rsquo;t care about their scaffold whatsoever. I&rsquo;ll then replace it with something like this:</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=kr>import</span> <span class=nx>React</span><span class=p>,</span> <span class=p>{</span> <span class=nx>Component</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;react&#39;</span><span class=p>;</span>
+<span class=kr>import</span> <span class=s1>&#39;./App.css&#39;</span><span class=p>;</span>
+
+<span class=kr>class</span> <span class=nx>App</span> <span class=kr>extends</span> <span class=nx>Component</span> <span class=p>{</span>
+  <span class=nx>render</span><span class=p>(</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=p>(</span>
+      <span class=o>&lt;</span><span class=nx>div</span><span class=o>&gt;</span>
+        <span class=o>&lt;</span><span class=nx>h3</span><span class=o>&gt;</span><span class=nx>Hello</span><span class=p>,</span> <span class=nx>World</span><span class=o>&lt;</span><span class=err>/</span><span class=err>h</span><span class=err>3</span><span class=err>&gt;</span>
+      <span class=o>&lt;</span><span class=err>/</span><span class=err>d</span><span class=err>i</span><span class=err>v</span><span class=err>&gt;</span>
+    <span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kr>export</span> <span class=k>default</span> <span class=nx>App</span><span class=p>;</span>
+
+</code></pre></div><p>That&rsquo;s because we &ldquo;Hello, World&rdquo; our learning here! Your browser should have live updated to display this purest of HTML greetings.</p><p>For our app we&rsquo;re going to need very few things.</p><ol><li>A header for awesome UI ness</li><li>A todos-list component</li><li>An input to add new Todos</li></ol><p>We&rsquo;re not going to worry about persisting data on a website for now as that may come in a part 2 (spoiler alert!)</p><p>First and foremost, we need to consider how we plan on managing state. This has been done a load of ways now apparently using <code>react-redux</code> however right now I&rsquo;m not totally sure what that does, so I&rsquo;m just going to use this from what I&rsquo;ve read in the docs as well:</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=kr>class</span> <span class=nx>App</span> <span class=kr>extends</span> <span class=nx>Component</span> <span class=p>{</span>
+
+  <span class=nx>constructor</span><span class=p>(</span><span class=nx>props</span><span class=p>)</span> <span class=p>{</span>
+    <span class=kr>super</span><span class=p>(</span><span class=nx>props</span><span class=p>)</span><span class=p>;</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>state</span> <span class=o>=</span> <span class=p>{</span>
+      <span class=nx>todos</span><span class=o>:</span> <span class=p>[</span><span class=s1>&#39;Learn React&#39;</span><span class=p>,</span> <span class=s1>&#39;???&#39;</span><span class=p>,</span> <span class=s1>&#39;Profit&#39;</span><span class=p>]</span><span class=p>,</span>
+      <span class=nx>text</span><span class=o>:</span> <span class=s1>&#39;&#39;</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+  <span class=c1>// Omitted for brevity
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></div><p>This should give us an active state now. Which is pretty neat. We&rsquo;ve created some Todos that we will now want to display in some way.</p><p>Do do this, let&rsquo;s go ahead and update our render function to show our cool list!</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript>  <span class=nx>render</span><span class=p>(</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=p>(</span>
+      <span class=o>&lt;</span><span class=nx>div</span><span class=o>&gt;</span>
+        <span class=o>&lt;</span><span class=nx>h3</span><span class=o>&gt;</span><span class=nx>Todo</span><span class=o>&lt;</span><span class=err>/</span><span class=err>h</span><span class=err>3</span><span class=err>&gt;</span>
+        <span class=o>&lt;</span><span class=nx>ul</span><span class=o>&gt;</span>
+          <span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>todos</span><span class=p>.</span><span class=nx>map</span><span class=p>(</span><span class=nx>t</span> <span class=p>=&gt;</span> <span class=o>&lt;</span><span class=nx>li</span><span class=o>&gt;</span><span class=p>{</span><span class=nx>t</span><span class=p>}</span><span class=o>&lt;</span><span class=err>/</span><span class=err>l</span><span class=err>i</span><span class=err>&gt;</span><span class=err>)</span><span class=err>}</span>
+        <span class=o>&lt;</span><span class=err>/</span><span class=err>u</span><span class=err>l</span><span class=err>&gt;</span>
+      <span class=o>&lt;</span><span class=err>/</span><span class=err>d</span><span class=err>i</span><span class=err>v</span><span class=err>&gt;</span>
+    <span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>This should do the trick. We create some HTML components and then add in some react code to rip through the todos list and return some list items with the todo information in it. Once you hit save, you should have a snazzy bullet list of our todos.</p><p>Next, what&rsquo;s a todo list without having the ability to enter in some new todos? Surely you don&rsquo;t want me to just display a list that you can never add to! Needless to say, we&rsquo;re going to require an input. For this part we are going to be editing the state so, if you&rsquo;re using chrome, it&rsquo;d be worth installing the React DevTools offered up by Facebook. This will help with any issues you may have debugging. It&rsquo;s a pretty neat extension.</p><p>Let&rsquo;s add an input above our todo list (I&rsquo;m a add from the top sort of guy I guess)</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript>  <span class=nx>render</span><span class=p>(</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=p>(</span>
+      <span class=o>&lt;</span><span class=nx>div</span><span class=o>&gt;</span>
+        <span class=o>&lt;</span><span class=nx>h3</span><span class=o>&gt;</span><span class=nx>Todo</span><span class=o>&lt;</span><span class=err>/</span><span class=err>h</span><span class=err>3</span><span class=err>&gt;</span>
+        <span class=o>&lt;</span><span class=nx>div</span><span class=o>&gt;</span>
+          <span class=o>&lt;</span><span class=nx>input</span> 
+            <span class=nx>type</span><span class=o>=</span><span class=s2>&#34;text&#34;</span>
+            <span class=nx>value</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>text</span><span class=p>}</span>
+            <span class=nx>onChange</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>onChange</span><span class=p>}</span> 
+          <span class=o>/</span><span class=o>&gt;</span>
+        <span class=o>&lt;</span><span class=err>/</span><span class=err>d</span><span class=err>i</span><span class=err>v</span><span class=err>&gt;</span>
+        <span class=o>&lt;</span><span class=nx>ul</span><span class=o>&gt;</span>
+          <span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>todos</span><span class=p>.</span><span class=nx>map</span><span class=p>(</span><span class=nx>t</span> <span class=p>=&gt;</span> <span class=o>&lt;</span><span class=nx>li</span><span class=o>&gt;</span><span class=p>{</span><span class=nx>t</span><span class=p>}</span><span class=o>&lt;</span><span class=err>/</span><span class=err>l</span><span class=err>i</span><span class=err>&gt;</span><span class=err>)</span><span class=err>}</span>
+        <span class=o>&lt;</span><span class=err>/</span><span class=err>u</span><span class=err>l</span><span class=err>&gt;</span>
+      <span class=o>&lt;</span><span class=err>/</span><span class=err>d</span><span class=err>i</span><span class=err>v</span><span class=err>&gt;</span>
+    <span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+</code></pre></div><p>The onChange function will be called as a user types. This is so that we can update our state variables as a way of databinding. Angular does this automatically with the [(ngModel)] directive, but for React, we need to handle it ourselves! So let&rsquo;s add that function into our class then!</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript>  <span class=nx>onChange</span> <span class=o>=</span> <span class=p>(</span><span class=nx>event</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>(</span><span class=p>{</span> <span class=nx>text</span><span class=o>:</span> <span class=nx>event</span><span class=p>.</span><span class=nx>target</span><span class=p>.</span><span class=nx>value</span> <span class=p>}</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+</code></pre></div><p>Now this part confused me a load when I first started working in react. The defining of a function in this way, that is. React requires you to bind functions in order to call them from a component. You can do this by invoking your function like this or by declaring your function and binding it in your constructor. In lieu of having to make sure that I expose everything in my constructor, I elected this method as I think it may be easier, however not as straight forward. FYI you could have accomplished this as well by doing something like this.</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=kr>class</span> <span class=nx>App</span> <span class=kr>extends</span> <span class=nx>Component</span> <span class=p>{</span>
+
+  <span class=nx>constructor</span><span class=p>(</span><span class=nx>props</span><span class=p>)</span> <span class=p>{</span>
+    <span class=kr>super</span><span class=p>(</span><span class=nx>props</span><span class=p>)</span><span class=p>;</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>state</span> <span class=o>=</span> <span class=p>{</span>
+      <span class=nx>todos</span><span class=o>:</span> <span class=p>[</span><span class=s1>&#39;Learn React&#39;</span><span class=p>,</span> <span class=s1>&#39;???&#39;</span><span class=p>,</span> <span class=s1>&#39;Profit&#39;</span><span class=p>]</span><span class=p>,</span>
+      <span class=nx>text</span><span class=o>:</span> <span class=s1>&#39;&#39;</span>
+    <span class=p>}</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>onChangeBound</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>onChangeBound</span><span class=p>.</span><span class=nx>bind</span><span class=p>(</span><span class=k>this</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+
+  <span class=nx>onChangeBound</span><span class=p>(</span><span class=nx>event</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>(</span><span class=p>{</span> <span class=nx>text</span><span class=o>:</span> <span class=nx>event</span><span class=p>.</span><span class=nx>target</span><span class=p>.</span><span class=nx>value</span> <span class=p>}</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=p>...</span>
+<span class=p>}</span>
+</code></pre></div><p>Update the <code>onChange</code> in your <code>&lt;input/></code> to <code>onChangeBound</code> and you&rsquo;ve got functionality again. I&rsquo;m still sort of confused on this syntax, but I&rsquo;m not about to fight the framework. Learn and move on!</p><p>We&rsquo;ve got an input and it&rsquo;s updating our state variables. Next we should probably handle when a user presses the enter key. Traditionally you&rsquo;d do this with a form and send some data to the server and it&rsquo;d do its thing and redirect you to reload the page. We&rsquo;re not going to do that though. I plan on just using an input container. To do this, we will need to implement a keypress handler and listen for the &lsquo;enter&rsquo; key. Ready?</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript>  <span class=nx>onKeypress</span> <span class=o>=</span> <span class=p>(</span><span class=nx>e</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=k>if</span> <span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>key</span> <span class=o>===</span> <span class=s1>&#39;Enter&#39;</span><span class=p>)</span> <span class=p>{</span>
+      <span class=c1>// validate the text
+</span><span class=c1></span>      <span class=k>if</span> <span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>text</span><span class=p>)</span> <span class=p>{</span>
+        <span class=c1>// if it&#39;s truthy
+</span><span class=c1></span>        <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>(</span><span class=nx>state</span> <span class=p>=&gt;</span> <span class=p>{</span>
+          <span class=kd>let</span> <span class=nx>todos</span> <span class=o>=</span> <span class=nx>state</span><span class=p>.</span><span class=nx>todos</span><span class=p>;</span>
+          <span class=nx>todos</span><span class=p>.</span><span class=nx>push</span><span class=p>(</span><span class=nx>state</span><span class=p>.</span><span class=nx>text</span><span class=p>)</span><span class=p>;</span>
+          <span class=k>return</span> <span class=p>{</span> <span class=nx>todos</span><span class=o>:</span> <span class=nx>todos</span><span class=p>,</span> <span class=nx>text</span><span class=o>:</span> <span class=s1>&#39;&#39;</span> <span class=p>}</span>
+        <span class=p>}</span><span class=p>)</span><span class=p>;</span>
+      <span class=p>}</span>
+      <span class=k>else</span> <span class=p>{</span>
+        <span class=c1>// Or else there&#39;s nothing to do I guess
+</span><span class=c1></span>        <span class=nx>alert</span><span class=p>(</span><span class=s1>&#39;Nothing to do!&#39;</span><span class=p>)</span><span class=p>;</span>
+      <span class=p>}</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+</code></pre></div><p>Next we amend our input to handle keypresses&mldr;</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=o>&lt;</span><span class=nx>input</span>
+  <span class=nx>type</span><span class=o>=</span><span class=s2>&#34;text&#34;</span>
+  <span class=nx>value</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>text</span><span class=p>}</span>
+  <span class=nx>onChange</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>onChangeBound</span><span class=p>}</span>
+  <span class=nx>onKeyPress</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>onKeypress</span><span class=p>}</span>
+<span class=err>/</span><span class=err>&gt;</span>
+</code></pre></div><p>I&rsquo;ll let you test this on your own. It should work. It worked on my machine!</p><p>Now that we have some functionality, go ahead and dump those placeholder todos. We can make this go on our own!</p><p>At minimum, you should be able to get rid of todos from your list when you&rsquo;re done. So we&rsquo;re going to implement an &lsquo;x&rsquo; button. We&rsquo;ll do this by amending our todos iteration to include the index, add in a button with an &lsquo;x&rsquo; in it, and implement an onDelete function!</p><p>First let&rsquo;s adjust our list items to include both the todo and the index of the todo. We&rsquo;ll then add a button that has an onClick function to handle the delete.</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript><span class=nx>render</span><span class=p>(</span><span class=p>)</span><span class=p>{</span>
+<span class=c1>// ...
+</span><span class=c1></span>
+        <span class=o>&lt;</span><span class=nx>ul</span><span class=o>&gt;</span>
+          <span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>todos</span><span class=p>.</span><span class=nx>map</span><span class=p>(</span><span class=p>(</span><span class=nx>t</span><span class=p>,</span> <span class=nx>index</span><span class=p>)</span> <span class=p>=&gt;</span>
+            <span class=o>&lt;</span><span class=nx>li</span><span class=o>&gt;</span>
+              <span class=p>{</span><span class=nx>t</span><span class=p>}</span>
+              <span class=o>&lt;</span><span class=nx>button</span> 
+                <span class=nx>type</span><span class=o>=</span><span class=s2>&#34;button&#34;</span> 
+                <span class=nx>onClick</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>onDeleteTodo</span><span class=p>}</span> 
+                <span class=nx>value</span><span class=o>=</span><span class=p>{</span><span class=nx>index</span><span class=p>}</span><span class=o>&gt;</span><span class=nx>X</span><span class=o>&lt;</span><span class=err>/</span><span class=err>b</span><span class=err>u</span><span class=err>t</span><span class=err>t</span><span class=err>o</span><span class=err>n</span><span class=err>&gt;</span>
+            <span class=o>&lt;</span><span class=err>/</span><span class=err>l</span><span class=err>i</span><span class=err>&gt;</span><span class=err>)</span>
+          <span class=p>}</span>
+        <span class=o>&lt;</span><span class=err>/</span><span class=err>u</span><span class=err>l</span><span class=err>&gt;</span>
+<span class=c1>// ...
+</span></code></pre></div><p>You&rsquo;ll probably have errors since onDeleteTodo isn&rsquo;t implemented, so let&rsquo;s build that function next.</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript>  <span class=nx>onDeleteTodo</span> <span class=o>=</span> <span class=p>(</span><span class=nx>e</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=kd>let</span> <span class=nx>index</span> <span class=o>=</span> <span class=nx>e</span><span class=p>.</span><span class=nx>target</span><span class=p>.</span><span class=nx>value</span><span class=p>;</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>(</span><span class=nx>state</span> <span class=p>=&gt;</span> <span class=p>{</span>
+      <span class=kd>let</span> <span class=nx>todos</span> <span class=o>=</span> <span class=nx>state</span><span class=p>.</span><span class=nx>todos</span><span class=p>;</span>
+      <span class=nx>todos</span><span class=p>.</span><span class=nx>splice</span><span class=p>(</span><span class=nx>index</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span><span class=p>;</span>
+      <span class=k>return</span> <span class=p>{</span> <span class=nx>todos</span><span class=o>:</span> <span class=nx>todos</span> <span class=p>}</span><span class=p>;</span>
+    <span class=p>}</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+</code></pre></div><p>One final piece of functionality we will add is some persistence. We&rsquo;ll use localStorage and a <code>React.Component</code> lifecycle hook.</p><p>First, we need to persist the todos. Let&rsquo;s make a function called <code>persistTodos</code></p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript>  <span class=nx>persistTodos</span><span class=p>(</span><span class=p>)</span><span class=p>{</span>
+    <span class=nx>localStorage</span><span class=p>.</span><span class=nx>setItem</span><span class=p>(</span><span class=s2>&#34;todos&#34;</span><span class=p>,</span> <span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>todos</span><span class=p>)</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+</code></pre></div><p>That was easy. We need to call this function every time we update our todos list. So add this into your <code>onKeypress</code> and <code>onDeleteTodo</code> functions.</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript>  <span class=nx>onKeypress</span> <span class=o>=</span> <span class=p>(</span><span class=nx>e</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=k>if</span> <span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>key</span> <span class=o>===</span> <span class=s1>&#39;Enter&#39;</span><span class=p>)</span> <span class=p>{</span>
+      <span class=k>if</span> <span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>text</span><span class=p>)</span> <span class=p>{</span>
+        <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>(</span><span class=nx>state</span> <span class=p>=&gt;</span> <span class=p>{</span>
+          <span class=kd>let</span> <span class=nx>todos</span> <span class=o>=</span> <span class=nx>state</span><span class=p>.</span><span class=nx>todos</span><span class=p>;</span>
+          <span class=nx>todos</span><span class=p>.</span><span class=nx>push</span><span class=p>(</span><span class=nx>state</span><span class=p>.</span><span class=nx>text</span><span class=p>)</span><span class=p>;</span>
+          <span class=k>this</span><span class=p>.</span><span class=nx>persistTodos</span><span class=p>(</span><span class=p>)</span><span class=p>;</span>
+          <span class=k>return</span> <span class=p>{</span><span class=nx>todos</span><span class=o>:</span> <span class=nx>todos</span><span class=p>,</span> <span class=nx>text</span><span class=o>:</span><span class=s1>&#39;&#39;</span><span class=p>}</span><span class=p>;</span>
+        <span class=p>}</span><span class=p>)</span><span class=p>;</span>
+      <span class=p>}</span>
+      <span class=k>else</span> <span class=p>{</span>
+        <span class=nx>alert</span><span class=p>(</span><span class=s1>&#39;Nothing to do!&#39;</span><span class=p>)</span><span class=p>;</span>
+      <span class=p>}</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+
+  <span class=nx>onDeleteTodo</span> <span class=o>=</span> <span class=p>(</span><span class=nx>e</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=kd>let</span> <span class=nx>index</span> <span class=o>=</span> <span class=nx>e</span><span class=p>.</span><span class=nx>target</span><span class=p>.</span><span class=nx>value</span><span class=p>;</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>(</span><span class=nx>state</span> <span class=p>=&gt;</span> <span class=p>{</span>
+      <span class=kd>let</span> <span class=nx>todos</span> <span class=o>=</span> <span class=nx>state</span><span class=p>.</span><span class=nx>todos</span><span class=p>;</span>
+      <span class=nx>todos</span><span class=p>.</span><span class=nx>splice</span><span class=p>(</span><span class=nx>index</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span><span class=p>;</span>
+      <span class=k>this</span><span class=p>.</span><span class=nx>persistTodos</span><span class=p>(</span><span class=p>)</span><span class=p>;</span>
+      <span class=k>return</span> <span class=p>{</span> <span class=nx>todos</span><span class=o>:</span> <span class=nx>todos</span> <span class=p>}</span><span class=p>;</span>
+    <span class=p>}</span><span class=p>)</span><span class=p>;</span>
+  <span class=p>}</span>
+</code></pre></div><p>Finally, we need to load the state before we mount the component. We will do this using the <code>onComponentWillMount</code> lifecycle hook. We will read the localStorage and set the todos should they exist.</p><div class=highlight><pre class=chroma><code class=language-javascript data-lang=javascript>  <span class=nx>componentWillMount</span><span class=p>(</span><span class=p>)</span> <span class=p>{</span>
+    <span class=kd>let</span> <span class=nx>todos</span> <span class=o>=</span> <span class=nx>localStorage</span><span class=p>.</span><span class=nx>getItem</span><span class=p>(</span><span class=s2>&#34;todos&#34;</span><span class=p>)</span>
+    <span class=k>if</span><span class=p>(</span><span class=nx>todos</span><span class=p>)</span> <span class=p>{</span>
+      <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>(</span><span class=p>{</span><span class=nx>todos</span><span class=o>:</span><span class=nx>JSON</span><span class=p>.</span><span class=nx>parse</span><span class=p>(</span><span class=nx>todos</span><span class=p>)</span><span class=p>}</span><span class=p>)</span><span class=p>;</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+</code></pre></div><p>Voila - a Todo App in Reactjs with some naive persistence and 0 styling. Only 80 lines of code! Next, I&rsquo;m going to explore styling (with frameworks. I hate writing CSS) and storing our data with a REST api.</p><p>If you&rsquo;ve got any questions or suggestions for improvement, feel free comment below!</p></article><section class="article labels"><a class=category href=/categories/reactjs/>ReactJS</a><a class=tag href=/tags/reactjs/>ReactJS</a></section></div><div class="article bottom"><section class="article navigation"><p><a class=link href=/posts/2018/fetching-data-with-react/><span class="iconfont icon-article"></span>Fetching data with react</a></p><p><a class=link href=/posts/2018/morse-code-in-go/><span class="iconfont icon-article"></span>Learning Go - Morse Code!</a></p></section></div></section><section id=footer><div class=footer-wrap><p class=copyright>©2020 James Hughes.</p><p class=powerby><span>Powered by </span><a href=https://gohugo.io target=_blank>Hugo</a><span> and the </span><a href=https://themes.gohugo.io/hugo-notepadium/ target=_blank>Notepadium</a></p></div></section></body></html>
