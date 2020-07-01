@@ -1,0 +1,107 @@
+<!doctype html><html lang=en><meta charset=utf-8><meta name=generator content="Hugo 0.64.0"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name=color-scheme content="light dark"><meta name=supported-color-schemes content="light dark"><title>Brainteasers - they're important!&nbsp;&ndash;&nbsp;James Hughes</title><link rel=stylesheet href=/css/core.min.99d761621eb15531f47d6f109c742c4d2f97f9c10fed380e3da27af7676a27a1fb5968bfbd3207717f11d40ad1d68b92.css integrity=sha384-mddhYh6xVTH0fW8QnHQsTS+X+cEP7TgOPaJ692dqJ6H7WWi/vTIHcX8R1ArR1ouS><meta name=twitter:card content="summary"><meta name=twitter:title content="Brainteasers - they're important!"><body><section id=header><div class="header wrap"><span class="header left-side"><a class="site home" href=/><span class="site name">James Hughes</span></a></span>
+<span class="header right-side"><div class="nav wrap"><nav class=nav><a class="nav item" href=/categories/>Categories</a><a class="nav item" href=/tags/>Tags</a><a class="nav item" href></a><a class="nav item" href></a></nav></div></span></div></section><section id=content><div class=article-container><section class="article header"><h1 class="article title">Brainteasers - they're important!</h1><p class="article date">Tuesday, November 13, 2018</p></section><article class="article markdown-body"><p>48 days ago I signed up for <a href=https://www.dailycodingproblem.com/ target=_blank>https://www.dailycodingproblem.com/</a></p><p>I haven&rsquo;t completed all 48 problems however the ones that I have completed, I&rsquo;ve had a blast with. It bring back a challenge that&rsquo;s been missing - not that my work and personal life don&rsquo;t have their own challenges. It brings me back to basics and gets me thinking again on algorithm design and optimization of code.</p><p>Much of my development work (which is less and less these days) is done using a framework of some sort which puts a layer of &lsquo;magic&rsquo; on top of the coding experience. I&rsquo;ve actually recently gotten a little miffed at just how much &lsquo;magic&rsquo; is built into a toolset and have determined that too much &lsquo;magic&rsquo; is killing the next generation of developers - but that is a topic for a different day.</p><p>Daily coding problem - a delightful brain teaser sent to my email every day for me to think about and hopefully solve! The beauty of these is the &lsquo;get thinking in an algorithmic way&rsquo; that has shrunk since my degree completed. An algorithm <em>really</em> has three parts:</p><ol><li>Initialization</li><li>Logic / Processing</li><li>Termination</li></ol><p>The point of an algorithm is to show that you can go from an initial state, through some logic and processing to a terminated / finished state with the correct answer. It&rsquo;s almost frustrating how this simple concept is lost on so many people once they finish school.</p><p>I completed one this weekend that I was impressed with myself on. Not impressed because of the elegance of my solution, not impressed with the performance of the solution, but impressed with how quickly I was able to go from <em>reading</em> the problem to a successful implementation of a solution.</p><h1 id=the-problem>The Problem:</h1><p>This problem was asked by Amazon.</p><p>Given a string, find the longest palindromic contiguous substring. If there are more than one with the maximum length, return any one.</p><p>For example, the longest palindromic substring of &ldquo;aabcdcb&rdquo; is &ldquo;bcdcb&rdquo;. The longest palindromic substring of &ldquo;bananas&rdquo; is &ldquo;anana&rdquo;.</p><h1 id=the-plan>The Plan</h1><h2 id=1-initialization>1) Initialization</h2><p>I&rsquo;ll need a string to hold the largest witnessed palindrome, a recursive function to step through my array in a top-down manner, and maybe a helper function to determine if a substring is a palindrome or not</p><h2 id=2-logic>2) Logic</h2><p>I&rsquo;ll check the full string first. If it&rsquo;s a palindrome - I&rsquo;m done! Next we&rsquo;ll check the substring from 0-(n-1) and the substring from 1- (n). The result will be the largest palindrome of each of those two substrings. We&rsquo;ll recurse over them until we find a palindrome and filter our way back up.</p><h2 id=3-termination>3) Termination</h2><p>If the length of the string reaches 1 (single character) or the string is a palindrome, return the string. Else, continue through with our logic.</p><p>That&rsquo;s it. Three simple steps to get to our answer. Now we just need to implement it.</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>main</span>
+
+<span class=kn>import</span> <span class=p>(</span>
+	<span class=s>&#34;fmt&#34;</span>
+<span class=p>)</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>(</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nf>FindPalindrome</span><span class=p>(</span><span class=s>&#34;baabdaad&#34;</span><span class=p>)</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>FindPalindrome</span><span class=p>(</span><span class=nx>s</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+	<span class=k>return</span> <span class=nf>PalindromeRecursive</span><span class=p>(</span><span class=nx>s</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>IsPalindrome</span><span class=p>(</span><span class=nx>s</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>bool</span> <span class=p>{</span>
+	<span class=kd>var</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>j</span> <span class=kt>int</span>
+	<span class=nx>j</span> <span class=p>=</span> <span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=o>-</span> <span class=mi>1</span>
+	<span class=k>for</span> <span class=nx>i</span> <span class=p>=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>j</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+		<span class=k>if</span> <span class=nx>s</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=o>!=</span> <span class=nx>s</span><span class=p>[</span><span class=nx>j</span><span class=p>]</span> <span class=p>{</span>
+			<span class=k>return</span> <span class=kc>false</span>
+		<span class=p>}</span>
+		<span class=nx>j</span><span class=o>--</span>
+	<span class=p>}</span>
+	<span class=k>return</span> <span class=kc>true</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>PalindromeRecursive</span><span class=p>(</span><span class=nx>s</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+	<span class=k>if</span> <span class=nx>n</span> <span class=o>==</span> <span class=mi>1</span> <span class=o>||</span> <span class=nf>IsPalindrome</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=p>{</span>
+		<span class=k>return</span> <span class=nx>s</span>
+	<span class=p>}</span>
+	<span class=nx>pLeft</span> <span class=o>:=</span> <span class=nf>PalindromeRecursive</span><span class=p>(</span><span class=nx>s</span><span class=p>[</span><span class=mi>1</span><span class=p>:</span><span class=p>]</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>)</span>
+	<span class=nx>pRight</span> <span class=o>:=</span> <span class=nf>PalindromeRecursive</span><span class=p>(</span><span class=nx>s</span><span class=p>[</span><span class=p>:</span><span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>pLeft</span><span class=p>)</span> <span class=p>&gt;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>pRight</span><span class=p>)</span> <span class=p>{</span>
+		<span class=k>return</span> <span class=nx>pLeft</span>
+	<span class=p>}</span>
+	<span class=k>return</span> <span class=nx>pRight</span>
+<span class=p>}</span>
+</code></pre></div><p>Then some tests to make sure it works</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go>
+<span class=kn>package</span> <span class=nx>main</span>
+
+<span class=kn>import</span> <span class=s>&#34;testing&#34;</span>
+
+<span class=kd>func</span> <span class=nf>TestShortPalindrome</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;aba&#34;</span>
+	<span class=nx>res</span> <span class=o>:=</span> <span class=nf>FindPalindrome</span><span class=p>(</span><span class=s>&#34;aba&#34;</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>res</span> <span class=o>!=</span> <span class=nx>s</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Expected %s got %s&#34;</span><span class=p>,</span> <span class=nx>s</span><span class=p>,</span> <span class=nx>res</span><span class=p>)</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>TestNoPalindrome</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;abcdefg&#34;</span>
+	<span class=nx>res</span> <span class=o>:=</span> <span class=nf>FindPalindrome</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>res</span><span class=p>)</span> <span class=p>&gt;</span> <span class=mi>1</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Expected no palindrome. Found %s&#34;</span><span class=p>,</span> <span class=nx>res</span><span class=p>)</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>TestPalindromeIsFullString</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;tattarrattat&#34;</span>
+	<span class=nx>res</span> <span class=o>:=</span> <span class=nf>FindPalindrome</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>res</span> <span class=o>!=</span> <span class=nx>s</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Expected %s got %s&#34;</span><span class=p>,</span> <span class=nx>s</span><span class=p>,</span> <span class=nx>res</span><span class=p>)</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>TestLongWordNoPalindrome</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;abcdefghijklmnopqrstuvwxyz&#34;</span>
+	<span class=nx>res</span> <span class=o>:=</span> <span class=nf>FindPalindrome</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>res</span><span class=p>)</span> <span class=p>&gt;</span> <span class=mi>1</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Expected no palindrome. Found %s&#34;</span><span class=p>,</span> <span class=nx>res</span><span class=p>)</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>testEvenPalindrome</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;abba&#34;</span>
+	<span class=nx>res</span> <span class=o>:=</span> <span class=nf>FindPalindrome</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>res</span> <span class=o>!=</span> <span class=nx>s</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Expected %s got %s&#34;</span><span class=p>,</span> <span class=s>&#34;abba&#34;</span><span class=p>,</span> <span class=nx>res</span><span class=p>)</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>TestOddPalindrome</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;aabaa&#34;</span>
+	<span class=nx>res</span> <span class=o>:=</span> <span class=nf>FindPalindrome</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>res</span> <span class=o>!=</span> <span class=nx>s</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Expected %s got %s&#34;</span><span class=p>,</span> <span class=s>&#34;aabaa&#34;</span><span class=p>,</span> <span class=nx>res</span><span class=p>)</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>TestEvenPalindromeMidString</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;abcdefgabbaabcdefg&#34;</span>
+	<span class=nx>res</span> <span class=o>:=</span> <span class=nf>FindPalindrome</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>res</span> <span class=o>!=</span> <span class=s>&#34;abba&#34;</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Expected %s got %s&#34;</span><span class=p>,</span> <span class=s>&#34;abba&#34;</span><span class=p>,</span> <span class=nx>res</span><span class=p>)</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>TestOddPalindromeMidString</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;abcdefgabcbaaxcdefg&#34;</span>
+	<span class=nx>res</span> <span class=o>:=</span> <span class=nf>FindPalindrome</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>res</span> <span class=o>!=</span> <span class=s>&#34;abcba&#34;</span> <span class=p>{</span>
+		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;Expected %s got %s&#34;</span><span class=p>,</span> <span class=s>&#34;abcba&#34;</span><span class=p>,</span> <span class=nx>res</span><span class=p>)</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>They all pass - so at least the algorithm is pretty resilient.</p><p>This is simply an ode to the brainteaser. If you find your mental agility getting a little slow, I&rsquo;d suggest signing up for something such as this as it will help sharpen up that wit a touch. This is a programmer-specific example but I&rsquo;m sure it applies to many other industries. I just don&rsquo;t have a service for you to play with :)</p><p>My github has my progress on these and I&rsquo;m writing them all in go. Check it out at <a href=https://github.com/jimdhughes/dcp>https://github.com/jimdhughes/dcp</a></p><p>Hopefully I&rsquo;ll be able to keep up with them a little better than I have been.</p><p>Have fun!</p></article><section class="article labels"><a class=category href=/categories/algorithms/>algorithms</a><a class=category href=/categories/golang/>golang</a><a class=tag href=/tags/algorithms/>algorithms</a><a class=tag href=/tags/golang/>golang</a></section></div><div class="article bottom"><section class="article navigation"><p><a class=link href=/indexeddb-react/><span class="iconfont icon-article"></span>IndexedDB + React for Offline Storage</a></p><p><a class=link href=/go-micro-services-and-embedded-databases-part-2/><span class="iconfont icon-article"></span>Go - Micro-services and Embedded Databases [Part 2]</a></p></section></div></section><section id=footer><div class=footer-wrap><p class=copyright>©2020 James Hughes.</p><p class=powerby><span>Powered by </span><a href=https://gohugo.io target=_blank>Hugo</a><span> and the </span><a href=https://themes.gohugo.io/hugo-notepadium/ target=_blank>Notepadium</a></p></div></section><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-61647183-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>
