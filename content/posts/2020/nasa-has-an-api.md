@@ -86,7 +86,7 @@ Ultimately I decided that I wanted to not maintain a lot of code so I decided to
 
 With all the time I saved switching my DB solution from `bbolt` to `Redis` I decided I may as well extract my api wrapper into a separate library. I figured that, one day, I might have more time / be more interested in calling more NASA endpoints and it would be much easier for people to help out, if they were so interested, committing to the library repository as opposed to my pet project repository. So off to the races I went!
 
-After a bit of refactoring and pumping up into git, I had a library that I was ready to consume because of go's slick depency model - that is, cloning and including go files from git repositories! I created the proxy at https://github.com/daimonos/nasa and was able to include it simply by runing a `go get` and then importing it in my `handlers.go` file in my `nasa-proxy-api` project with a simple
+After a bit of refactoring and pumping up into git, I had a library that I was ready to consume because of go's slick depency model - that is, cloning and including go files from git repositories! I created the proxy at https://github.com/jimdhughes/nasa and was able to include it simply by runing a `go get` and then importing it in my `handlers.go` file in my `nasa-proxy-api` project with a simple
 
 ```golang
 import (
@@ -96,8 +96,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/daimonos/nasa"
-	"github.com/daimonos/nasa/models"
+	"github.com/jimdhughes/nasa"
+	"github.com/jimdhughes/nasa/models"
 	"github.com/gorilla/mux"
 )
 ```
@@ -128,7 +128,7 @@ I've had so many projects stop before they started because I tried prematurely o
 Here are the git repos for these projects if you want to mess around.
 
 <figure>
-	     <a href="https://github.com/Daimonos/nasa-proxy-api">
+	     <a href="https://github.com/jimdhughes/nasa-proxy-api">
 	       <div>
 	         <div>Daimonos/nasa-proxy-api</div>
 	         <div>Proxy APII for requesting and caching requests. Contribute to Daimonos/nasa-proxy-api development by creating an account on GitHub.</div>
@@ -144,7 +144,7 @@ Here are the git repos for these projects if you want to mess around.
 	   </figure>
 
 <figure>
-	     <a href="https://github.com/Daimonos/nasa">
+	     <a href="https://github.com/jimdhughes/nasa">
 	       <div>
 	         <div>Daimonos/nasa</div>
 	         <div>Contribute to Daimonos/nasa development by creating an account on GitHub.</div>
@@ -160,7 +160,7 @@ Here are the git repos for these projects if you want to mess around.
 	   </figure>
 
 <figure>
-	     <a href="https://github.com/Daimonos/nasa-browser">
+	     <a href="https://github.com/jimdhughes/nasa-browser">
 	       <div>
 	         <div>Daimonos/nasa-browser</div>
 	         <div>A Vue.js app for browsing the nasa apis. Contribute to Daimonos/nasa-browser development by creating an account on GitHub.</div>

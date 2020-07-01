@@ -277,5 +277,5 @@ and there you have it! A super simple morse code utility.
 
 To think that people say watching TV doesn't amount to anything productive :-)
 
-The code for this is live at my [Github](https://github.com/Daimonos/morse-go)
+The code for this is live at my [Github](https://github.com/jimdhughes/morse-go)
 

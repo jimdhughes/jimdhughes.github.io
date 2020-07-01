@@ -20,7 +20,7 @@ This was primarily because of the time it took to serialize and deserialize (str
 
 We started researching different usages of IndexedDB. The team was pretty comfortable using localstorage and structured our data to use key/value stores in that way. We didn't _really_ understand the true power of IndexedDB as an awesomex data store in the browser.
 
-So - I'm going to walk you through my PoC to show the awesome performance gains we would realize by using IndexedDB in our app to it's fullest.  As usual, the code is available on my [Github](https://github.com/Daimonos/react-indexeddb-demo)
+So - I'm going to walk you through my PoC to show the awesome performance gains we would realize by using IndexedDB in our app to it's fullest.  As usual, the code is available on my [Github](https://github.com/jimdhughes/react-indexeddb-demo)
 
 We'll start it off using create-react-app. (I ejected the app before putting it in my GitHub because reasons) I'm not going to show you how to do that. There's loads of getting started tutorials for that.
 

@@ -17,7 +17,7 @@ Vue is basically react. Let's be serious.
 
 I like the clear separation of my HTML, CSS, TS, and unit tests. That won't ever go away.   Work has taken me into some new territories where I didn't think I'd have as much fun as I am. That's enough of my ranting about javascript frameworks. Let's dive into the root of the article!
 
-If you don't feel like reading below, the code is up on my github. Check it out at [https://github.com/Daimonos/jdhc-esri-starter](https://github.com/Daimonos/jdhc-esri-starter)
+If you don't feel like reading below, the code is up on my github. Check it out at [https://github.com/jimdhughes/jdhc-esri-starter](https://github.com/jimdhughes/jdhc-esri-starter)
 
 If you feel like following along with some code and some possible random side stories, follow along!
 

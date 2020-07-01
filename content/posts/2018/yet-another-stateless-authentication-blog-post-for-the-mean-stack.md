@@ -619,7 +619,7 @@ Isn't that fun?
 
 ~~I'm going to post the source code on my github - I'll update the post when I do!~~
 
-The source is up at https://github.com/Daimonos/jdhc-express-stateless-template
+The source is up at https://github.com/jimdhughes/jdhc-express-stateless-template
 
 Cheers!
 

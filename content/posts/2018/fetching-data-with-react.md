@@ -17,7 +17,7 @@ I'm continuing this from my previous post about my efforts to learn about react.
 
 # Firstly!
 
-We're going to use a Node.js scaffold that I covered off in a previous posting as our backend for this app. It's located [here](https://github.com/Daimonos/jdhc-express-stateless-template) and requires you to have Node.js installed and access to a MongoDB Instance.  Follow the instructions in that repo to get up and running.  If you don't want to use that one, you can set up your own REST service (or CouchDB instance?) and follow along with the concepts.
+We're going to use a Node.js scaffold that I covered off in a previous posting as our backend for this app. It's located [here](https://github.com/jimdhughes/jdhc-express-stateless-template) and requires you to have Node.js installed and access to a MongoDB Instance.  Follow the instructions in that repo to get up and running.  If you don't want to use that one, you can set up your own REST service (or CouchDB instance?) and follow along with the concepts.
 
 Since I'm not going to cover authentication yet, we need to set up a model and endpoints for our Todo's that are going to be 100% public. To do this add the following code to the `models/todo.model.js` file.
 
@@ -161,7 +161,7 @@ set PORT=3001&npm start
 PORT=3001 npm start
 ```
 
-There we go. API is running on `http://localhost:3001/api/todos` Now it's time to get to the meat and potatoes of this post! Head over to your react app and type `npm start` I'm using the Todo app that I built in a previous post with a few minor modifications. I released this on my github under the release v0.1: [https://github.com/Daimonos/react-todos-blog/releases/tag/v0.1](https://github.com/Daimonos/react-todos-blog/releases/tag/v0.1)
+There we go. API is running on `http://localhost:3001/api/todos` Now it's time to get to the meat and potatoes of this post! Head over to your react app and type `npm start` I'm using the Todo app that I built in a previous post with a few minor modifications. I released this on my github under the release v0.1: [https://github.com/jimdhughes/react-todos-blog/releases/tag/v0.1](https://github.com/jimdhughes/react-todos-blog/releases/tag/v0.1)
 
 Install it using `npm install` and run with `npm serve` You should see our minimal Todos app that uses local storage for persistence.
 

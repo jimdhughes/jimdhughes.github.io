@@ -168,7 +168,7 @@ They all pass - so at least the algorithm is pretty resilient.
 
 This is simply an ode to the brainteaser.  If you find your mental agility getting a little slow, I'd suggest signing up for something such as this as it will help sharpen up that wit a touch.  This is a programmer-specific example but I'm sure it applies to many other industries. I just don't have a service for you to play with :)
 
-My github has my progress on these and I'm writing them all in go. Check it out at https://github.com/daimonos/dcp
+My github has my progress on these and I'm writing them all in go. Check it out at https://github.com/jimdhughes/dcp
 
 Hopefully I'll be able to keep up with them a little better than I have been.
 
