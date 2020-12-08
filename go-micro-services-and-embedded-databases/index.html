@@ -36,11 +36,7 @@
 	<span class=p>}</span>
 	<span class=k>return</span> <span class=kc>nil</span>
 <span class=p>}</span>
-
-<span class=nx>We</span> <span class=nx>now</span> <span class=nx>have</span> <span class=nx>some</span> <span class=nx>testable</span> <span class=nx>code</span><span class=p>!</span> <span class=nx>For</span> <span class=nx>fun</span> <span class=nx>let</span><span class=err>&#39;</span><span class=nx>s</span> <span class=nx>write</span> <span class=nx>a</span> <span class=nx>test</span> <span class=k>for</span> <span class=nx>the</span> <span class=nx>password</span> <span class=nx>hasing</span><span class=p>!</span>
-
-<span class=s>`</span><span class=s>`</span><span class=err>`</span><span class=k>go</span>
-<span class=kn>package</span> <span class=nx>main</span>
+</code></pre></div><p>We now have some testable code! For fun let&rsquo;s write a test for the password hasing!</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>main</span>
 
 <span class=kn>import</span> <span class=p>(</span>
 	<span class=s>&#34;testing&#34;</span>
@@ -139,14 +135,7 @@
 <span class=p>}</span>
 
 
-<span class=s>`</span><span class=s>
-</span><span class=s>
-</span><span class=s>I like to use postman to test my apis but you can curl it if you want.  Go ahead and send some POST requests to our endpoints and you&#39;ll get a simple 500 response with &#34;Not Yet Implemented&#34; as the response.
-</span><span class=s>
-</span><span class=s>Next we can either implement a service to handle these requests or we can implement the database interface.  I&#39;m going to elect to implement the database functionality because I&#39;m a bit of a database nerd.  BoltDB is a key/value store which is really all that we need for implementing an authentication database in a microservice.  I&#39;m not going to do anything fancy such as allowing token invalidation etc so this should be pretty simple! Let&#39;s make a new file called </span><span class=s>`</span><span class=nx>db</span><span class=p>.</span><span class=k>go</span><span class=s>`</span><span class=s>
-</span><span class=s>
-</span><span class=s></span><span class=s>`</span><span class=s>`</span><span class=s>`</span><span class=k>go</span>
-<span class=kn>package</span> <span class=nx>main</span>
+</code></pre></div><p>I like to use postman to test my apis but you can curl it if you want. Go ahead and send some POST requests to our endpoints and you&rsquo;ll get a simple 500 response with &ldquo;Not Yet Implemented&rdquo; as the response.</p><p>Next we can either implement a service to handle these requests or we can implement the database interface. I&rsquo;m going to elect to implement the database functionality because I&rsquo;m a bit of a database nerd. BoltDB is a key/value store which is really all that we need for implementing an authentication database in a microservice. I&rsquo;m not going to do anything fancy such as allowing token invalidation etc so this should be pretty simple! Let&rsquo;s make a new file called <code>db.go</code></p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>main</span>
 
 <span class=kn>import</span> <span class=p>(</span>
 	<span class=s>&#34;encoding/json&#34;</span>
@@ -423,8 +412,8 @@
 	<span class=nx>DB</span><span class=p>.</span><span class=nf>Initialize</span><span class=p>(</span><span class=s>&#34;bolt.db&#34;</span><span class=p>)</span>
 <span class=p>}</span>
 </code></pre></div><p>Now - Build it and run! <code>go build</code> and <code>./whatever-your-foldername-is</code> if you&rsquo;re on *nix or <code>./whatever-your-foldername-is.exe</code> if you&rsquo;re on windows! I use Postman, you can use CURL if you like, but no matter what let&rsquo;s send a registration request to <code>http://localhost:8080/register</code> with a payload of</p><div class=highlight><pre class=chroma><code class=language-json data-lang=json><span class=p>{</span>
-  <span class=nt>&#34;email&#34;</span><span class=p>:</span><span class=s2>&#34;someemail@domain.com&#34;</span><span class=p>,</span>
-  <span class=nt>&#34;password&#34;</span><span class=p>:</span><span class=s2>&#34;password&#34;</span>
+  <span class=nt>&#34;email&#34;</span><span class=p>:</span> <span class=s2>&#34;someemail@domain.com&#34;</span><span class=p>,</span>
+  <span class=nt>&#34;password&#34;</span><span class=p>:</span> <span class=s2>&#34;password&#34;</span>
 <span class=p>}</span>
 </code></pre></div><p>You should get a response of: <code>Status: true</code>. Success! We have registered a user!</p><p>Now we should allow this user to login. We&rsquo;ll implement the <code>HandleLogin</code> handler next.</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>HandleLogin</span><span class=p>(</span><span class=nx>w</span> <span class=nx>http</span><span class=p>.</span><span class=nx>ResponseWriter</span><span class=p>,</span> <span class=nx>r</span> <span class=o>*</span><span class=nx>http</span><span class=p>.</span><span class=nx>Request</span><span class=p>)</span> <span class=p>{</span>
 	<span class=kd>var</span> <span class=nx>user</span> <span class=nx>User</span>
@@ -441,8 +430,8 @@
 	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Fprintf</span><span class=p>(</span><span class=nx>w</span><span class=p>,</span> <span class=nx>status</span><span class=p>)</span>
 <span class=p>}</span>
 </code></pre></div><p>Buld and run again! Send a POST to <code>http://localhost:8080/login</code> with the payload</p><div class=highlight><pre class=chroma><code class=language-json data-lang=json><span class=p>{</span>
-  <span class=nt>&#34;email&#34;</span><span class=p>:</span><span class=s2>&#34;someemail@domain.com&#34;</span><span class=p>,</span>
-  <span class=nt>&#34;password&#34;</span><span class=p>:</span><span class=s2>&#34;password&#34;</span>
+  <span class=nt>&#34;email&#34;</span><span class=p>:</span> <span class=s2>&#34;someemail@domain.com&#34;</span><span class=p>,</span>
+  <span class=nt>&#34;password&#34;</span><span class=p>:</span> <span class=s2>&#34;password&#34;</span>
 <span class=p>}</span>
 </code></pre></div><p>And you should get the message: <code>yep</code>.</p><p>Anyways, this post has gotten REALLY long. So check back for part 2 where we implement the token service, the <code>tokenValidation</code> endpoints, and make some more interesting responses that can be digested better by a calling service.</p><p>Keep Hacking!</p></article><section class="article labels"><a class=category href=/categories/golang/>golang</a><a class=tag href=/tags/golang/>golang</a></section></div><div class="article bottom"><section class="article navigation"><p><a class=link href=/go-micro-services-and-embedded-databases-part-2/><span class="iconfont icon-article"></span>Go - Micro-services and Embedded Databases [Part 2]</a></p><p><a class=link href=/fetching-data-with-react/><span class="iconfont icon-article"></span>Fetching data with react</a></p></section><section class="article discussion"><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
 var d=document,s=d.createElement('script');s.async=true;s.src='//'+"https-blog-jimdhughes-com"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section></div></section><section id=footer><div class=footer-wrap><p class=copyright>©2020 James Hughes.</p><p class=powerby><span>Powered by </span><a href=https://gohugo.io target=_blank>Hugo</a><span> and the </span><a href=https://themes.gohugo.io/hugo-notepadium/ target=_blank>Notepadium</a></p></div></section><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-61647183-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>
