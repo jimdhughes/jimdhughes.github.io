@@ -2,16 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blog.jimdhughes.com/categories/</loc>
-    <lastmod>2021-04-06T19:37:25-06:00</lastmod>
-  </url><url>
     <loc>https://blog.jimdhughes.com/</loc>
-    <lastmod>2021-04-06T19:37:25-06:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/categories/nerds-fixing-stuff/</loc>
-    <lastmod>2021-04-06T19:37:25-06:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/posts/2021/nerds-fixing-stuff-roof-leak-part-1/</loc>
     <lastmod>2021-04-06T19:37:25-06:00</lastmod>
   </url><url>
     <loc>https://blog.jimdhughes.com/tags/docker/</loc>
@@ -27,6 +18,9 @@
     <lastmod>2020-07-31T23:29:42-06:00</lastmod>
   </url><url>
     <loc>https://blog.jimdhughes.com/categories/blog/</loc>
+    <lastmod>2020-07-01T09:02:12-06:00</lastmod>
+  </url><url>
+    <loc>https://blog.jimdhughes.com/categories/</loc>
     <lastmod>2020-07-01T09:02:12-06:00</lastmod>
   </url><url>
     <loc>https://blog.jimdhughes.com/tags/ghost/</loc>
@@ -134,33 +128,6 @@
     <loc>https://blog.jimdhughes.com/tags/asynchronous/</loc>
     <lastmod>2018-05-31T01:35:29+00:00</lastmod>
   </url><url>
-    <loc>https://blog.jimdhughes.com/tags/concept2/</loc>
-    <lastmod>2018-05-23T23:26:35+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/categories/concept2/</loc>
-    <lastmod>2018-05-23T23:26:35+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/tags/data/</loc>
-    <lastmod>2018-05-23T23:26:35+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/categories/data/</loc>
-    <lastmod>2018-05-23T23:26:35+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/tags/fitness/</loc>
-    <lastmod>2018-05-23T23:26:35+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/categories/fitness/</loc>
-    <lastmod>2018-05-23T23:26:35+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/posts/2018/my-concept2-model-d-lets-get-after-it/</loc>
-    <lastmod>2018-05-23T23:26:35+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/tags/pm5/</loc>
-    <lastmod>2018-05-23T23:26:35+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/categories/pm5/</loc>
-    <lastmod>2018-05-23T23:26:35+00:00</lastmod>
-  </url><url>
     <loc>https://blog.jimdhughes.com/categories/async/</loc>
     <lastmod>2018-05-05T03:32:35+00:00</lastmod>
   </url><url>
@@ -227,38 +194,14 @@
     <loc>https://blog.jimdhughes.com/tags/worklife/</loc>
     <lastmod>2018-02-27T05:29:13+00:00</lastmod>
   </url><url>
-    <loc>https://blog.jimdhughes.com/posts/2018/thought-how-im-anti-tech/</loc>
-    <lastmod>2018-02-01T00:15:35+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/tags/technology/</loc>
-    <lastmod>2018-02-01T00:15:35+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/categories/technology/</loc>
-    <lastmod>2018-02-01T00:15:35+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/categories/thoughts/</loc>
-    <lastmod>2018-02-01T00:15:35+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/posts/2018/thoughts-keeping-myself-organized/</loc>
-    <lastmod>2018-01-12T02:11:57+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/tags/organization/</loc>
-    <lastmod>2018-01-12T02:11:57+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/categories/organization/</loc>
-    <lastmod>2018-01-12T02:11:57+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/tags/productivity/</loc>
-    <lastmod>2018-01-12T02:11:57+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/categories/productivity/</loc>
-    <lastmod>2018-01-12T02:11:57+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.jimdhughes.com/categories/worklife/</loc>
-    <lastmod>2018-01-12T02:11:57+00:00</lastmod>
-  </url><url>
     <loc>https://blog.jimdhughes.com/posts/2017/a-huzzah-to-millennials-killing-everything-by-a-millennial/</loc>
     <lastmod>2017-08-22T21:44:14+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.jimdhughes.com/tags/data/</loc>
+    <lastmod>2017-05-26T01:27:28+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.jimdhughes.com/categories/data/</loc>
+    <lastmod>2017-05-26T01:27:28+00:00</lastmod>
   </url><url>
     <loc>https://blog.jimdhughes.com/tags/dataporn/</loc>
     <lastmod>2017-05-26T01:27:28+00:00</lastmod>

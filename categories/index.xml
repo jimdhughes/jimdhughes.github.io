@@ -6,15 +6,8 @@
     <description>Recent content in Categories on James Hughes</description>
     <generator>Hugo -- 0.142.0</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 06 Apr 2021 19:37:25 -0600</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2020 09:02:12 -0600</lastBuildDate>
     <atom:link href="https://blog.jimdhughes.com/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Nerds Fixing Stuff</title>
-      <link>https://blog.jimdhughes.com/categories/nerds-fixing-stuff/</link>
-      <pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/nerds-fixing-stuff/</guid>
-      <description></description>
-    </item>
     <item>
       <title>Blog</title>
       <link>https://blog.jimdhughes.com/categories/blog/</link>
@@ -34,34 +27,6 @@
       <link>https://blog.jimdhughes.com/categories/reactjs/</link>
       <pubDate>Fri, 17 Aug 2018 20:34:30 +0000</pubDate>
       <guid>https://blog.jimdhughes.com/categories/reactjs/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Concept2</title>
-      <link>https://blog.jimdhughes.com/categories/concept2/</link>
-      <pubDate>Wed, 23 May 2018 23:26:35 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/concept2/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Data</title>
-      <link>https://blog.jimdhughes.com/categories/data/</link>
-      <pubDate>Wed, 23 May 2018 23:26:35 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/data/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Fitness</title>
-      <link>https://blog.jimdhughes.com/categories/fitness/</link>
-      <pubDate>Wed, 23 May 2018 23:26:35 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/fitness/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>PM5</title>
-      <link>https://blog.jimdhughes.com/categories/pm5/</link>
-      <pubDate>Wed, 23 May 2018 23:26:35 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/pm5/</guid>
       <description></description>
     </item>
     <item>
@@ -128,38 +93,10 @@
       <description></description>
     </item>
     <item>
-      <title>Technology</title>
-      <link>https://blog.jimdhughes.com/categories/technology/</link>
-      <pubDate>Thu, 01 Feb 2018 00:15:35 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/technology/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Thoughts</title>
-      <link>https://blog.jimdhughes.com/categories/thoughts/</link>
-      <pubDate>Thu, 01 Feb 2018 00:15:35 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/thoughts/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Organization</title>
-      <link>https://blog.jimdhughes.com/categories/organization/</link>
-      <pubDate>Fri, 12 Jan 2018 02:11:57 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/organization/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Productivity</title>
-      <link>https://blog.jimdhughes.com/categories/productivity/</link>
-      <pubDate>Fri, 12 Jan 2018 02:11:57 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/productivity/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Worklife</title>
-      <link>https://blog.jimdhughes.com/categories/worklife/</link>
-      <pubDate>Fri, 12 Jan 2018 02:11:57 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/worklife/</guid>
+      <title>Data</title>
+      <link>https://blog.jimdhughes.com/categories/data/</link>
+      <pubDate>Fri, 26 May 2017 01:27:28 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/categories/data/</guid>
       <description></description>
     </item>
     <item>

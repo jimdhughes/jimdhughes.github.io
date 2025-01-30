@@ -6,22 +6,8 @@
     <description>Recent content on James Hughes</description>
     <generator>Hugo -- 0.142.0</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 06 Apr 2021 19:37:25 -0600</lastBuildDate>
+    <lastBuildDate>Fri, 31 Jul 2020 23:29:42 -0600</lastBuildDate>
     <atom:link href="https://blog.jimdhughes.com/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Nerds Fixing Stuff: Roof Leak, Part 1</title>
-      <link>https://blog.jimdhughes.com/posts/2021/nerds-fixing-stuff-roof-leak-part-1/</link>
-      <pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate>
-      <guid>https://blog.jimdhughes.com/posts/2021/nerds-fixing-stuff-roof-leak-part-1/</guid>
-      <description>&lt;h1 id=&#34;the-setup&#34;&gt;The Setup&lt;/h1&gt;
-&lt;p&gt;In August of last year I purchased a new house in the &amp;lsquo;burbs to accommodate my ever growing family. We went by the books and got the home inspection done which yielded some pretty low-hanging-fruit issues such as&amp;hellip;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Don&amp;rsquo;t have rain barrels near your foundation&lt;/li&gt;
-&lt;li&gt;Maybe upgrade that outdoor tap to have a frost nib&lt;/li&gt;
-&lt;li&gt;Eventually you&amp;rsquo;ll need to replace your shingles&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;I prioritized some of the work in the results and carried on with my life. We did a few reno&amp;rsquo;s including painting, installing new flooring upstairs, when suddenly this spring, a wild wall deformity appeared!&lt;/p&gt;</description>
-    </item>
     <item>
       <title>Docker Seq Setup With API Key</title>
       <link>https://blog.jimdhughes.com/posts/2020/docker-seq-setup-default-api-key/</link>
@@ -159,14 +145,6 @@ and put in the morse code equilvalent for a quick reference&lt;/p&gt;</descripti
       <description>&lt;p&gt;The Async / Await functionality introduced into Node.js in v7.10.0 is legitimately a godsend.  The Async / Await paradigm works with promises to do exactly what the paradigm implies.  It will asynchronously call the function and await it&amp;rsquo;s response before continuing on with the rest of the function. Previously, you could do this with promise chaining. Passing results from one promise to the next. Where this issue fell apart is when you needed to use the result of Promise 1 in Promise 4. You would need to somehow pass the result of Promise 1 through Promises 2 and 3 in order to use them in promise 4.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>My Concept2 Model D - Let&#39;s get after it!</title>
-      <link>https://blog.jimdhughes.com/posts/2018/my-concept2-model-d-lets-get-after-it/</link>
-      <pubDate>Wed, 23 May 2018 23:26:35 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/posts/2018/my-concept2-model-d-lets-get-after-it/</guid>
-      <description>&lt;p&gt;In February 2018, I received a service award from work and decided that I would use it to purchase a cardio machine of some sort for my basement gym.  I used to go the the gym at my work all the time but once I had a child and my wife returned back to work after mat leave, that option had fallen by the wayside real quick!&lt;/p&gt;
-&lt;p&gt;I applaud those who can get themselves out of bed after only four hours of sleep. However, my drive for that quickly waned as well.&lt;/p&gt;</description>
-    </item>
-    <item>
       <title>Yet Another Stateless Authentication Blog Post for the MEAN stack.</title>
       <link>https://blog.jimdhughes.com/posts/2018/yet-another-stateless-authentication-blog-post-for-the-mean-stack/</link>
       <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
@@ -206,45 +184,6 @@ The whole process really highlighted a few personality traits that I&amp;rsquo;v
 &lt;li&gt;I have too many ideas&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Since starting down my career path, I&amp;rsquo;ve made some massive changes to my demeanour. I used to be &lt;em&gt;very&lt;/em&gt; technical.  I wanted to be extremely proficient in &lt;em&gt;one&lt;/em&gt; thing.  I thought that this would be what sets me apart and what makes me indispensable.  I&amp;rsquo;m now about 7 years in and I&amp;rsquo;ve taken such a drastic turn that I had to look back hard to determine where it happened and why.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>&lt;Thoughts&gt; Print vs Media - Hoof</title>
-      <link>https://blog.jimdhughes.com/posts/2018/thought-how-im-anti-tech/</link>
-      <pubDate>Thu, 01 Feb 2018 00:15:35 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/posts/2018/thought-how-im-anti-tech/</guid>
-      <description>&lt;p&gt;TLDR;
-I learned to memorize by reading and writing paper content
-I learned to look up using digital content.
-I find myself continually using indexing and ctrl-f to find information in digital content whereas I actually read and commit to memory when I read physical text and write physical notes.&lt;/p&gt;
-&lt;p&gt;Lessons I learned once and apparently have forgotten since&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;Yep. Awkward, right?&lt;/p&gt;
-&lt;p&gt;Hear me out.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m studying for my PMP exam (finally) and up until now I&amp;rsquo;ve been using PDF&amp;rsquo;s and the like to read and jot down notes.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>&lt;Thoughts&gt; Keeping Myself Organized</title>
-      <link>https://blog.jimdhughes.com/posts/2018/thoughts-keeping-myself-organized/</link>
-      <pubDate>Fri, 12 Jan 2018 02:11:57 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/posts/2018/thoughts-keeping-myself-organized/</guid>
-      <description>&lt;h1 id=&#34;my-most-productive-months-through-2017&#34;&gt;My most productive months through 2017&lt;/h1&gt;
-&lt;p&gt;Were from about July through to the middle of December.  As I sit here in my office I wonder what happened?
-I&amp;rsquo;ve gone from completing &lt;em&gt;real&lt;/em&gt; &lt;strong&gt;actionable&lt;/strong&gt; items daily to feeling like I&amp;rsquo;m just spinning my tires again, but I&amp;rsquo;m definitely not. Since my first day back to work of 2018, I&amp;rsquo;ve successfully:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Implemented a prototype for a potential new internal project
-&lt;ul&gt;
-&lt;li&gt;Furthermore I&amp;rsquo;ve had 1 sit-down meeting to demo the application sprints and 3 meaningful conversations around alignment of the processes we&amp;rsquo;re looking to automate.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Developed a mind map for implementing some new corporate infrastructure and initiated conversation with my company&amp;rsquo;s operations team
-&lt;ul&gt;
-&lt;li&gt;With a fair bit of background fact-finding which date back to December of last year to be fair&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Consolidated 10 years of data from excel workbooks to transcribe into a newly developed application&amp;rsquo;s database (specifically for the first bullet point)&lt;/li&gt;
-&lt;li&gt;Submitted the paperwork to sit for my &lt;a href=&#34;http://pmi.org&#34;&gt;PMP&lt;/a&gt; examination&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;That&amp;rsquo;s a pretty good amount of work for 10 days back at it I think? So why do I feel like I&amp;rsquo;m not actually accomplishing anything?&lt;/p&gt;</description>
     </item>
     <item>
       <title>A Huzzah to Millennials killing everything - By a Millennial</title>
