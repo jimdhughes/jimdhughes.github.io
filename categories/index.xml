@@ -16,20 +16,6 @@
       <description></description>
     </item>
     <item>
-      <title>Docker</title>
-      <link>https://blog.jimdhughes.com/categories/docker/</link>
-      <pubDate>Fri, 31 Jul 2020 23:29:42 -0600</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/docker/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Seq</title>
-      <link>https://blog.jimdhughes.com/categories/seq/</link>
-      <pubDate>Fri, 31 Jul 2020 23:29:42 -0600</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/seq/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Blog</title>
       <link>https://blog.jimdhughes.com/categories/blog/</link>
       <pubDate>Wed, 01 Jul 2020 09:02:12 -0600</pubDate>
@@ -44,122 +30,10 @@
       <description></description>
     </item>
     <item>
-      <title>ArcGIS</title>
-      <link>https://blog.jimdhughes.com/categories/arcgis/</link>
-      <pubDate>Sat, 15 Jun 2019 00:45:00 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/arcgis/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Algorithms</title>
-      <link>https://blog.jimdhughes.com/categories/algorithms/</link>
-      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/algorithms/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>C</title>
-      <link>https://blog.jimdhughes.com/categories/c/</link>
-      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/c/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Java</title>
-      <link>https://blog.jimdhughes.com/categories/java/</link>
-      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/java/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Nodejs</title>
-      <link>https://blog.jimdhughes.com/categories/nodejs/</link>
-      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/nodejs/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Pi</title>
-      <link>https://blog.jimdhughes.com/categories/pi/</link>
-      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/pi/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Programming</title>
-      <link>https://blog.jimdhughes.com/categories/programming/</link>
-      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/programming/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Python</title>
-      <link>https://blog.jimdhughes.com/categories/python/</link>
-      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/python/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Database</title>
-      <link>https://blog.jimdhughes.com/categories/database/</link>
-      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/database/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Idb</title>
-      <link>https://blog.jimdhughes.com/categories/idb/</link>
-      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/idb/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>IndexedDB</title>
-      <link>https://blog.jimdhughes.com/categories/indexeddb/</link>
-      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/indexeddb/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>JavaScript</title>
-      <link>https://blog.jimdhughes.com/categories/javascript/</link>
-      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/javascript/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Offline Storage</title>
-      <link>https://blog.jimdhughes.com/categories/offline-storage/</link>
-      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/offline-storage/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>ReactJS</title>
       <link>https://blog.jimdhughes.com/categories/reactjs/</link>
-      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
+      <pubDate>Fri, 17 Aug 2018 20:34:30 +0000</pubDate>
       <guid>https://blog.jimdhughes.com/categories/reactjs/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Async</title>
-      <link>https://blog.jimdhughes.com/categories/async/</link>
-      <pubDate>Thu, 31 May 2018 01:35:29 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/async/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Async/Await</title>
-      <link>https://blog.jimdhughes.com/categories/async/await/</link>
-      <pubDate>Thu, 31 May 2018 01:35:29 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/async/await/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Asynchronous</title>
-      <link>https://blog.jimdhughes.com/categories/asynchronous/</link>
-      <pubDate>Thu, 31 May 2018 01:35:29 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/asynchronous/</guid>
       <description></description>
     </item>
     <item>
@@ -191,6 +65,13 @@
       <description></description>
     </item>
     <item>
+      <title>Async</title>
+      <link>https://blog.jimdhughes.com/categories/async/</link>
+      <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/categories/async/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Development</title>
       <link>https://blog.jimdhughes.com/categories/development/</link>
       <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
@@ -202,6 +83,13 @@
       <link>https://blog.jimdhughes.com/categories/expressjs/</link>
       <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
       <guid>https://blog.jimdhughes.com/categories/expressjs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>JavaScript</title>
+      <link>https://blog.jimdhughes.com/categories/javascript/</link>
+      <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/categories/javascript/</guid>
       <description></description>
     </item>
     <item>
@@ -226,6 +114,13 @@
       <description></description>
     </item>
     <item>
+      <title>Nodejs</title>
+      <link>https://blog.jimdhughes.com/categories/nodejs/</link>
+      <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/categories/nodejs/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>REST</title>
       <link>https://blog.jimdhughes.com/categories/rest/</link>
       <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
@@ -233,31 +128,17 @@
       <description></description>
     </item>
     <item>
-      <title>Leadership</title>
-      <link>https://blog.jimdhughes.com/categories/leadership/</link>
-      <pubDate>Tue, 27 Feb 2018 05:29:13 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/leadership/</guid>
+      <title>Technology</title>
+      <link>https://blog.jimdhughes.com/categories/technology/</link>
+      <pubDate>Thu, 01 Feb 2018 00:15:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/categories/technology/</guid>
       <description></description>
     </item>
     <item>
       <title>Thoughts</title>
       <link>https://blog.jimdhughes.com/categories/thoughts/</link>
-      <pubDate>Tue, 27 Feb 2018 05:29:13 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/thoughts/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Worklife</title>
-      <link>https://blog.jimdhughes.com/categories/worklife/</link>
-      <pubDate>Tue, 27 Feb 2018 05:29:13 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/worklife/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Technology</title>
-      <link>https://blog.jimdhughes.com/categories/technology/</link>
       <pubDate>Thu, 01 Feb 2018 00:15:35 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/technology/</guid>
+      <guid>https://blog.jimdhughes.com/categories/thoughts/</guid>
       <description></description>
     </item>
     <item>
@@ -275,38 +156,10 @@
       <description></description>
     </item>
     <item>
-      <title>Cable</title>
-      <link>https://blog.jimdhughes.com/categories/cable/</link>
-      <pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/cable/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>CellPhones</title>
-      <link>https://blog.jimdhughes.com/categories/cellphones/</link>
-      <pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/cellphones/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>CordCutting</title>
-      <link>https://blog.jimdhughes.com/categories/cordcutting/</link>
-      <pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/cordcutting/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Millennial</title>
-      <link>https://blog.jimdhughes.com/categories/millennial/</link>
-      <pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/millennial/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Value!!@!</title>
-      <link>https://blog.jimdhughes.com/categories/value@/</link>
-      <pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/value@/</guid>
+      <title>Worklife</title>
+      <link>https://blog.jimdhughes.com/categories/worklife/</link>
+      <pubDate>Fri, 12 Jan 2018 02:11:57 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/categories/worklife/</guid>
       <description></description>
     </item>
     <item>
@@ -384,20 +237,6 @@
       <link>https://blog.jimdhughes.com/categories/windows-sdk/</link>
       <pubDate>Fri, 10 Apr 2015 05:04:49 +0000</pubDate>
       <guid>https://blog.jimdhughes.com/categories/windows-sdk/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Tutorial</title>
-      <link>https://blog.jimdhughes.com/categories/tutorial/</link>
-      <pubDate>Wed, 08 Apr 2015 03:42:01 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/tutorial/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Ubuntu</title>
-      <link>https://blog.jimdhughes.com/categories/ubuntu/</link>
-      <pubDate>Wed, 08 Apr 2015 03:42:01 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/categories/ubuntu/</guid>
       <description></description>
     </item>
   </channel>

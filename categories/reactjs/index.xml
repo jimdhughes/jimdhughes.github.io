@@ -6,25 +6,8 @@
     <description>Recent content in ReactJS on James Hughes</description>
     <generator>Hugo -- 0.142.0</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 09 Jan 2019 13:07:23 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 17 Aug 2018 20:34:30 +0000</lastBuildDate>
     <atom:link href="https://blog.jimdhughes.com/categories/reactjs/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>IndexedDB &#43; React for Offline Storage</title>
-      <link>https://blog.jimdhughes.com/posts/2019/indexeddb-react/</link>
-      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/posts/2019/indexeddb-react/</guid>
-      <description>Building an app with React, IndexedDB, and a ridiculous amount of seed data</description>
-    </item>
-    <item>
-      <title>Fetching data with react</title>
-      <link>https://blog.jimdhughes.com/posts/2018/fetching-data-with-react/</link>
-      <pubDate>Wed, 29 Aug 2018 02:37:01 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/posts/2018/fetching-data-with-react/</guid>
-      <description>&lt;p&gt;What use is an app that can&amp;rsquo;t persist data?&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m continuing this from my previous post about my efforts to learn about react.  I want to be able to persist my data on a server and display it on a web client.  To my understanding, this should be pretty simple so I&amp;rsquo;m going to put that theory to the test.&lt;/p&gt;
-&lt;h1 id=&#34;firstly&#34;&gt;Firstly!&lt;/h1&gt;
-&lt;p&gt;We&amp;rsquo;re going to use a Node.js scaffold that I covered off in a previous posting as our backend for this app. It&amp;rsquo;s located &lt;a href=&#34;https://github.com/jimdhughes/jdhc-express-stateless-template&#34;&gt;here&lt;/a&gt; and requires you to have Node.js installed and access to a MongoDB Instance.  Follow the instructions in that repo to get up and running.  If you don&amp;rsquo;t want to use that one, you can set up your own REST service (or CouchDB instance?) and follow along with the concepts.&lt;/p&gt;</description>
-    </item>
     <item>
       <title>Learning React with create-react-app</title>
       <link>https://blog.jimdhughes.com/posts/2018/learning-react-with-create-react-app/</link>

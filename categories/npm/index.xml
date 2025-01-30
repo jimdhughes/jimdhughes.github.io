@@ -19,15 +19,5 @@ See the comments from Cees Timmerman and Mark Pinder in the comments.&lt;/p&gt;
 &lt;p&gt;Step 1: Install Visual Studio community edition (2015 seems to be tried, tested and true). Ensure that you do a &lt;em&gt;custom&lt;/em&gt; install and include the &lt;strong&gt;C++&lt;/strong&gt; components.&lt;/p&gt;
 &lt;p&gt;Step 2: rebuild node-gyp using the following:&lt;/p&gt;</description>
     </item>
-    <item>
-      <title>Installing Node without Sudo - Ubuntu 14.04 LTS</title>
-      <link>https://blog.jimdhughes.com/posts/2015/installing-node-without-sudo/</link>
-      <pubDate>Wed, 08 Apr 2015 03:42:01 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/posts/2015/installing-node-without-sudo/</guid>
-      <description>&lt;p&gt;If you&amp;rsquo;re unlike me and really don&amp;rsquo;t care about superuser permissions or having the most up-to-date releases, you can just do the regular old naive thing and use the package manager&amp;hellip;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get update &amp;amp;&amp;amp; sudo apt-get install nodejs
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;However since you&amp;rsquo;re here, I&amp;rsquo;m betting this doesn&amp;rsquo;t jive with you.&lt;/p&gt;
-&lt;p&gt;The idea of having to give checked out source code from the npm repository super user access makes me quite uncomfortable. I mean, all it&amp;rsquo;s going to do is sit on a virtual machine that will remain dormant long after I complete an awesome a-snychronous ToDo application and feel like a boss. It&amp;rsquo;s the principal of the matter!&lt;/p&gt;</description>
-    </item>
   </channel>
 </rss>

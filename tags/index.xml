@@ -6,43 +6,8 @@
     <description>Recent content in Tags on James Hughes</description>
     <generator>Hugo -- 0.142.0</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 06 Apr 2021 19:37:25 -0600</lastBuildDate>
+    <lastBuildDate>Fri, 31 Jul 2020 23:29:42 -0600</lastBuildDate>
     <atom:link href="https://blog.jimdhughes.com/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Fix-It</title>
-      <link>https://blog.jimdhughes.com/tags/fix-it/</link>
-      <pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate>
-      <guid>https://blog.jimdhughes.com/tags/fix-it/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Home</title>
-      <link>https://blog.jimdhughes.com/tags/home/</link>
-      <pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate>
-      <guid>https://blog.jimdhughes.com/tags/home/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Leak</title>
-      <link>https://blog.jimdhughes.com/tags/leak/</link>
-      <pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate>
-      <guid>https://blog.jimdhughes.com/tags/leak/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Renovations</title>
-      <link>https://blog.jimdhughes.com/tags/renovations/</link>
-      <pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate>
-      <guid>https://blog.jimdhughes.com/tags/renovations/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Roof</title>
-      <link>https://blog.jimdhughes.com/tags/roof/</link>
-      <pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate>
-      <guid>https://blog.jimdhughes.com/tags/roof/</guid>
-      <description></description>
-    </item>
     <item>
       <title>Docker</title>
       <link>https://blog.jimdhughes.com/tags/docker/</link>
@@ -79,9 +44,16 @@
       <description></description>
     </item>
     <item>
+      <title>Angular</title>
+      <link>https://blog.jimdhughes.com/tags/angular/</link>
+      <pubDate>Fri, 06 Sep 2019 09:33:18 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/angular/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>ArcGIS</title>
       <link>https://blog.jimdhughes.com/tags/arcgis/</link>
-      <pubDate>Sat, 15 Jun 2019 00:45:00 +0000</pubDate>
+      <pubDate>Fri, 06 Sep 2019 09:33:18 +0000</pubDate>
       <guid>https://blog.jimdhughes.com/tags/arcgis/</guid>
       <description></description>
     </item>
@@ -142,44 +114,30 @@
       <description></description>
     </item>
     <item>
-      <title>Database</title>
-      <link>https://blog.jimdhughes.com/tags/database/</link>
+      <title>Frontend</title>
+      <link>https://blog.jimdhughes.com/tags/frontend/</link>
       <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/tags/database/</guid>
+      <guid>https://blog.jimdhughes.com/tags/frontend/</guid>
       <description></description>
     </item>
     <item>
-      <title>Idb</title>
-      <link>https://blog.jimdhughes.com/tags/idb/</link>
+      <title>Indexdb</title>
+      <link>https://blog.jimdhughes.com/tags/indexdb/</link>
       <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/tags/idb/</guid>
+      <guid>https://blog.jimdhughes.com/tags/indexdb/</guid>
       <description></description>
     </item>
     <item>
-      <title>IndexedDB</title>
-      <link>https://blog.jimdhughes.com/tags/indexeddb/</link>
+      <title>React</title>
+      <link>https://blog.jimdhughes.com/tags/react/</link>
       <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/tags/indexeddb/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>JavaScript</title>
-      <link>https://blog.jimdhughes.com/tags/javascript/</link>
-      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/tags/javascript/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Offline Storage</title>
-      <link>https://blog.jimdhughes.com/tags/offline-storage/</link>
-      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/tags/offline-storage/</guid>
+      <guid>https://blog.jimdhughes.com/tags/react/</guid>
       <description></description>
     </item>
     <item>
       <title>ReactJS</title>
       <link>https://blog.jimdhughes.com/tags/reactjs/</link>
-      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
+      <pubDate>Wed, 29 Aug 2018 02:37:01 +0000</pubDate>
       <guid>https://blog.jimdhughes.com/tags/reactjs/</guid>
       <description></description>
     </item>
@@ -244,6 +202,13 @@
       <link>https://blog.jimdhughes.com/tags/expressjs/</link>
       <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
       <guid>https://blog.jimdhughes.com/tags/expressjs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>JavaScript</title>
+      <link>https://blog.jimdhughes.com/tags/javascript/</link>
+      <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/javascript/</guid>
       <description></description>
     </item>
     <item>
@@ -314,41 +279,6 @@
       <link>https://blog.jimdhughes.com/tags/productivity/</link>
       <pubDate>Fri, 12 Jan 2018 02:11:57 +0000</pubDate>
       <guid>https://blog.jimdhughes.com/tags/productivity/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Cable</title>
-      <link>https://blog.jimdhughes.com/tags/cable/</link>
-      <pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/tags/cable/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>CellPhones</title>
-      <link>https://blog.jimdhughes.com/tags/cellphones/</link>
-      <pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/tags/cellphones/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>CordCutting</title>
-      <link>https://blog.jimdhughes.com/tags/cordcutting/</link>
-      <pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/tags/cordcutting/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Millennial</title>
-      <link>https://blog.jimdhughes.com/tags/millennial/</link>
-      <pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/tags/millennial/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Value!!@!</title>
-      <link>https://blog.jimdhughes.com/tags/value@/</link>
-      <pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/tags/value@/</guid>
       <description></description>
     </item>
     <item>

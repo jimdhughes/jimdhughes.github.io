@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>ArcGIS on James Hughes</title>
-    <link>https://blog.jimdhughes.com/tags/arcgis/</link>
-    <description>Recent content in ArcGIS on James Hughes</description>
+    <title>Angular on James Hughes</title>
+    <link>https://blog.jimdhughes.com/tags/angular/</link>
+    <description>Recent content in Angular on James Hughes</description>
     <generator>Hugo -- 0.142.0</generator>
     <language>en</language>
     <lastBuildDate>Fri, 06 Sep 2019 09:33:18 +0000</lastBuildDate>
-    <atom:link href="https://blog.jimdhughes.com/tags/arcgis/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.jimdhughes.com/tags/angular/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Angular &#43; ESRI = Not bad</title>
       <link>https://blog.jimdhughes.com/posts/2019/angular-esri-not-bad/</link>
@@ -17,15 +17,6 @@
 &lt;p&gt;React&amp;rsquo;s willy nilly do whatever you want attitude doesn&amp;rsquo;t do much for me.&lt;/p&gt;
 &lt;p&gt;Vue is basically react. Let&amp;rsquo;s be serious.&lt;/p&gt;
 &lt;p&gt;I like the clear separation of my HTML, CSS, TS, and unit tests. That won&amp;rsquo;t ever go away.   Work has taken me into some new territories where I didn&amp;rsquo;t think I&amp;rsquo;d have as much fun as I am. That&amp;rsquo;s enough of my ranting about javascript frameworks. Let&amp;rsquo;s dive into the root of the article!&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>ArcGIS Upgrade Error 28809</title>
-      <link>https://blog.jimdhughes.com/posts/2019/arcgis-upgrade/</link>
-      <pubDate>Sat, 15 Jun 2019 00:45:00 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/posts/2019/arcgis-upgrade/</guid>
-      <description>&lt;p&gt;I was upgrading ArcGIS Server (10.6.1 -&amp;gt; 10.7) the other day&amp;hellip;&lt;/p&gt;
-&lt;p&gt;We encountered an issue with the account ArcGIS was using to run itself - the LocalSystem account. We don&amp;rsquo;t have passwords for it, so the installer would not let us proceed. We couldn&amp;rsquo;t change the user either which posed a bit of an issue so we decided to just cancel our install and proceed along our merry way.&lt;/p&gt;
-&lt;p&gt;So we turned our ArcGIS Server service back on and gave it a few minutes to spin back up however it never did! We hunted through our logs and didn&amp;rsquo;t see much to indicate what might have happened.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
