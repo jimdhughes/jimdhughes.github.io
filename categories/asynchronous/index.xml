@@ -1,1 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>asynchronous on James Hughes</title><link>/categories/asynchronous/</link><description>Recent content in asynchronous on James Hughes</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>©2020 James Hughes.</copyright><lastBuildDate>Thu, 31 May 2018 01:35:29 +0000</lastBuildDate><atom:link href="/categories/asynchronous/index.xml" rel="self" type="application/rss+xml"/><item><title>Async / Await in Node.js</title><link>/async-await-in-node-js/</link><pubDate>Thu, 31 May 2018 01:35:29 +0000</pubDate><guid>/async-await-in-node-js/</guid><description>The Async / Await functionality introduced into Node.js in v7.10.0 is legitimately a godsend. The Async / Await paradigm works with promises to do exactly what the paradigm implies. It will asynchronously call the function and await it&amp;rsquo;s response before continuing on with the rest of the function. Previously, you could do this with promise chaining. Passing results from one promise to the next. Where this issue fell apart is when you needed to use the result of Promise 1 in Promise 4.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Asynchronous on James Hughes</title>
+    <link>https://blog.jimdhughes.com/categories/asynchronous/</link>
+    <description>Recent content in Asynchronous on James Hughes</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 31 May 2018 01:35:29 +0000</lastBuildDate>
+    <atom:link href="https://blog.jimdhughes.com/categories/asynchronous/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Async / Await in Node.js</title>
+      <link>https://blog.jimdhughes.com/posts/2018/async-await-in-node-js/</link>
+      <pubDate>Thu, 31 May 2018 01:35:29 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/async-await-in-node-js/</guid>
+      <description>&lt;p&gt;The Async / Await functionality introduced into Node.js in v7.10.0 is legitimately a godsend.  The Async / Await paradigm works with promises to do exactly what the paradigm implies.  It will asynchronously call the function and await it&amp;rsquo;s response before continuing on with the rest of the function. Previously, you could do this with promise chaining. Passing results from one promise to the next. Where this issue fell apart is when you needed to use the result of Promise 1 in Promise 4. You would need to somehow pass the result of Promise 1 through Promises 2 and 3 in order to use them in promise 4.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

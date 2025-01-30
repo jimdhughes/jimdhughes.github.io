@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Docker on James Hughes</title><link>/categories/docker/</link><description>Recent content in Docker on James Hughes</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>©2020 James Hughes.</copyright><lastBuildDate>Fri, 31 Jul 2020 23:29:42 -0600</lastBuildDate><atom:link href="/categories/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>Docker Seq Setup With API Key</title><link>/docker-seq-setup-default-api-key/</link><pubDate>Fri, 31 Jul 2020 23:29:42 -0600</pubDate><guid>/docker-seq-setup-default-api-key/</guid><description>Here&amp;rsquo;s what happened I was playing around with a system that my team was building at work. The system, when deployed, will have 3 components living on 3 different servers with their networks locked down. You can think of it like:
-a &amp;mdash; b &amp;mdash; c
-Server a can talk to server b, b to a and c, and c to b.
-To test these without deploying to the actual environment, I figured I may as well dockerize it!</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Docker on James Hughes</title>
+    <link>https://blog.jimdhughes.com/categories/docker/</link>
+    <description>Recent content in Docker on James Hughes</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 31 Jul 2020 23:29:42 -0600</lastBuildDate>
+    <atom:link href="https://blog.jimdhughes.com/categories/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker Seq Setup With API Key</title>
+      <link>https://blog.jimdhughes.com/posts/2020/docker-seq-setup-default-api-key/</link>
+      <pubDate>Fri, 31 Jul 2020 23:29:42 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2020/docker-seq-setup-default-api-key/</guid>
+      <description>I was setting up a project that is made up of several Dotnet Core services and have a common logging service with Seq.  I decided to dockerize the app for easy debugging and couldn&amp;#39;t, for the life of me, figure out how to set up seq with a default API Key! Here&amp;#39;s how I did it.</description>
+    </item>
+  </channel>
+</rss>

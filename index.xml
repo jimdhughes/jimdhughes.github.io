@@ -1,1 +1,295 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>James Hughes</title><link>/</link><description>Recent content on James Hughes</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>©2020 James Hughes.</copyright><lastBuildDate>Tue, 06 Apr 2021 19:37:25 -0600</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>Posts</title><link>/posts/</link><pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate><guid>/posts/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>James Hughes</title>
+    <link>https://blog.jimdhughes.com/</link>
+    <description>Recent content on James Hughes</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 06 Apr 2021 19:37:25 -0600</lastBuildDate>
+    <atom:link href="https://blog.jimdhughes.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nerds Fixing Stuff: Roof Leak, Part 1</title>
+      <link>https://blog.jimdhughes.com/posts/2021/nerds-fixing-stuff-roof-leakpart-1/</link>
+      <pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2021/nerds-fixing-stuff-roof-leakpart-1/</guid>
+      <description>&lt;h1 id=&#34;the-setup&#34;&gt;The Setup&lt;/h1&gt;
+&lt;p&gt;In August of last year I purchased a new house in the &amp;lsquo;burbs to accommodate my ever growing family. We went by the books and got the home inspection done which yielded some pretty low-hanging-fruit issues such as&amp;hellip;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Don&amp;rsquo;t have rain barrels near your foundation&lt;/li&gt;
+&lt;li&gt;Maybe upgrade that outdoor tap to have a frost nib&lt;/li&gt;
+&lt;li&gt;Eventually you&amp;rsquo;ll need to replace your shingles&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I prioritized some of the work in the results and carried on with my life. We did a few reno&amp;rsquo;s including painting, installing new flooring upstairs, when suddenly this spring, a wild wall deformity appeared!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Docker Seq Setup With API Key</title>
+      <link>https://blog.jimdhughes.com/posts/2020/docker-seq-setup-default-api-key/</link>
+      <pubDate>Fri, 31 Jul 2020 23:29:42 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2020/docker-seq-setup-default-api-key/</guid>
+      <description>I was setting up a project that is made up of several Dotnet Core services and have a common logging service with Seq.  I decided to dockerize the app for easy debugging and couldn&amp;#39;t, for the life of me, figure out how to set up seq with a default API Key! Here&amp;#39;s how I did it.</description>
+    </item>
+    <item>
+      <title>Migrating my Blog from Ghost to Hugo</title>
+      <link>https://blog.jimdhughes.com/posts/2020/migrating-my-blog-from-ghost-to-hugo/</link>
+      <pubDate>Wed, 01 Jul 2020 09:02:12 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2020/migrating-my-blog-from-ghost-to-hugo/</guid>
+      <description>For Canada Day, I decided to migrate my blog from Ghost to Hugo. I have sort-of reasons that I&amp;#39;ll discuss here but ultimately, I was just bored of my current setup and figured I could save a few bucks a month in hosting fees by using github to host my static content.</description>
+    </item>
+    <item>
+      <title>NASA has an API!</title>
+      <link>https://blog.jimdhughes.com/posts/2020/nasa-has-an-api/</link>
+      <pubDate>Wed, 01 Jan 2020 00:49:30 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2020/nasa-has-an-api/</guid>
+      <description>&lt;p&gt;This started as an article on me learning Vue.js&lt;/p&gt;
+&lt;p&gt;As I was going through the motions of the annoying and overdone TODO application to learn a JS library, I decided to do a quick scour of the internet for a public API that might jazz things up a bit.  After finding a few cat and meme generators, I stumbled across this gem!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://api.nasa.gov/&#34;&gt;https://api.nasa.gov/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s right - NASA has a public API.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Angular &#43; ESRI = Not bad</title>
+      <link>https://blog.jimdhughes.com/posts/2019/angular-esri-not-bad/</link>
+      <pubDate>Fri, 06 Sep 2019 09:33:18 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2019/angular-esri-not-bad/</guid>
+      <description>&lt;p&gt;There&amp;rsquo;s no question that I&amp;rsquo;m an ng fanboy.&lt;/p&gt;
+&lt;p&gt;React&amp;rsquo;s willy nilly do whatever you want attitude doesn&amp;rsquo;t do much for me.&lt;/p&gt;
+&lt;p&gt;Vue is basically react. Let&amp;rsquo;s be serious.&lt;/p&gt;
+&lt;p&gt;I like the clear separation of my HTML, CSS, TS, and unit tests. That won&amp;rsquo;t ever go away.   Work has taken me into some new territories where I didn&amp;rsquo;t think I&amp;rsquo;d have as much fun as I am. That&amp;rsquo;s enough of my ranting about javascript frameworks. Let&amp;rsquo;s dive into the root of the article!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ArcGIS Upgrade Error 28809</title>
+      <link>https://blog.jimdhughes.com/posts/2019/arcgis-upgrade/</link>
+      <pubDate>Sat, 15 Jun 2019 00:45:00 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2019/arcgis-upgrade/</guid>
+      <description>&lt;p&gt;I was upgrading ArcGIS Server (10.6.1 -&amp;gt; 10.7) the other day&amp;hellip;&lt;/p&gt;
+&lt;p&gt;We encountered an issue with the account ArcGIS was using to run itself - the LocalSystem account. We don&amp;rsquo;t have passwords for it, so the installer would not let us proceed. We couldn&amp;rsquo;t change the user either which posed a bit of an issue so we decided to just cancel our install and proceed along our merry way.&lt;/p&gt;
+&lt;p&gt;So we turned our ArcGIS Server service back on and gave it a few minutes to spin back up however it never did! We hunted through our logs and didn&amp;rsquo;t see much to indicate what might have happened.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Benchmarking a pi calculation for fun</title>
+      <link>https://blog.jimdhughes.com/posts/2019/benchmarking-a-pi-calculation-for-fun/</link>
+      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2019/benchmarking-a-pi-calculation-for-fun/</guid>
+      <description>&lt;p&gt;Dotnet Core, Golang, Node, C, Java, Python.&lt;/p&gt;
+&lt;p&gt;This is what I felt like doing on a Tuesday night after seeing yet another article discussing the performance of dotnet core over node.js.  As is typical when things like these arise, our team&amp;rsquo;s slack channel went into the lightest of debates about C# vs Node, compiled speeds vs interpreted languages, and finally back to what we were originally discussing - &amp;ldquo;Do you think cypress would be faster than selenium?&amp;rdquo;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>IndexedDB &#43; React for Offline Storage</title>
+      <link>https://blog.jimdhughes.com/posts/2019/indexeddb-react/</link>
+      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2019/indexeddb-react/</guid>
+      <description>Building an app with React, IndexedDB, and a ridiculous amount of seed data</description>
+    </item>
+    <item>
+      <title>Brainteasers - they&#39;re important!</title>
+      <link>https://blog.jimdhughes.com/posts/2018/brainteasers-theyre-important/</link>
+      <pubDate>Tue, 13 Nov 2018 10:47:10 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/brainteasers-theyre-important/</guid>
+      <description>&lt;p&gt;48 days ago I signed up for &lt;a href=&#34;https://www.dailycodingproblem.com/&#34;&gt;https://www.dailycodingproblem.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I haven&amp;rsquo;t completed all 48 problems however the ones that I have completed, I&amp;rsquo;ve had a blast with.  It bring back a challenge that&amp;rsquo;s been missing - not that my work and personal life don&amp;rsquo;t have their own challenges.  It brings me back to basics and gets me thinking again on algorithm design and optimization of code.&lt;/p&gt;
+&lt;p&gt;Much of my development work (which is less and less these days) is done using a framework of some sort which puts a layer of &amp;lsquo;magic&amp;rsquo; on top of the coding experience.  I&amp;rsquo;ve actually recently gotten a little miffed at just how much &amp;lsquo;magic&amp;rsquo; is built into a toolset and have determined that too much &amp;lsquo;magic&amp;rsquo; is killing the next generation of developers - but that is a topic for a different day.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Go - Micro-services and Embedded Databases [Part 2]</title>
+      <link>https://blog.jimdhughes.com/posts/2018/go-micro-services-and-embedded-databases-part-2/</link>
+      <pubDate>Mon, 24 Sep 2018 09:51:32 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/go-micro-services-and-embedded-databases-part-2/</guid>
+      <description>&lt;p&gt;If you haven&amp;rsquo;t already, check out &lt;a href=&#34;https://blog.jimdhughes.com/go-micro-services-and-embedded-databases/&#34;&gt;Part 1&lt;/a&gt;[!]&lt;/p&gt;
+&lt;p&gt;First things first - let&amp;rsquo;s make these responses something machine readable instead of just some plain text! That&amp;rsquo;s a nice and easy way to dive back into the code!&lt;/p&gt;
+&lt;p&gt;We are going to create 2 new structs in the &lt;code&gt;router.go&lt;/code&gt; file to declare how the app is going to return Errors and Standard responses.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// ...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ApiErrorResponse&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#a6e22e&#34;&gt;Error&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;`json:&amp;#34;error&amp;#34;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ApiStandardResponse&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#a6e22e&#34;&gt;Payload&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt;{} &lt;span style=&#34;color:#e6db74&#34;&gt;`json:&amp;#34;payload&amp;#34;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This is menial, but it helps our responses have a bit more structure.  The first simply returns an error message as a string value. We will assume that our handlers will set the http response status accordingly.  The &lt;code&gt;ApiStandardResponse&lt;/code&gt; is pretty well the same except we have an &lt;code&gt;interface{}&lt;/code&gt; type on the payload.  This is so that we can return any type of data.   The response will be dependent on what is being returned by the handler.  Next let&amp;rsquo;s update our &lt;code&gt;WriteError&lt;/code&gt; function to use this new struct&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Go - Micro-services and Embedded Databases [Part 1]</title>
+      <link>https://blog.jimdhughes.com/posts/2018/go-micro-services-and-embedded-databases/</link>
+      <pubDate>Wed, 19 Sep 2018 06:30:15 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/go-micro-services-and-embedded-databases/</guid>
+      <description>&lt;p&gt;This is fun!&lt;/p&gt;
+&lt;p&gt;FYI - If you&amp;rsquo;re looking for Part 2, it&amp;rsquo;s &lt;a href=&#34;https://blog.jimdhughes.com/go-micro-services-and-embedded-databases-part-2/&#34;&gt;here&lt;/a&gt;[.]&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;I&amp;rsquo;ve been meaning to learn a few of the things I&amp;rsquo;m going to go over in this post. Firstly, I want to make an actual useful application using Go. I want it to be run as a microservice with it&amp;rsquo;s own database. Instead of putting it in a docker container, I want to just use an embedded database that the executable can use.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Fetching data with react</title>
+      <link>https://blog.jimdhughes.com/posts/2018/fetching-data-with-react/</link>
+      <pubDate>Wed, 29 Aug 2018 02:37:01 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/fetching-data-with-react/</guid>
+      <description>&lt;p&gt;What use is an app that can&amp;rsquo;t persist data?&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m continuing this from my previous post about my efforts to learn about react.  I want to be able to persist my data on a server and display it on a web client.  To my understanding, this should be pretty simple so I&amp;rsquo;m going to put that theory to the test.&lt;/p&gt;
+&lt;h1 id=&#34;firstly&#34;&gt;Firstly!&lt;/h1&gt;
+&lt;p&gt;We&amp;rsquo;re going to use a Node.js scaffold that I covered off in a previous posting as our backend for this app. It&amp;rsquo;s located &lt;a href=&#34;https://github.com/jimdhughes/jdhc-express-stateless-template&#34;&gt;here&lt;/a&gt; and requires you to have Node.js installed and access to a MongoDB Instance.  Follow the instructions in that repo to get up and running.  If you don&amp;rsquo;t want to use that one, you can set up your own REST service (or CouchDB instance?) and follow along with the concepts.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Learning React with create-react-app</title>
+      <link>https://blog.jimdhughes.com/posts/2018/learning-react-with-create-react-app/</link>
+      <pubDate>Fri, 17 Aug 2018 20:34:30 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/learning-react-with-create-react-app/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m an Angular kind of guy.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve built several front end applications using Angular 1.x and 2+.  I&amp;rsquo;ve built hybrid mobile apps using the Ionic Framework.  In this time, I seem to have just completely ignored the phenomenon that is React js.  There are so many frameworks that I&amp;rsquo;ve not even touched but if any of the job postings I&amp;rsquo;m seeing are an indication, the appetite for React and React Native developers is increasing rapidly.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Learning Go - Morse Code!</title>
+      <link>https://blog.jimdhughes.com/posts/2018/morse-code-in-go/</link>
+      <pubDate>Wed, 15 Aug 2018 02:52:19 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/morse-code-in-go/</guid>
+      <description>&lt;p&gt;I was watching Churchill&amp;rsquo;s secret agents on Netflix the other day&lt;/p&gt;
+&lt;p&gt;When all of a sudden I got a hit of nostalgia when they got to the portion on morse code.  Such an ingenious little method of communcation that I still, to this day, couldn&amp;rsquo;t follow for the life of me!
+I took a class on encryption and one of the first concepts they spoke of was morse code.  Taking language and transcribing it into a not-so-easy to decipher combination of beeps and blips to send messages over a wire.&lt;br&gt;
+Some other fun facts for those of you that haven&amp;rsquo;t taken any introductory encryption classes, morse code is designed very closely following a common english language frequency table.  That is, a table that determines the frequency at which a letter appears in the alphabet.  Letters that appear frequently are, in morse code, encoded using fewer and shorter . and -&amp;rsquo;s!
+I&amp;rsquo;ve added in a column to the table found at:
+&lt;a href=&#34;http://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html&#34;&gt;http://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html&lt;/a&gt;
+and put in the morse code equilvalent for a quick reference&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Async / Await in Node.js</title>
+      <link>https://blog.jimdhughes.com/posts/2018/async-await-in-node-js/</link>
+      <pubDate>Thu, 31 May 2018 01:35:29 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/async-await-in-node-js/</guid>
+      <description>&lt;p&gt;The Async / Await functionality introduced into Node.js in v7.10.0 is legitimately a godsend.  The Async / Await paradigm works with promises to do exactly what the paradigm implies.  It will asynchronously call the function and await it&amp;rsquo;s response before continuing on with the rest of the function. Previously, you could do this with promise chaining. Passing results from one promise to the next. Where this issue fell apart is when you needed to use the result of Promise 1 in Promise 4. You would need to somehow pass the result of Promise 1 through Promises 2 and 3 in order to use them in promise 4.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>My Concept2 Model D - Let&#39;s get after it!</title>
+      <link>https://blog.jimdhughes.com/posts/2018/my-concept2-model-d-lets-get-after-it/</link>
+      <pubDate>Wed, 23 May 2018 23:26:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/my-concept2-model-d-lets-get-after-it/</guid>
+      <description>&lt;p&gt;In February 2018, I received a service award from work and decided that I would use it to purchase a cardio machine of some sort for my basement gym.  I used to go the the gym at my work all the time but once I had a child and my wife returned back to work after mat leave, that option had fallen by the wayside real quick!&lt;/p&gt;
+&lt;p&gt;I applaud those who can get themselves out of bed after only four hours of sleep. However, my drive for that quickly waned as well.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Yet Another Stateless Authentication Blog Post for the MEAN stack.</title>
+      <link>https://blog.jimdhughes.com/posts/2018/yet-another-stateless-authentication-blog-post-for-the-mean-stack/</link>
+      <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/yet-another-stateless-authentication-blog-post-for-the-mean-stack/</guid>
+      <description>&lt;p&gt;#inb4: this ain&amp;rsquo;t new.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m writing this for everyone that wants a &lt;em&gt;slightly&lt;/em&gt; more organized approach to express middleware and authentication.  I&amp;rsquo;m writing this because once again I was inspired by how much I &lt;strong&gt;adore&lt;/strong&gt; Node, Express, and all the delights that come from being able to implement my API&amp;rsquo;s and leverage middlewares.  Also, I&amp;rsquo;m using async / await, which is pretty neat.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m going to use MongoDB as a datastore it just jives so well with Node.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Why your IT friends are always grumpy</title>
+      <link>https://blog.jimdhughes.com/posts/2018/why-your-it-friends-are-always-grumpy/</link>
+      <pubDate>Sat, 21 Apr 2018 01:28:28 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/why-your-it-friends-are-always-grumpy/</guid>
+      <description>&lt;p&gt;Humor me for a second here.&lt;/p&gt;
+&lt;p&gt;It might just be my company - but I doubt it.
+Watching VLOGs you see lots of developers that have some common traits:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Tired all the time&lt;/li&gt;
+&lt;li&gt;Sarcastic AF&lt;/li&gt;
+&lt;li&gt;Refusal to help you fix your PC at family dinners&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The meme&amp;rsquo;s are endless.
+&lt;img alt=&#34;It Works!&#34; loading=&#34;lazy&#34; src=&#34;https://i.imgur.com/RHpy3Ho.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Note: Google Images stopped letting me follow links here so I&amp;rsquo;ll have to revisit it. As if to prove the point of my post.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>I got my PMP! With other random thoughts.</title>
+      <link>https://blog.jimdhughes.com/posts/2018/i-got-my-pmp-with-other-random-thoughts/</link>
+      <pubDate>Tue, 27 Feb 2018 05:29:13 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/i-got-my-pmp-with-other-random-thoughts/</guid>
+      <description>&lt;p&gt;FINALLY!
+I&amp;rsquo;ve mentioned it in previous articles but I&amp;rsquo;ve finally done it.  I got my PMP.
+The whole process really highlighted a few personality traits that I&amp;rsquo;ve developed at recently in my life.  They&amp;rsquo;re essentially as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;I pursue so many things in an effort to claim that I&amp;rsquo;m too busy.&lt;/li&gt;
+&lt;li&gt;I hate.. &lt;strong&gt;hate&lt;/strong&gt; failing&lt;/li&gt;
+&lt;li&gt;I have too many ideas&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Since starting down my career path, I&amp;rsquo;ve made some massive changes to my demeanour. I used to be &lt;em&gt;very&lt;/em&gt; technical.  I wanted to be extremely proficient in &lt;em&gt;one&lt;/em&gt; thing.  I thought that this would be what sets me apart and what makes me indispensable.  I&amp;rsquo;m now about 7 years in and I&amp;rsquo;ve taken such a drastic turn that I had to look back hard to determine where it happened and why.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>&lt;Thoughts&gt; Print vs Media - Hoof</title>
+      <link>https://blog.jimdhughes.com/posts/2018/thought-how-im-anti-tech/</link>
+      <pubDate>Thu, 01 Feb 2018 00:15:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/thought-how-im-anti-tech/</guid>
+      <description>&lt;p&gt;TLDR;
+I learned to memorize by reading and writing paper content
+I learned to look up using digital content.
+I find myself continually using indexing and ctrl-f to find information in digital content whereas I actually read and commit to memory when I read physical text and write physical notes.&lt;/p&gt;
+&lt;p&gt;Lessons I learned once and apparently have forgotten since&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Yep. Awkward, right?&lt;/p&gt;
+&lt;p&gt;Hear me out.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m studying for my PMP exam (finally) and up until now I&amp;rsquo;ve been using PDF&amp;rsquo;s and the like to read and jot down notes.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>&lt;Thoughts&gt; Keeping Myself Organized</title>
+      <link>https://blog.jimdhughes.com/posts/2018/thoughts-keeping-myself-organized/</link>
+      <pubDate>Fri, 12 Jan 2018 02:11:57 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/thoughts-keeping-myself-organized/</guid>
+      <description>&lt;h1 id=&#34;my-most-productive-months-through-2017&#34;&gt;My most productive months through 2017&lt;/h1&gt;
+&lt;p&gt;Were from about July through to the middle of December.  As I sit here in my office I wonder what happened?
+I&amp;rsquo;ve gone from completing &lt;em&gt;real&lt;/em&gt; &lt;strong&gt;actionable&lt;/strong&gt; items daily to feeling like I&amp;rsquo;m just spinning my tires again, but I&amp;rsquo;m definitely not. Since my first day back to work of 2018, I&amp;rsquo;ve successfully:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Implemented a prototype for a potential new internal project
+&lt;ul&gt;
+&lt;li&gt;Furthermore I&amp;rsquo;ve had 1 sit-down meeting to demo the application sprints and 3 meaningful conversations around alignment of the processes we&amp;rsquo;re looking to automate.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Developed a mind map for implementing some new corporate infrastructure and initiated conversation with my company&amp;rsquo;s operations team
+&lt;ul&gt;
+&lt;li&gt;With a fair bit of background fact-finding which date back to December of last year to be fair&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Consolidated 10 years of data from excel workbooks to transcribe into a newly developed application&amp;rsquo;s database (specifically for the first bullet point)&lt;/li&gt;
+&lt;li&gt;Submitted the paperwork to sit for my &lt;a href=&#34;http://pmi.org&#34;&gt;PMP&lt;/a&gt; examination&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;That&amp;rsquo;s a pretty good amount of work for 10 days back at it I think? So why do I feel like I&amp;rsquo;m not actually accomplishing anything?&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>A Huzzah to Millennials killing everything - By a Millennial</title>
+      <link>https://blog.jimdhughes.com/posts/2017/a-huzzah-to-millennials-killing-everything-by-a-millennial/</link>
+      <pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2017/a-huzzah-to-millennials-killing-everything-by-a-millennial/</guid>
+      <description>&lt;p&gt;I had an article pushed to me by LinkedIn from Business Insider titled:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;lsquo;Psychologically scarred&amp;rsquo; millennials are killing countless industries from napkins to Applebee&amp;rsquo;s — here are the businesses they like the least&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I wanted to go through their list and put a bit of dialogue around a Canadian&amp;rsquo;s perspective on all these alleged failures. (Yep, Dialogue. We have French in our English). You can see the original article &lt;a href=&#34;http://www.businessinsider.com/millennials-are-killing-list-2017-8/#casual-dining-chains-like-buffalo-wild-wings-and-applebees-1&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;1-casual-dining-chains&#34;&gt;1. Casual Dining Chains&lt;/h2&gt;
+&lt;p&gt;The article references Applebee&amp;rsquo;s. I&amp;rsquo;ve personally &lt;em&gt;never&lt;/em&gt; been to Applebee&amp;rsquo;s so I&amp;rsquo;m going to reference a chain that I used to go to all the time - Boston Pizza.
+For me to get a Bandera Pizza Bread at Boston Pizza, I can expect to pay $11.50 for Bandera Pizza Bread - a delightful treat.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>My Dive into Neo4j - and my PMP</title>
+      <link>https://blog.jimdhughes.com/posts/2017/my-dive-into-neo4j-and-my-pmp/</link>
+      <pubDate>Fri, 26 May 2017 01:27:28 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2017/my-dive-into-neo4j-and-my-pmp/</guid>
+      <description>&lt;p&gt;Man,
+I need to get my life figured out!&lt;/p&gt;
+&lt;p&gt;I spend so much of my free time diving into new technology that I&amp;rsquo;m just waiting for my wife to pull the pin.  Sorry dearest! The nerdom never dies!&lt;/p&gt;
+&lt;p&gt;I just finished my application for my PMP exam (Project Management Professional - shameless self plug) and it was accepted. So once I scrounge up some dough I&amp;rsquo;ll be paying to take the test and then we are off to the races! Goal reached.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Windows, NodeJS, and node-gyp. The Battle and the Conquest</title>
+      <link>https://blog.jimdhughes.com/posts/2015/perils-with-node-gyp-and-windows-development/</link>
+      <pubDate>Fri, 10 Apr 2015 05:04:49 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2015/perils-with-node-gyp-and-windows-development/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Update!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;It has been brought to my attention that there is a another way to fix this solution that seems a bit simpler than my original approach.
+See the comments from Cees Timmerman and Mark Pinder in the comments.&lt;/p&gt;
+&lt;p&gt;Step 1: Install Visual Studio community edition (2015 seems to be tried, tested and true). Ensure that you do a &lt;em&gt;custom&lt;/em&gt; install and include the &lt;strong&gt;C++&lt;/strong&gt; components.&lt;/p&gt;
+&lt;p&gt;Step 2: rebuild node-gyp using the following:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Installing Node without Sudo - Ubuntu 14.04 LTS</title>
+      <link>https://blog.jimdhughes.com/posts/2015/installing-node-without-sudo/</link>
+      <pubDate>Wed, 08 Apr 2015 03:42:01 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2015/installing-node-without-sudo/</guid>
+      <description>&lt;p&gt;If you&amp;rsquo;re unlike me and really don&amp;rsquo;t care about superuser permissions or having the most up-to-date releases, you can just do the regular old naive thing and use the package manager&amp;hellip;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get update &amp;amp;&amp;amp; sudo apt-get install nodejs
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;However since you&amp;rsquo;re here, I&amp;rsquo;m betting this doesn&amp;rsquo;t jive with you.&lt;/p&gt;
+&lt;p&gt;The idea of having to give checked out source code from the npm repository super user access makes me quite uncomfortable. I mean, all it&amp;rsquo;s going to do is sit on a virtual machine that will remain dormant long after I complete an awesome a-snychronous ToDo application and feel like a boss. It&amp;rsquo;s the principal of the matter!&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

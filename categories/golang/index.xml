@@ -1,10 +1,80 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>golang on James Hughes</title><link>/categories/golang/</link><description>Recent content in golang on James Hughes</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>©2020 James Hughes.</copyright><lastBuildDate>Wed, 01 Jul 2020 09:02:12 -0600</lastBuildDate><atom:link href="/categories/golang/index.xml" rel="self" type="application/rss+xml"/><item><title>Migrating my Blog from Ghost to Hugo</title><link>/migrating-my-blog-from-ghost-to-hugo/</link><pubDate>Wed, 01 Jul 2020 09:02:12 -0600</pubDate><guid>/migrating-my-blog-from-ghost-to-hugo/</guid><description>The Story Like any hipster developer, I got caught up hard in the node.js craze circa 2015 and when go started gaining traction, heck I jumped over there too. I first started my blog in an attempt to &amp;lsquo;practice what I preach&amp;rsquo; to my peers and young minds that I was hoping to help mould for the best. I think that every developer should have their own blog. Not in a vain attempt to get clicks or ad revenue, but to keep a log of that tough-to-diagnose error that they tried for weeks to diagnose and fix.</description></item><item><title>Benchmarking a pi calculation for fun</title><link>/benchmarking-a-pi-calculation-for-fun/</link><pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate><guid>/benchmarking-a-pi-calculation-for-fun/</guid><description>Dotnet Core, Golang, Node, C, Java, Python.
-This is what I felt like doing on a Tuesday night after seeing yet another article discussing the performance of dotnet core over node.js. As is typical when things like these arise, our team&amp;rsquo;s slack channel went into the lightest of debates about C# vs Node, compiled speeds vs interpreted languages, and finally back to what we were originally discussing - &amp;ldquo;Do you think cypress would be faster than selenium?</description></item><item><title>Brainteasers - they're important!</title><link>/brainteasers-theyre-important/</link><pubDate>Tue, 13 Nov 2018 10:47:10 +0000</pubDate><guid>/brainteasers-theyre-important/</guid><description>48 days ago I signed up for https://www.dailycodingproblem.com/
-I haven&amp;rsquo;t completed all 48 problems however the ones that I have completed, I&amp;rsquo;ve had a blast with. It bring back a challenge that&amp;rsquo;s been missing - not that my work and personal life don&amp;rsquo;t have their own challenges. It brings me back to basics and gets me thinking again on algorithm design and optimization of code.
-Much of my development work (which is less and less these days) is done using a framework of some sort which puts a layer of &amp;lsquo;magic&amp;rsquo; on top of the coding experience.</description></item><item><title>Go - Micro-services and Embedded Databases [Part 2]</title><link>/go-micro-services-and-embedded-databases-part-2/</link><pubDate>Mon, 24 Sep 2018 09:51:32 +0000</pubDate><guid>/go-micro-services-and-embedded-databases-part-2/</guid><description>If you haven&amp;rsquo;t already, check out Part 1[!]
-First things first - let&amp;rsquo;s make these responses something machine readable instead of just some plain text! That&amp;rsquo;s a nice and easy way to dive back into the code!
-We are going to create 2 new structs in the router.go file to declare how the app is going to return Errors and Standard responses.
-package main // ... type ApiErrorResponse struct { Error string `json:&amp;#34;error&amp;#34;` } type ApiStandardResponse struct { Payload interface{} `json:&amp;#34;payload&amp;#34;` } This is menial, but it helps our responses have a bit more structure.</description></item><item><title>Go - Micro-services and Embedded Databases [Part 1]</title><link>/go-micro-services-and-embedded-databases/</link><pubDate>Wed, 19 Sep 2018 06:30:15 +0000</pubDate><guid>/go-micro-services-and-embedded-databases/</guid><description>This is fun!
-FYI - If you&amp;rsquo;re looking for Part 2, it&amp;rsquo;s here[.]
-I&amp;rsquo;ve been meaning to learn a few of the things I&amp;rsquo;m going to go over in this post. Firstly, I want to make an actual useful application using Go. I want it to be run as a microservice with it&amp;rsquo;s own database. Instead of putting it in a docker container, I want to just use an embedded database that the executable can use.</description></item><item><title>Learning Go - Morse Code!</title><link>/morse-code-in-go/</link><pubDate>Wed, 15 Aug 2018 02:52:19 +0000</pubDate><guid>/morse-code-in-go/</guid><description>I was watching Churchill&amp;rsquo;s secret agents on Netflix the other day
-When all of a sudden I got a hit of nostalgia when they got to the portion on morse code. Such an ingenious little method of communcation that I still, to this day, couldn&amp;rsquo;t follow for the life of me! I took a class on encryption and one of the first concepts they spoke of was morse code. Taking language and transcribing it into a not-so-easy to decipher combination of beeps and blips to send messages over a wire.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Golang on James Hughes</title>
+    <link>https://blog.jimdhughes.com/categories/golang/</link>
+    <description>Recent content in Golang on James Hughes</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 01 Jul 2020 09:02:12 -0600</lastBuildDate>
+    <atom:link href="https://blog.jimdhughes.com/categories/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Migrating my Blog from Ghost to Hugo</title>
+      <link>https://blog.jimdhughes.com/posts/2020/migrating-my-blog-from-ghost-to-hugo/</link>
+      <pubDate>Wed, 01 Jul 2020 09:02:12 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2020/migrating-my-blog-from-ghost-to-hugo/</guid>
+      <description>For Canada Day, I decided to migrate my blog from Ghost to Hugo. I have sort-of reasons that I&amp;#39;ll discuss here but ultimately, I was just bored of my current setup and figured I could save a few bucks a month in hosting fees by using github to host my static content.</description>
+    </item>
+    <item>
+      <title>Benchmarking a pi calculation for fun</title>
+      <link>https://blog.jimdhughes.com/posts/2019/benchmarking-a-pi-calculation-for-fun/</link>
+      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2019/benchmarking-a-pi-calculation-for-fun/</guid>
+      <description>&lt;p&gt;Dotnet Core, Golang, Node, C, Java, Python.&lt;/p&gt;
+&lt;p&gt;This is what I felt like doing on a Tuesday night after seeing yet another article discussing the performance of dotnet core over node.js.  As is typical when things like these arise, our team&amp;rsquo;s slack channel went into the lightest of debates about C# vs Node, compiled speeds vs interpreted languages, and finally back to what we were originally discussing - &amp;ldquo;Do you think cypress would be faster than selenium?&amp;rdquo;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Brainteasers - they&#39;re important!</title>
+      <link>https://blog.jimdhughes.com/posts/2018/brainteasers-theyre-important/</link>
+      <pubDate>Tue, 13 Nov 2018 10:47:10 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/brainteasers-theyre-important/</guid>
+      <description>&lt;p&gt;48 days ago I signed up for &lt;a href=&#34;https://www.dailycodingproblem.com/&#34;&gt;https://www.dailycodingproblem.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I haven&amp;rsquo;t completed all 48 problems however the ones that I have completed, I&amp;rsquo;ve had a blast with.  It bring back a challenge that&amp;rsquo;s been missing - not that my work and personal life don&amp;rsquo;t have their own challenges.  It brings me back to basics and gets me thinking again on algorithm design and optimization of code.&lt;/p&gt;
+&lt;p&gt;Much of my development work (which is less and less these days) is done using a framework of some sort which puts a layer of &amp;lsquo;magic&amp;rsquo; on top of the coding experience.  I&amp;rsquo;ve actually recently gotten a little miffed at just how much &amp;lsquo;magic&amp;rsquo; is built into a toolset and have determined that too much &amp;lsquo;magic&amp;rsquo; is killing the next generation of developers - but that is a topic for a different day.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Go - Micro-services and Embedded Databases [Part 2]</title>
+      <link>https://blog.jimdhughes.com/posts/2018/go-micro-services-and-embedded-databases-part-2/</link>
+      <pubDate>Mon, 24 Sep 2018 09:51:32 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/go-micro-services-and-embedded-databases-part-2/</guid>
+      <description>&lt;p&gt;If you haven&amp;rsquo;t already, check out &lt;a href=&#34;https://blog.jimdhughes.com/go-micro-services-and-embedded-databases/&#34;&gt;Part 1&lt;/a&gt;[!]&lt;/p&gt;
+&lt;p&gt;First things first - let&amp;rsquo;s make these responses something machine readable instead of just some plain text! That&amp;rsquo;s a nice and easy way to dive back into the code!&lt;/p&gt;
+&lt;p&gt;We are going to create 2 new structs in the &lt;code&gt;router.go&lt;/code&gt; file to declare how the app is going to return Errors and Standard responses.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// ...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ApiErrorResponse&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#a6e22e&#34;&gt;Error&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;`json:&amp;#34;error&amp;#34;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ApiStandardResponse&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#a6e22e&#34;&gt;Payload&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt;{} &lt;span style=&#34;color:#e6db74&#34;&gt;`json:&amp;#34;payload&amp;#34;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This is menial, but it helps our responses have a bit more structure.  The first simply returns an error message as a string value. We will assume that our handlers will set the http response status accordingly.  The &lt;code&gt;ApiStandardResponse&lt;/code&gt; is pretty well the same except we have an &lt;code&gt;interface{}&lt;/code&gt; type on the payload.  This is so that we can return any type of data.   The response will be dependent on what is being returned by the handler.  Next let&amp;rsquo;s update our &lt;code&gt;WriteError&lt;/code&gt; function to use this new struct&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Go - Micro-services and Embedded Databases [Part 1]</title>
+      <link>https://blog.jimdhughes.com/posts/2018/go-micro-services-and-embedded-databases/</link>
+      <pubDate>Wed, 19 Sep 2018 06:30:15 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/go-micro-services-and-embedded-databases/</guid>
+      <description>&lt;p&gt;This is fun!&lt;/p&gt;
+&lt;p&gt;FYI - If you&amp;rsquo;re looking for Part 2, it&amp;rsquo;s &lt;a href=&#34;https://blog.jimdhughes.com/go-micro-services-and-embedded-databases-part-2/&#34;&gt;here&lt;/a&gt;[.]&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;I&amp;rsquo;ve been meaning to learn a few of the things I&amp;rsquo;m going to go over in this post. Firstly, I want to make an actual useful application using Go. I want it to be run as a microservice with it&amp;rsquo;s own database. Instead of putting it in a docker container, I want to just use an embedded database that the executable can use.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Learning Go - Morse Code!</title>
+      <link>https://blog.jimdhughes.com/posts/2018/morse-code-in-go/</link>
+      <pubDate>Wed, 15 Aug 2018 02:52:19 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/morse-code-in-go/</guid>
+      <description>&lt;p&gt;I was watching Churchill&amp;rsquo;s secret agents on Netflix the other day&lt;/p&gt;
+&lt;p&gt;When all of a sudden I got a hit of nostalgia when they got to the portion on morse code.  Such an ingenious little method of communcation that I still, to this day, couldn&amp;rsquo;t follow for the life of me!
+I took a class on encryption and one of the first concepts they spoke of was morse code.  Taking language and transcribing it into a not-so-easy to decipher combination of beeps and blips to send messages over a wire.&lt;br&gt;
+Some other fun facts for those of you that haven&amp;rsquo;t taken any introductory encryption classes, morse code is designed very closely following a common english language frequency table.  That is, a table that determines the frequency at which a letter appears in the alphabet.  Letters that appear frequently are, in morse code, encoded using fewer and shorter . and -&amp;rsquo;s!
+I&amp;rsquo;ve added in a column to the table found at:
+&lt;a href=&#34;http://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html&#34;&gt;http://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html&lt;/a&gt;
+and put in the morse code equilvalent for a quick reference&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

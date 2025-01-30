@@ -1,1 +1,446 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Tags on James Hughes</title><link>/tags/</link><description>Recent content in Tags on James Hughes</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>©2020 James Hughes.</copyright><lastBuildDate>Tue, 06 Apr 2021 19:37:25 -0600</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml"/><item><title>fix-it</title><link>/tags/fix-it/</link><pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate><guid>/tags/fix-it/</guid><description/></item><item><title>home</title><link>/tags/home/</link><pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate><guid>/tags/home/</guid><description/></item><item><title>leak</title><link>/tags/leak/</link><pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate><guid>/tags/leak/</guid><description/></item><item><title>renovations</title><link>/tags/renovations/</link><pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate><guid>/tags/renovations/</guid><description/></item><item><title>roof</title><link>/tags/roof/</link><pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate><guid>/tags/roof/</guid><description/></item><item><title>Docker</title><link>/tags/docker/</link><pubDate>Fri, 31 Jul 2020 23:29:42 -0600</pubDate><guid>/tags/docker/</guid><description/></item><item><title>Seq</title><link>/tags/seq/</link><pubDate>Fri, 31 Jul 2020 23:29:42 -0600</pubDate><guid>/tags/seq/</guid><description/></item><item><title>Ghost</title><link>/tags/ghost/</link><pubDate>Wed, 01 Jul 2020 09:02:12 -0600</pubDate><guid>/tags/ghost/</guid><description/></item><item><title>Github Pages</title><link>/tags/github-pages/</link><pubDate>Wed, 01 Jul 2020 09:02:12 -0600</pubDate><guid>/tags/github-pages/</guid><description/></item><item><title>Hugo</title><link>/tags/hugo/</link><pubDate>Wed, 01 Jul 2020 09:02:12 -0600</pubDate><guid>/tags/hugo/</guid><description/></item><item><title>ArcGIS</title><link>/tags/arcgis/</link><pubDate>Sat, 15 Jun 2019 00:45:00 +0000</pubDate><guid>/tags/arcgis/</guid><description/></item><item><title>algorithms</title><link>/tags/algorithms/</link><pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate><guid>/tags/algorithms/</guid><description/></item><item><title>c</title><link>/tags/c/</link><pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate><guid>/tags/c/</guid><description/></item><item><title>golang</title><link>/tags/golang/</link><pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate><guid>/tags/golang/</guid><description/></item><item><title>java</title><link>/tags/java/</link><pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate><guid>/tags/java/</guid><description/></item><item><title>nodejs</title><link>/tags/nodejs/</link><pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate><guid>/tags/nodejs/</guid><description/></item><item><title>pi</title><link>/tags/pi/</link><pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate><guid>/tags/pi/</guid><description/></item><item><title>programming</title><link>/tags/programming/</link><pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate><guid>/tags/programming/</guid><description/></item><item><title>python</title><link>/tags/python/</link><pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate><guid>/tags/python/</guid><description/></item><item><title>Database</title><link>/tags/database/</link><pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate><guid>/tags/database/</guid><description/></item><item><title>idb</title><link>/tags/idb/</link><pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate><guid>/tags/idb/</guid><description/></item><item><title>IndexedDB</title><link>/tags/indexeddb/</link><pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate><guid>/tags/indexeddb/</guid><description/></item><item><title>JavaScript</title><link>/tags/javascript/</link><pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate><guid>/tags/javascript/</guid><description/></item><item><title>Offline Storage</title><link>/tags/offline-storage/</link><pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate><guid>/tags/offline-storage/</guid><description/></item><item><title>ReactJS</title><link>/tags/reactjs/</link><pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate><guid>/tags/reactjs/</guid><description/></item><item><title>async/await</title><link>/tags/async/await/</link><pubDate>Thu, 31 May 2018 01:35:29 +0000</pubDate><guid>/tags/async/await/</guid><description/></item><item><title>asynchronous</title><link>/tags/asynchronous/</link><pubDate>Thu, 31 May 2018 01:35:29 +0000</pubDate><guid>/tags/asynchronous/</guid><description/></item><item><title>Concept2</title><link>/tags/concept2/</link><pubDate>Wed, 23 May 2018 23:26:35 +0000</pubDate><guid>/tags/concept2/</guid><description/></item><item><title>Data</title><link>/tags/data/</link><pubDate>Wed, 23 May 2018 23:26:35 +0000</pubDate><guid>/tags/data/</guid><description/></item><item><title>Fitness</title><link>/tags/fitness/</link><pubDate>Wed, 23 May 2018 23:26:35 +0000</pubDate><guid>/tags/fitness/</guid><description/></item><item><title>PM5</title><link>/tags/pm5/</link><pubDate>Wed, 23 May 2018 23:26:35 +0000</pubDate><guid>/tags/pm5/</guid><description/></item><item><title>async</title><link>/tags/async/</link><pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate><guid>/tags/async/</guid><description/></item><item><title>development</title><link>/tags/development/</link><pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate><guid>/tags/development/</guid><description/></item><item><title>ExpressJS</title><link>/tags/expressjs/</link><pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate><guid>/tags/expressjs/</guid><description/></item><item><title>JWT</title><link>/tags/jwt/</link><pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate><guid>/tags/jwt/</guid><description/></item><item><title>Middleware</title><link>/tags/middleware/</link><pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate><guid>/tags/middleware/</guid><description/></item><item><title>MongoDB</title><link>/tags/mongodb/</link><pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate><guid>/tags/mongodb/</guid><description/></item><item><title>REST</title><link>/tags/rest/</link><pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate><guid>/tags/rest/</guid><description/></item><item><title>Leadership</title><link>/tags/leadership/</link><pubDate>Tue, 27 Feb 2018 05:29:13 +0000</pubDate><guid>/tags/leadership/</guid><description/></item><item><title>thoughts</title><link>/tags/thoughts/</link><pubDate>Tue, 27 Feb 2018 05:29:13 +0000</pubDate><guid>/tags/thoughts/</guid><description/></item><item><title>worklife</title><link>/tags/worklife/</link><pubDate>Tue, 27 Feb 2018 05:29:13 +0000</pubDate><guid>/tags/worklife/</guid><description/></item><item><title>technology</title><link>/tags/technology/</link><pubDate>Thu, 01 Feb 2018 00:15:35 +0000</pubDate><guid>/tags/technology/</guid><description/></item><item><title>organization</title><link>/tags/organization/</link><pubDate>Fri, 12 Jan 2018 02:11:57 +0000</pubDate><guid>/tags/organization/</guid><description/></item><item><title>productivity</title><link>/tags/productivity/</link><pubDate>Fri, 12 Jan 2018 02:11:57 +0000</pubDate><guid>/tags/productivity/</guid><description/></item><item><title>Cable</title><link>/tags/cable/</link><pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate><guid>/tags/cable/</guid><description/></item><item><title>CellPhones</title><link>/tags/cellphones/</link><pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate><guid>/tags/cellphones/</guid><description/></item><item><title>CordCutting</title><link>/tags/cordcutting/</link><pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate><guid>/tags/cordcutting/</guid><description/></item><item><title>Millennial</title><link>/tags/millennial/</link><pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate><guid>/tags/millennial/</guid><description/></item><item><title>Value!!@!</title><link>/tags/value/</link><pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate><guid>/tags/value/</guid><description/></item><item><title>DataPorn</title><link>/tags/dataporn/</link><pubDate>Fri, 26 May 2017 01:27:28 +0000</pubDate><guid>/tags/dataporn/</guid><description/></item><item><title>GraphDB</title><link>/tags/graphdb/</link><pubDate>Fri, 26 May 2017 01:27:28 +0000</pubDate><guid>/tags/graphdb/</guid><description/></item><item><title>neo4j</title><link>/tags/neo4j/</link><pubDate>Fri, 26 May 2017 01:27:28 +0000</pubDate><guid>/tags/neo4j/</guid><description/></item><item><title>PMBoK</title><link>/tags/pmbok/</link><pubDate>Fri, 26 May 2017 01:27:28 +0000</pubDate><guid>/tags/pmbok/</guid><description/></item><item><title>PMI</title><link>/tags/pmi/</link><pubDate>Fri, 26 May 2017 01:27:28 +0000</pubDate><guid>/tags/pmi/</guid><description/></item><item><title>PMP</title><link>/tags/pmp/</link><pubDate>Fri, 26 May 2017 01:27:28 +0000</pubDate><guid>/tags/pmp/</guid><description/></item><item><title>javaonnode</title><link>/tags/javaonnode/</link><pubDate>Fri, 10 Apr 2015 05:04:49 +0000</pubDate><guid>/tags/javaonnode/</guid><description/></item><item><title>node-gyp</title><link>/tags/node-gyp/</link><pubDate>Fri, 10 Apr 2015 05:04:49 +0000</pubDate><guid>/tags/node-gyp/</guid><description/></item><item><title>Node.js</title><link>/tags/node.js/</link><pubDate>Fri, 10 Apr 2015 05:04:49 +0000</pubDate><guid>/tags/node.js/</guid><description/></item><item><title>npm</title><link>/tags/npm/</link><pubDate>Fri, 10 Apr 2015 05:04:49 +0000</pubDate><guid>/tags/npm/</guid><description/></item><item><title>Windows-sdk</title><link>/tags/windows-sdk/</link><pubDate>Fri, 10 Apr 2015 05:04:49 +0000</pubDate><guid>/tags/windows-sdk/</guid><description/></item><item><title>tutorial</title><link>/tags/tutorial/</link><pubDate>Wed, 08 Apr 2015 03:42:01 +0000</pubDate><guid>/tags/tutorial/</guid><description/></item><item><title>ubuntu</title><link>/tags/ubuntu/</link><pubDate>Wed, 08 Apr 2015 03:42:01 +0000</pubDate><guid>/tags/ubuntu/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on James Hughes</title>
+    <link>https://blog.jimdhughes.com/tags/</link>
+    <description>Recent content in Tags on James Hughes</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 06 Apr 2021 19:37:25 -0600</lastBuildDate>
+    <atom:link href="https://blog.jimdhughes.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fix-It</title>
+      <link>https://blog.jimdhughes.com/tags/fix-it/</link>
+      <pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/fix-it/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Home</title>
+      <link>https://blog.jimdhughes.com/tags/home/</link>
+      <pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/home/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Leak</title>
+      <link>https://blog.jimdhughes.com/tags/leak/</link>
+      <pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/leak/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Renovations</title>
+      <link>https://blog.jimdhughes.com/tags/renovations/</link>
+      <pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/renovations/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Roof</title>
+      <link>https://blog.jimdhughes.com/tags/roof/</link>
+      <pubDate>Tue, 06 Apr 2021 19:37:25 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/roof/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Docker</title>
+      <link>https://blog.jimdhughes.com/tags/docker/</link>
+      <pubDate>Fri, 31 Jul 2020 23:29:42 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/docker/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Seq</title>
+      <link>https://blog.jimdhughes.com/tags/seq/</link>
+      <pubDate>Fri, 31 Jul 2020 23:29:42 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/seq/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ghost</title>
+      <link>https://blog.jimdhughes.com/tags/ghost/</link>
+      <pubDate>Wed, 01 Jul 2020 09:02:12 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/ghost/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Github Pages</title>
+      <link>https://blog.jimdhughes.com/tags/github-pages/</link>
+      <pubDate>Wed, 01 Jul 2020 09:02:12 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/github-pages/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hugo</title>
+      <link>https://blog.jimdhughes.com/tags/hugo/</link>
+      <pubDate>Wed, 01 Jul 2020 09:02:12 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/hugo/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ArcGIS</title>
+      <link>https://blog.jimdhughes.com/tags/arcgis/</link>
+      <pubDate>Sat, 15 Jun 2019 00:45:00 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/arcgis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Algorithms</title>
+      <link>https://blog.jimdhughes.com/tags/algorithms/</link>
+      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/algorithms/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>C</title>
+      <link>https://blog.jimdhughes.com/tags/c/</link>
+      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/c/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Golang</title>
+      <link>https://blog.jimdhughes.com/tags/golang/</link>
+      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/golang/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Java</title>
+      <link>https://blog.jimdhughes.com/tags/java/</link>
+      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/java/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Nodejs</title>
+      <link>https://blog.jimdhughes.com/tags/nodejs/</link>
+      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/nodejs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Pi</title>
+      <link>https://blog.jimdhughes.com/tags/pi/</link>
+      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/pi/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Programming</title>
+      <link>https://blog.jimdhughes.com/tags/programming/</link>
+      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/programming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>https://blog.jimdhughes.com/tags/python/</link>
+      <pubDate>Wed, 22 May 2019 09:51:39 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Database</title>
+      <link>https://blog.jimdhughes.com/tags/database/</link>
+      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/database/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Idb</title>
+      <link>https://blog.jimdhughes.com/tags/idb/</link>
+      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/idb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>IndexedDB</title>
+      <link>https://blog.jimdhughes.com/tags/indexeddb/</link>
+      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/indexeddb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>JavaScript</title>
+      <link>https://blog.jimdhughes.com/tags/javascript/</link>
+      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/javascript/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Offline Storage</title>
+      <link>https://blog.jimdhughes.com/tags/offline-storage/</link>
+      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/offline-storage/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ReactJS</title>
+      <link>https://blog.jimdhughes.com/tags/reactjs/</link>
+      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/reactjs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Async</title>
+      <link>https://blog.jimdhughes.com/tags/async/</link>
+      <pubDate>Thu, 31 May 2018 01:35:29 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/async/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Async/Await</title>
+      <link>https://blog.jimdhughes.com/tags/async/await/</link>
+      <pubDate>Thu, 31 May 2018 01:35:29 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/async/await/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Asynchronous</title>
+      <link>https://blog.jimdhughes.com/tags/asynchronous/</link>
+      <pubDate>Thu, 31 May 2018 01:35:29 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/asynchronous/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Concept2</title>
+      <link>https://blog.jimdhughes.com/tags/concept2/</link>
+      <pubDate>Wed, 23 May 2018 23:26:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/concept2/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Data</title>
+      <link>https://blog.jimdhughes.com/tags/data/</link>
+      <pubDate>Wed, 23 May 2018 23:26:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/data/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Fitness</title>
+      <link>https://blog.jimdhughes.com/tags/fitness/</link>
+      <pubDate>Wed, 23 May 2018 23:26:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/fitness/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>PM5</title>
+      <link>https://blog.jimdhughes.com/tags/pm5/</link>
+      <pubDate>Wed, 23 May 2018 23:26:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/pm5/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Development</title>
+      <link>https://blog.jimdhughes.com/tags/development/</link>
+      <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/development/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ExpressJS</title>
+      <link>https://blog.jimdhughes.com/tags/expressjs/</link>
+      <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/expressjs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>JWT</title>
+      <link>https://blog.jimdhughes.com/tags/jwt/</link>
+      <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/jwt/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Middleware</title>
+      <link>https://blog.jimdhughes.com/tags/middleware/</link>
+      <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/middleware/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MongoDB</title>
+      <link>https://blog.jimdhughes.com/tags/mongodb/</link>
+      <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/mongodb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>REST</title>
+      <link>https://blog.jimdhughes.com/tags/rest/</link>
+      <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/rest/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Leadership</title>
+      <link>https://blog.jimdhughes.com/tags/leadership/</link>
+      <pubDate>Tue, 27 Feb 2018 05:29:13 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/leadership/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Thoughts</title>
+      <link>https://blog.jimdhughes.com/tags/thoughts/</link>
+      <pubDate>Tue, 27 Feb 2018 05:29:13 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/thoughts/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Worklife</title>
+      <link>https://blog.jimdhughes.com/tags/worklife/</link>
+      <pubDate>Tue, 27 Feb 2018 05:29:13 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/worklife/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Technology</title>
+      <link>https://blog.jimdhughes.com/tags/technology/</link>
+      <pubDate>Thu, 01 Feb 2018 00:15:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/technology/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Organization</title>
+      <link>https://blog.jimdhughes.com/tags/organization/</link>
+      <pubDate>Fri, 12 Jan 2018 02:11:57 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/organization/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Productivity</title>
+      <link>https://blog.jimdhughes.com/tags/productivity/</link>
+      <pubDate>Fri, 12 Jan 2018 02:11:57 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/productivity/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cable</title>
+      <link>https://blog.jimdhughes.com/tags/cable/</link>
+      <pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/cable/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CellPhones</title>
+      <link>https://blog.jimdhughes.com/tags/cellphones/</link>
+      <pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/cellphones/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CordCutting</title>
+      <link>https://blog.jimdhughes.com/tags/cordcutting/</link>
+      <pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/cordcutting/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Millennial</title>
+      <link>https://blog.jimdhughes.com/tags/millennial/</link>
+      <pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/millennial/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Value!!@!</title>
+      <link>https://blog.jimdhughes.com/tags/value@/</link>
+      <pubDate>Tue, 22 Aug 2017 21:44:14 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/value@/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DataPorn</title>
+      <link>https://blog.jimdhughes.com/tags/dataporn/</link>
+      <pubDate>Fri, 26 May 2017 01:27:28 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/dataporn/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GraphDB</title>
+      <link>https://blog.jimdhughes.com/tags/graphdb/</link>
+      <pubDate>Fri, 26 May 2017 01:27:28 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/graphdb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Neo4j</title>
+      <link>https://blog.jimdhughes.com/tags/neo4j/</link>
+      <pubDate>Fri, 26 May 2017 01:27:28 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/neo4j/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>PMBoK</title>
+      <link>https://blog.jimdhughes.com/tags/pmbok/</link>
+      <pubDate>Fri, 26 May 2017 01:27:28 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/pmbok/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>PMI</title>
+      <link>https://blog.jimdhughes.com/tags/pmi/</link>
+      <pubDate>Fri, 26 May 2017 01:27:28 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/pmi/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>PMP</title>
+      <link>https://blog.jimdhughes.com/tags/pmp/</link>
+      <pubDate>Fri, 26 May 2017 01:27:28 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/pmp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Javaonnode</title>
+      <link>https://blog.jimdhughes.com/tags/javaonnode/</link>
+      <pubDate>Fri, 10 Apr 2015 05:04:49 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/javaonnode/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Node-Gyp</title>
+      <link>https://blog.jimdhughes.com/tags/node-gyp/</link>
+      <pubDate>Fri, 10 Apr 2015 05:04:49 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/node-gyp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Node.js</title>
+      <link>https://blog.jimdhughes.com/tags/node.js/</link>
+      <pubDate>Fri, 10 Apr 2015 05:04:49 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/node.js/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Npm</title>
+      <link>https://blog.jimdhughes.com/tags/npm/</link>
+      <pubDate>Fri, 10 Apr 2015 05:04:49 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/npm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Windows-Sdk</title>
+      <link>https://blog.jimdhughes.com/tags/windows-sdk/</link>
+      <pubDate>Fri, 10 Apr 2015 05:04:49 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/windows-sdk/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tutorial</title>
+      <link>https://blog.jimdhughes.com/tags/tutorial/</link>
+      <pubDate>Wed, 08 Apr 2015 03:42:01 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/tutorial/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ubuntu</title>
+      <link>https://blog.jimdhughes.com/tags/ubuntu/</link>
+      <pubDate>Wed, 08 Apr 2015 03:42:01 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

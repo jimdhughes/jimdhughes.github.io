@@ -1,2 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Database on James Hughes</title><link>/categories/database/</link><description>Recent content in Database on James Hughes</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>©2020 James Hughes.</copyright><lastBuildDate>Wed, 09 Jan 2019 13:07:23 +0000</lastBuildDate><atom:link href="/categories/database/index.xml" rel="self" type="application/rss+xml"/><item><title>IndexedDB + React for Offline Storage</title><link>/indexeddb-react/</link><pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate><guid>/indexeddb-react/</guid><description>Offline data is annoying.
-I&amp;rsquo;m used to storing data in localstorage which is okay&amp;hellip; sometimes. When you have a small amount of data to store such as user settings or persisting filters between views then this is a decent enough solution. I was working on a project recently that had a wild requirement appear where we needed to store upwards of 10k items offline. Needless to say, this put performance problems in our application.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Database on James Hughes</title>
+    <link>https://blog.jimdhughes.com/categories/database/</link>
+    <description>Recent content in Database on James Hughes</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 09 Jan 2019 13:07:23 +0000</lastBuildDate>
+    <atom:link href="https://blog.jimdhughes.com/categories/database/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IndexedDB &#43; React for Offline Storage</title>
+      <link>https://blog.jimdhughes.com/posts/2019/indexeddb-react/</link>
+      <pubDate>Wed, 09 Jan 2019 13:07:23 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2019/indexeddb-react/</guid>
+      <description>Building an app with React, IndexedDB, and a ridiculous amount of seed data</description>
+    </item>
+  </channel>
+</rss>

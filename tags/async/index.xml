@@ -1,3 +1,28 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>async on James Hughes</title><link>/tags/async/</link><description>Recent content in async on James Hughes</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>©2020 James Hughes.</copyright><lastBuildDate>Sat, 05 May 2018 03:32:35 +0000</lastBuildDate><atom:link href="/tags/async/index.xml" rel="self" type="application/rss+xml"/><item><title>Yet Another Stateless Authentication Blog Post for the MEAN stack.</title><link>/yet-another-stateless-authentication-blog-post-for-the-mean-stack/</link><pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate><guid>/yet-another-stateless-authentication-blog-post-for-the-mean-stack/</guid><description>#inb4: this ain&amp;rsquo;t new.
-I&amp;rsquo;m writing this for everyone that wants a slightly more organized approach to express middleware and authentication. I&amp;rsquo;m writing this because once again I was inspired by how much I adore Node, Express, and all the delights that come from being able to implement my API&amp;rsquo;s and leverage middlewares. Also, I&amp;rsquo;m using async / await, which is pretty neat.
-I&amp;rsquo;m going to use MongoDB as a datastore it just jives so well with Node.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Async on James Hughes</title>
+    <link>https://blog.jimdhughes.com/tags/async/</link>
+    <description>Recent content in Async on James Hughes</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 31 May 2018 01:35:29 +0000</lastBuildDate>
+    <atom:link href="https://blog.jimdhughes.com/tags/async/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Async / Await in Node.js</title>
+      <link>https://blog.jimdhughes.com/posts/2018/async-await-in-node-js/</link>
+      <pubDate>Thu, 31 May 2018 01:35:29 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/async-await-in-node-js/</guid>
+      <description>&lt;p&gt;The Async / Await functionality introduced into Node.js in v7.10.0 is legitimately a godsend.  The Async / Await paradigm works with promises to do exactly what the paradigm implies.  It will asynchronously call the function and await it&amp;rsquo;s response before continuing on with the rest of the function. Previously, you could do this with promise chaining. Passing results from one promise to the next. Where this issue fell apart is when you needed to use the result of Promise 1 in Promise 4. You would need to somehow pass the result of Promise 1 through Promises 2 and 3 in order to use them in promise 4.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Yet Another Stateless Authentication Blog Post for the MEAN stack.</title>
+      <link>https://blog.jimdhughes.com/posts/2018/yet-another-stateless-authentication-blog-post-for-the-mean-stack/</link>
+      <pubDate>Sat, 05 May 2018 03:32:35 +0000</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2018/yet-another-stateless-authentication-blog-post-for-the-mean-stack/</guid>
+      <description>&lt;p&gt;#inb4: this ain&amp;rsquo;t new.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m writing this for everyone that wants a &lt;em&gt;slightly&lt;/em&gt; more organized approach to express middleware and authentication.  I&amp;rsquo;m writing this because once again I was inspired by how much I &lt;strong&gt;adore&lt;/strong&gt; Node, Express, and all the delights that come from being able to implement my API&amp;rsquo;s and leverage middlewares.  Also, I&amp;rsquo;m using async / await, which is pretty neat.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m going to use MongoDB as a datastore it just jives so well with Node.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
