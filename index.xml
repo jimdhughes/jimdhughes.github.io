@@ -6,8 +6,15 @@
     <description>Recent content on James Hughes</description>
     <generator>Hugo -- 0.142.0</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 31 Jul 2020 23:29:42 -0600</lastBuildDate>
+    <lastBuildDate>Mon, 10 Feb 2025 00:00:00 -0600</lastBuildDate>
     <atom:link href="https://blog.jimdhughes.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Designing and Open Data Stack - Part 1</title>
+      <link>https://blog.jimdhughes.com/posts/2025/open-data-stack/</link>
+      <pubDate>Mon, 10 Feb 2025 00:00:00 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2025/open-data-stack/</guid>
+      <description>Designing and Open Data Stack - Part 1</description>
+    </item>
     <item>
       <title>Docker Seq Setup With API Key</title>
       <link>https://blog.jimdhughes.com/posts/2020/docker-seq-setup-default-api-key/</link>

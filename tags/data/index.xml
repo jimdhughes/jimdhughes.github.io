@@ -6,8 +6,15 @@
     <description>Recent content in Data on James Hughes</description>
     <generator>Hugo -- 0.142.0</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 26 May 2017 01:27:28 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 10 Feb 2025 00:00:00 -0600</lastBuildDate>
     <atom:link href="https://blog.jimdhughes.com/tags/data/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Designing and Open Data Stack - Part 1</title>
+      <link>https://blog.jimdhughes.com/posts/2025/open-data-stack/</link>
+      <pubDate>Mon, 10 Feb 2025 00:00:00 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/posts/2025/open-data-stack/</guid>
+      <description>Designing and Open Data Stack - Part 1</description>
+    </item>
     <item>
       <title>My Dive into Neo4j - and my PMP</title>
       <link>https://blog.jimdhughes.com/posts/2017/my-dive-into-neo4j-and-my-pmp/</link>

@@ -6,8 +6,22 @@
     <description>Recent content in Tags on James Hughes</description>
     <generator>Hugo -- 0.142.0</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 31 Jul 2020 23:29:42 -0600</lastBuildDate>
+    <lastBuildDate>Mon, 10 Feb 2025 00:00:00 -0600</lastBuildDate>
     <atom:link href="https://blog.jimdhughes.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data</title>
+      <link>https://blog.jimdhughes.com/tags/data/</link>
+      <pubDate>Mon, 10 Feb 2025 00:00:00 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/data/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Open-Source</title>
+      <link>https://blog.jimdhughes.com/tags/open-source/</link>
+      <pubDate>Mon, 10 Feb 2025 00:00:00 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/tags/open-source/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Docker</title>
       <link>https://blog.jimdhughes.com/tags/docker/</link>
@@ -230,13 +244,6 @@
       <link>https://blog.jimdhughes.com/tags/worklife/</link>
       <pubDate>Tue, 27 Feb 2018 05:29:13 +0000</pubDate>
       <guid>https://blog.jimdhughes.com/tags/worklife/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Data</title>
-      <link>https://blog.jimdhughes.com/tags/data/</link>
-      <pubDate>Fri, 26 May 2017 01:27:28 +0000</pubDate>
-      <guid>https://blog.jimdhughes.com/tags/data/</guid>
       <description></description>
     </item>
     <item>

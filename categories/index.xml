@@ -6,8 +6,15 @@
     <description>Recent content in Categories on James Hughes</description>
     <generator>Hugo -- 0.142.0</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 01 Jul 2020 09:02:12 -0600</lastBuildDate>
+    <lastBuildDate>Mon, 10 Feb 2025 00:00:00 -0600</lastBuildDate>
     <atom:link href="https://blog.jimdhughes.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tutorials</title>
+      <link>https://blog.jimdhughes.com/categories/tutorials/</link>
+      <pubDate>Mon, 10 Feb 2025 00:00:00 -0600</pubDate>
+      <guid>https://blog.jimdhughes.com/categories/tutorials/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Blog</title>
       <link>https://blog.jimdhughes.com/categories/blog/</link>
