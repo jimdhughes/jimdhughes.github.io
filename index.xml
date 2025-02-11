@@ -9,11 +9,11 @@
     <lastBuildDate>Mon, 10 Feb 2025 00:00:00 -0600</lastBuildDate>
     <atom:link href="https://blog.jimdhughes.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Designing and Open Data Stack - Part 1</title>
+      <title>Designing an Open Data Stack - Part 1</title>
       <link>https://blog.jimdhughes.com/posts/2025/open-data-stack-p1/</link>
       <pubDate>Mon, 10 Feb 2025 00:00:00 -0600</pubDate>
       <guid>https://blog.jimdhughes.com/posts/2025/open-data-stack-p1/</guid>
-      <description>Designing and Open Data Stack - Part 1</description>
+      <description>Designing an Open Data Stack - Part 1</description>
     </item>
     <item>
       <title>Docker Seq Setup With API Key</title>
